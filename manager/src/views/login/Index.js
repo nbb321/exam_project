@@ -1,53 +1,82 @@
-import React,{Component} from 'react';
+import React,{useState,useEffect} from 'react';
 import { connect } from 'dva';
 import styles from './Index.scss';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import "antd/dist/antd.css";
 import { Link } from 'dva/router';
- class LoginPage extends Component{
-      componentDidMount(){//生命周期函数用来请求数据
-        //调登录接口
-        let {login}=this.props;
-        login({
-          user_name:'chenmanjie',
-          user_pwd:'Chenmanjie123!'
-        });
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
+function LoginPage(props){
+  //获取login
+  let {login}=props;
+  useEffect(()=>{
+     login({
+       user_name:'chenmanjie',
+       user_pwd:'Chenmanjie123!'
+     })
+  });
+  //处理表单提交
+  let handleSubmit = e => {
+    e.preventDefault();
+    props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+        login({
+          user_name:values.username,
+          user_pwd:values.password
+        })
       }
-      render(){
-        return (
-          <div className={styles.box}>
-                 <Form.Item>
-                       <Input
-                        className={styles.ipts}
-                        prefix={<Icon type="user" style={{ color: 'rgba(88,88,88)' }} />}
-                        placeholder="请输入用户名"
-                      />
-                  </Form.Item>
-                  <Form.Item>
-                      <Input
-                        className={styles.ipts}
-                        prefix={<Icon type="lock" style={{ color: 'rgba(88,88,88)' }} />}
-                        type="password"
-                        placeholder="请输入密码"
-                      />
-                  </Form.Item>
-                  <Form.Item>
-                    <div className={styles.lefts}>
-                    <Checkbox>记住密码</Checkbox>
-                    <a className="login-form-forgot" href="">
-                      忘记密码
-                    </a>
-                    </div>
-                    <Button type="primary" htmlType="submit" className={styles.loginBtn}>
-                      <Link to="/home">登录</Link>
-                    </Button>
-                 
-                  </Form.Item>
-             </div>
-        );
-      }
- }
+    })
+  };
+  //表单校验
+  const { getFieldDecorator } = props.form;
+  return (
+    <Form onSubmit={handleSubmit} className={styles.login_form}>
+  <Form.Item>
+    {getFieldDecorator('username', {
+      rules: [{ required: true, message: '请输入用户名' }],
+    })(
+      <Input
+        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+        placeholder="请输入用户名"
+      />,
+    )}
+  </Form.Item>
+  <Form.Item>
+    {getFieldDecorator('password', {
+      rules: [{ required: true,
+      pattern:/^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{8,16}$/,//进行验证大小写字母数字
+       message: '请输入正确格式的代码' }],
+    })(
+      <Input
+        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+        type="password"
+        placeholder="请输入用户名密码！"
+      />,
+    )}
+  </Form.Item>
+  <Form.Item>
+    {getFieldDecorator('remember', {
+      valuePropName: 'checked',
+      initialValue: true,
+    })(<Checkbox>记住密码</Checkbox>)}
+    <a className={styles.login_form_forgot} href="">
+      忘记密码
+    </a>
+    <Button type="primary" htmlType="submit" className={styles.login_form_button}>
+    <Link to="/home">登陆</Link>
+    </Button>
+  </Form.Item>
+</Form>
+  );
+}
+//props的类型检查
+LoginPage.propTypes={
+
+}
+//props的默认值
+LoginPage.defaultProps={
+
+}
  const mapStateToProps=state=>{
    return {}
  }
@@ -61,7 +90,7 @@ import { Link } from 'dva/router';
      }
    }
  }
-export default connect(mapStateToProps,mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps,mapDispatchToProps)(Form.create({name:'normal_login'})(LoginPage));
  
  
  

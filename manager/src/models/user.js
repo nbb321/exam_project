@@ -16,9 +16,6 @@ export default {
       *login({payload},{call,put}){
         console.log("payload",payload,login)
         let data=yield call(login,payload);
-        // yield put({
-
-        // })
         console.log("data",data)
       },
      *fetch({ payload }, { call, put }) {  // eslint-disable-line
