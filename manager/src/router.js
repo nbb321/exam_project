@@ -3,12 +3,16 @@ import { Router, Route, Switch } from 'dva/router';
 // import IndexPage from './views/login/IndexPage';
 import HomePage from './views/home/IndexPage';
 
+// import HomePage from './views/home/IndexPage';
+import IndexPage from './views/login/IndexPage';
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
       <Switch>
         {/* <Route path="/" exact component={IndexPage} /> */}
         <Route path="/home" exact component={HomePage} />
+        <Route path="/" exact component={IndexPage} />
+        {/* <Route path="/home" exact component={HomePage} /> */}
       </Switch>
     </Router>
   );
