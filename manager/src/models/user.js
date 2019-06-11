@@ -14,9 +14,9 @@ export default {
     // 异步操作
     effects: {
       *login({ payload },{ call,put }){
-        console.log(payload,login)
-        let data=yield call(login);
-        console.log(data)
+        // console.log(payload,login)
+        let data=yield call(login,payload);
+        // console.log(data)
       },
       *fetch({ payload }, { call, put }) {  // eslint-disable-line
         yield put({ type: 'save' });
