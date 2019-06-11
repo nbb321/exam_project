@@ -1,4 +1,4 @@
-import {login} from "../services"
+import {login} from  "../services/user.js"
 export default {
     // 命名空间
     namespace: 'user',
