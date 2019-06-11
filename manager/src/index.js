@@ -2,6 +2,8 @@ import dva from 'dva';
 import './index.css';
 //引用polyfill补丁,解决路由警告
 import "@babel/polyfill"
+//ant的css样式
+import "antd/dist/antd.css";
 // 1. Initialize
 
 const app = dva();

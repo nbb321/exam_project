@@ -1,7 +1,12 @@
 import React, {useState,useEffect} from 'react';
+//使用高阶组件
 import { connect } from 'dva';
+//引入局部样式
 import styles from "./index.scss";
+//引入ant使用form表单
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
+//引入router使用link标签跳转路由
+import { Link } from 'dva/router';
 function LoginPage(props){
     //获取login
     let {login}=props
@@ -15,12 +20,11 @@ function LoginPage(props){
         e.preventDefault();
         props.form.validateFields((err, values) => {
           if (!err) {
-            console.log('Received values of form: ', values);
             login({
                 user_name:values.username,
                 user_pwd:values.password
             })
-        }
+          }
         });
       };
     //表单验证
@@ -54,14 +58,13 @@ function LoginPage(props){
       {getFieldDecorator('remember', {
         valuePropName: 'checked',
         initialValue: true,
-      })(<Checkbox>Remember me</Checkbox>)}
+      })(<Checkbox>记住密码</Checkbox>)}
       <a className="login-form-forgot" href="">
-        Forgot password
+       忘记密码
       </a>
       <Button type="primary" htmlType="submit" className="login-form-button">
-        Log in
+       <Link to="/home">登录</Link>
       </Button>
-      Or <a href="">register now!</a>
     </Form.Item>
   </Form>
   </div> 
@@ -74,6 +77,22 @@ localStorage.propTypes={
 LoginPage.defaultProps={
     
 }
+const mapStateToProps=state=>{
+    // console.log("state",state)
+    return{}
+}
+const mapDispatchToProps=dispatch=>{
+    return{
+        login(payload){
+            dispatch({
+                type:"user/login",
+                payload
+            })
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Form.create()(LoginPage))
+//使用class无状态函数
 // import React, {Component} from 'react';
 // class LoginPage extends Component{
 //     componentDidMount(){
@@ -88,18 +107,3 @@ LoginPage.defaultProps={
 //         return null
 //     }
 // }
-const mapStateToProps=state=>{
-    console.log("state",state)
-    return{}
-}
-const mapDispatchToProps=dispatch=>{
-    return{
-        login(payload){
-            dispatch({
-                type:"user/login",
-                payload
-            })
-        }
-    }
-}
-export default connect(mapStateToProps,mapDispatchToProps)(Form.create()(LoginPage))
