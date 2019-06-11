@@ -1,19 +1,93 @@
-
-import React, {Component} from 'react';
+import React, {useState,useEffect} from 'react';
 import { connect } from 'dva';
-class LoginPage extends Component{
-    componentDidMount(){
-        //调用 登录接口
-        let {login}=this.props;
+import styles from "./index.scss";
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
+function LoginPage(props){
+    //获取login
+    let {login}=props
+    useEffect(()=>{
         login({
             user_name:"chenmanjie",
             user_pwd:"Chenmanjie123!"
         })
-    }
-    render(){
-        return null
-    }
+    },[]);
+   let handleSubmit = e => {
+        e.preventDefault();
+        props.form.validateFields((err, values) => {
+          if (!err) {
+            console.log('Received values of form: ', values);
+            login({
+                user_name:values.username,
+                user_pwd:values.password
+            })
+        }
+        });
+      };
+    //表单验证
+    const { getFieldDecorator } = props.form;
+    return  <div className="box">
+    <Form onSubmit={handleSubmit} className="login-form">
+    <Form.Item>
+      {getFieldDecorator('username', {
+        validateTrigger:"onBlur",
+        rules: [{ required: true,pattern:/^[a-zA-Z]+$/, message: '请输入正确的用户名!' }],
+      })(
+        <Input
+          prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+          placeholder="Username"
+        />,
+      )}
+    </Form.Item>
+    <Form.Item>
+      {getFieldDecorator('password', {
+        validateTrigger:"onBlur",
+        rules: [{ required: true,pattern:/^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)/, message: '请输入正确的密码!' }],
+      })(
+        <Input
+          prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+          type="password"
+          placeholder="Password"
+        />,
+      )}
+    </Form.Item>
+    <Form.Item>
+      {getFieldDecorator('remember', {
+        valuePropName: 'checked',
+        initialValue: true,
+      })(<Checkbox>Remember me</Checkbox>)}
+      <a className="login-form-forgot" href="">
+        Forgot password
+      </a>
+      <Button type="primary" htmlType="submit" className="login-form-button">
+        Log in
+      </Button>
+      Or <a href="">register now!</a>
+    </Form.Item>
+  </Form>
+  </div> 
 }
+//props的类型检查
+localStorage.propTypes={
+
+}
+//props的默认值
+LoginPage.defaultProps={
+    
+}
+// import React, {Component} from 'react';
+// class LoginPage extends Component{
+//     componentDidMount(){
+//         //调用 登录接口
+//         let {login}=props;
+//         login({
+//             user_name:"chenmanjie",
+//             user_pwd:"Chenmanjie123!"
+//         })
+//     }
+//     render(){
+//         return null
+//     }
+// }
 const mapStateToProps=state=>{
     console.log("state",state)
     return{}
@@ -28,4 +102,4 @@ const mapDispatchToProps=dispatch=>{
         }
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(LoginPage)
+export default connect(mapStateToProps,mapDispatchToProps)(Form.create()(LoginPage))
