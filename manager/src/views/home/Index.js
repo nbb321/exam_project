@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Layout, Menu, Icon } from 'antd';
-import styles from './IndexPage.css';
+import styles from './Index.scss';
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
 /**
@@ -51,28 +51,48 @@ function IndexPage() {
                       title={
                         <span>
                           <Icon type="laptop" />
-                          subnav 2
+                          用户管理
                         </span>
                       }
                     >
-                      <Menu.Item key="5">option5</Menu.Item>
-                      <Menu.Item key="6">option6</Menu.Item>
-                      <Menu.Item key="7">option7</Menu.Item>
-                      <Menu.Item key="8">option8</Menu.Item>
+                      <Menu.Item key="4">添加用户</Menu.Item>
+                      <Menu.Item key="5">用户展示</Menu.Item>
                     </SubMenu>
                     <SubMenu
                       key="sub3"
                       title={
                         <span>
                           <Icon type="notification" />
-                          subnav 3
+                          考试管理
                         </span>
                       }
                     >
-                      <Menu.Item key="9">option9</Menu.Item>
-                      <Menu.Item key="10">option10</Menu.Item>
-                      <Menu.Item key="11">option11</Menu.Item>
-                      <Menu.Item key="12">option12</Menu.Item>
+                      <Menu.Item key="6">添加考试</Menu.Item>
+                      <Menu.Item key="7">试卷列表</Menu.Item>
+                    </SubMenu>
+                    <SubMenu
+                      key="sub4"
+                      title={
+                        <span>
+                          <Icon type="notification" />
+                          班级管理
+                        </span>
+                      }
+                    >
+                      <Menu.Item key="8">班级管理</Menu.Item>
+                      <Menu.Item key="9">教室管理</Menu.Item>
+                      <Menu.Item key="10">学生管理</Menu.Item>
+                    </SubMenu>
+                    <SubMenu
+                      key="sub5"
+                      title={
+                        <span>
+                          <Icon type="notification" />
+                          阅卷管理
+                        </span>
+                      }
+                    >
+                      <Menu.Item key="11">待批班级</Menu.Item>
                     </SubMenu>
                   </Menu>
                 </Sider>

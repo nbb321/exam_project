@@ -18,7 +18,7 @@ html, body, :global(#root) {
       border-radius: 3px;
       text-align: center;
       margin-top: 12px;
-      background: rgba(54,98,255);
+      background:navy;
   }
   .ipts{
       height: 35px;
@@ -53,7 +53,7 @@ html, body, :global(#root) {
 .fromBox_item{
     width: 355px;
     height: 40px;
-    background: rgba(232,240,254);
+    background: rgba(232,240,254,254);
     border: 1px solid #ccc;
     margin: 0 auto;
     display: flex;
@@ -62,8 +62,8 @@ html, body, :global(#root) {
     border-radius: 2px;
 }
 .fromBox_item:hover{
-    border: 1px solid rgba(56,100,254);
-    /* box-shadow: 1 1 rgba(56,100,254); */
+    border: 1px solid rgba(56,100,254,254);
+    
 }
 .user{
     width:16px;
