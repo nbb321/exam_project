@@ -21,8 +21,9 @@ function IndexPage(psrops){
             <Route path="/questions/type" component={null}></Route>
             <Route path="/questions/view" component={null}></Route>
           </Switch>
-        </Content>
+      </Content>
     </Layout>
+    
   </Layout>
   
 }
