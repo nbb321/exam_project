@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 import { connect } from 'dva';
-import './index.scss';
+import styles from './index.scss';
   function LoginPage(props){  
     useEffect(()=>{
       if (props.isLogin === 1){
