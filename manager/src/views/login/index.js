@@ -1,23 +1,21 @@
 import React, {useEffect} from 'react';
+import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 import { connect } from 'dva';
-import "./index.scss";
-//引入ant使用form表单
-import { Form, Icon, Input, Button, Checkbox,message} from 'antd';
-//引入router使用link标签跳转路由
+import './index.scss';
   function LoginPage(props){  
-      useEffect(()=>{
-        console.log(props.isLogin);
-        if(props.isLogin===1){
-          //1.提示登录成功
-          //2.存储cookir
-          //3.跳转主页面
-          message.success('登录成功');
-          let pathName=decodeURIComponent(props.history.location.search.split('=')[1])
-          props.history.replace(pathName)
-        }else if(props.isLogin===-1){
-          message.error('用户名或密码错误');
-        }
-      },[props.isLogin]);
+    useEffect(()=>{
+      if (props.isLogin === 1){
+        // 1.提示登陆成功
+        // 2.存储cookie
+        // 3.跳转主页面
+        message.success('登陆成功');
+        let pathName = decodeURIComponent(props.history.location.search.split('=')[1]);
+        props.history.replace(pathName);
+      }else if(props.isLogin === -1){
+        // 登陆失败
+        message.error('用户名或密码错误')
+      }
+    }, [props.isLogin]);
     let handleSubmit = e => {
           e.preventDefault();
           props.form.validateFields((err, values) => {
