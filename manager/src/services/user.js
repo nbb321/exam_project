@@ -6,6 +6,13 @@ return request({
     url:"/user/login",
     method:"POST",
     data:params
-})
+    })
 }
 
+//添加试题
+export function Add(){
+    return request({
+        url:"/exam/getQuestionsType",
+        method:"GET"
+    })
+}
