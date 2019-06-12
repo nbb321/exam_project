@@ -1,19 +1,26 @@
-import React,{useState,useEffect} from 'react';
+import React,{useEffect} from 'react';
 import { connect } from 'dva';
 import styles from './Index.scss';
 import "antd/dist/antd.css";
 import { Link } from 'dva/router';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox ,message} from 'antd';
 
 function LoginPage(props){
   //获取login
   let {login}=props;
   useEffect(()=>{
-     login({
-       user_name:'chenmanjie',
-       user_pwd:'Chenmanjie123!'
-     })
-  });
+     if(props.isLogin===1){
+       //1.提示登录成功
+       message.success('登录成功');
+       //2.提示登录成功
+       //3.跳转主页面  home
+       let pathName=decodeURIComponent(props.history.location.search.split('=')[1]);
+       props.history.replace(pathName);
+     }else if(props.isLogin === -1){
+      //登录失败
+      message.error('用户名或密码错误')
+     }
+  },[props.isLogin]);
   //处理表单提交
   let handleSubmit = e => {
     e.preventDefault();
@@ -31,7 +38,7 @@ function LoginPage(props){
   const { getFieldDecorator } = props.form;
   return (
     <Form onSubmit={handleSubmit} className={styles.login_form}>
-  <Form.Item>
+    <Form.Item>
     {getFieldDecorator('username', {
       rules: [{ required: true, message: '请输入用户名' }],
     })(
@@ -40,8 +47,8 @@ function LoginPage(props){
         placeholder="请输入用户名"
       />,
     )}
-  </Form.Item>
-  <Form.Item>
+   </Form.Item>
+   <Form.Item>
     {getFieldDecorator('password', {
       rules: [{ required: true,
       pattern:/^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{8,16}$/,//进行验证大小写字母数字
@@ -53,8 +60,8 @@ function LoginPage(props){
         placeholder="请输入用户名密码！"
       />,
     )}
-  </Form.Item>
-  <Form.Item>
+   </Form.Item>
+   <Form.Item>
     {getFieldDecorator('remember', {
       valuePropName: 'checked',
       initialValue: true,

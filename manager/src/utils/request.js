@@ -1,4 +1,5 @@
 import axios from "axios";
+import {getToken} from "./user"
 //create an axios instance  创建一个axios的实例
 const service = axios.create({
   baseURL:'http://127.0.0.1:7001',
@@ -7,7 +8,11 @@ const service = axios.create({
 //request interceptor 请求体拦截器
 service.interceptors.request.use(
   config=>{
-    return config;
+   //判断是否有登录
+   if(getToken()){
+     config.headers['authorization']=getToken()
+   }
+   return config;
   },
   error=>{
     return Promise.reject(error)
