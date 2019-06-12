@@ -9,10 +9,18 @@ return request({
     })
 }
 
-//添加试题
-export function Add(){
+//获取所有的试题类型
+export function Type(){
     return request({
         url:"/exam/getQuestionsType",
+        method:"GET"
+    })
+}
+
+//获取所有的试题
+export function View(){
+    return request({
+        url:"/exam/questions/new",
         method:"GET"
     })
 }

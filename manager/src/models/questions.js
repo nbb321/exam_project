@@ -1,5 +1,4 @@
-import {Add} from '@/services';
-
+import {Type,View} from '@/services';
 
 export default {
     // 命名空间
@@ -7,7 +6,8 @@ export default {
   
     // 模块内部的状态
     state: {
-        AddList:[]
+        TypeList:[],
+        ViewList:[]
     },
   
     subscriptions: {
@@ -17,17 +17,32 @@ export default {
   
     // 异步操作
     effects: {
-        *add({payload}, {call, put}){
-            let data = yield call(Add);
-            console.log('data...', data);
-        }
+        *type({payload}, {call, put}){
+            let data = yield call(Type);
+            yield put({
+                type:"typeUpdata",
+                payload:data.data
+            })
+        },
+        *view({payload}, {call, put}){
+            let data = yield call(View);
+            console.log(data.data)
+            yield put({
+                type:"viewUpdata",
+                payload:data.data
+            })
+        },
     },
   
     // 同步操作
     reducers: {
-      save(state, action) {
-        return { ...state, ...action.payload };
-      },
+        typeUpdata(state, {payload}) {
+            return { ...state, TypeList:payload };
+        },
+        viewUpdata(state, {payload}) {
+            return { ...state, ViewList:payload };
+        }
+        
     },
   
   };

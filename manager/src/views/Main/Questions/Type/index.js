@@ -1,32 +1,36 @@
 import React, {useEffect} from 'react';
-// import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 import { connect } from 'dva';
 import './index.scss';
-  function LoginPage(props){  
+  function TypePage(props){  
     useEffect(()=>{
-      
+      props.Type();
+      console.log(props.TypeList)
     }, []);
+
      return  <div>
       type
     </div> 
 } 
   //props的类型检查
-  localStorage.propTypes={
+  TypePage.propTypes={
 
   }
   //props的默认值
-  LoginPage.defaultProps={
+  TypePage.defaultProps={
       
   }
   const mapStateToProps=state=>{
-      // console.log("state",state)
       return{
-       
+        ...state.questions
       }
   }
   const mapDispatchToProps=dispatch=>{
       return{
-         
+        Type(){
+          dispatch({
+            type:"questions/type"
+          })
+        }
       }
   }
-export default connect(mapStateToProps,mapDispatchToProps)(LoginPage)
+export default connect(mapStateToProps,mapDispatchToProps)(TypePage)

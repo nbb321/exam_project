@@ -5,11 +5,7 @@ import { Input ,Select, Button} from 'antd';
 import  styles from './index.scss';
 
   const { Option } = Select;
-  function LoginPage(props){  
-    useEffect(()=>{
- 
-    }, []);
-  
+  function AddPage(props){  
      return <div className={styles.content}>
         <h2 className={styles.title}>添加试题</h2>
         <div className={styles.main}>
@@ -52,26 +48,22 @@ import  styles from './index.scss';
     </div> 
 }
   //props的类型检查
-  localStorage.propTypes={
+  AddPage.propTypes={
 
   }
   //props的默认值
-  LoginPage.defaultProps={
+  AddPage.defaultProps={
       
   }
   const mapStateToProps=state=>{
       // console.log("state",state)
       return{
-       ...state.questions
+       
       }
   }
   const mapDispatchToProps=dispatch=>{
       return{
-        add(){
-          dispatch({
-            type:"questions/add"
-          })
-        }
+       
       }
   }
-export default connect(mapStateToProps,mapDispatchToProps)(LoginPage)
+export default connect(mapStateToProps,mapDispatchToProps)(AddPage)
