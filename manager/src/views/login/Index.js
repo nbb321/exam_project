@@ -2,7 +2,6 @@ import React,{useEffect} from 'react';
 import { connect } from 'dva';
 import styles from './Index.scss';
 import "antd/dist/antd.css";
-import { Link } from 'dva/router';
 import { Form, Icon, Input, Button, Checkbox ,message} from 'antd';
 
 function LoginPage(props){
@@ -70,7 +69,7 @@ function LoginPage(props){
       忘记密码
     </a>
     <Button type="primary" htmlType="submit" className={styles.login_form_button}>
-    <Link to="/home">登陆</Link>
+         登陆
     </Button>
   </Form.Item>
 </Form>
@@ -85,7 +84,9 @@ LoginPage.defaultProps={
 
 }
  const mapStateToProps=state=>{
-   return {}
+   return {
+     ...state.user
+   }
  }
  const mapDispatchToProps=dispatch=>{
    return {
