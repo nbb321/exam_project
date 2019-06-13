@@ -1,4 +1,4 @@
-import {Type,View} from '@/services';
+import {Type,View,Condition} from '@/services';
 
 export default {
     // 命名空间
@@ -7,7 +7,9 @@ export default {
     // 模块内部的状态
     state: {
         TypeList:[],
-        ViewList:[]
+        ViewList:[],
+        conditionList:[],
+        examTypeList:[]
     },
   
     subscriptions: {
@@ -33,6 +35,22 @@ export default {
                 payload:data.data
             })
         },
+        *condition({payload}, {call, put}){
+            let data = yield call(Condition);
+            // console.log(data)
+            yield put({
+                type:"conditaionUpdate",
+                payload:data.data
+            })
+        },
+        *examType({payload}, {call, put}){
+            let data = yield call(Condition);
+            // console.log(data)
+            yield put({
+                type:"examTypeUpdata",
+                payload:data.data
+            })
+        },
     },
   
     // 同步操作
@@ -42,7 +60,14 @@ export default {
         },
         viewUpdata(state, {payload}) {
             return { ...state, ViewList:payload };
-        }
+        },
+        conditaionUpdate(state, {payload}) {
+            return { ...state, conditionList:payload };
+        },
+        examTypeUpdata(state, {payload}) {
+            return { ...state, examTypeList:payload };
+        },
+
         
     },
   

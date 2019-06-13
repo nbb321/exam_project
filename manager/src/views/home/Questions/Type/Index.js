@@ -1,8 +1,8 @@
-import React,{useEffect} from 'react';
+import React,{useState,useEffect} from 'react';
 import { connect } from 'dva';
 import "antd/dist/antd.css";
 import styles from './Index.scss';
-import { Table,  Button , Modal , Input } from 'antd';
+import { Table,  Button , Modal , Input , Form } from 'antd';
 
 
 function TypePage(props){
@@ -32,25 +32,39 @@ function TypePage(props){
         },
       ];
       
-  //获取login
+  //控制添加弹框
+  let [showDialong,updateDialog]=useState(false);
+  //获取所有分类
   useEffect(()=>{
     props.Type();
     
   },[]);
+   
+  //点击添加类型
+  let handleSubmit = e =>{
+    
+  }
+  const {getFieldDecorator}=props.form;
   return (
     <div className={styles.main}>
         <h2 className={styles.titType}>试题分类</h2>
         <div className={styles.typesContent}>
         <div className={styles.btn}>
-        <Button type="primary"  className={styles.btns}>
+        <Button type="primary"  className={styles.btns} onClick={()=>updateDialog(true)}>
             +添加类型
         </Button>
-        <Modal
-        title="创建新类型"
-        okText="确认"
-        cancelText="取消"
-        >
-        <Input placeholder="请输入类型名称" />
+        
+        <Modal visible={showDialong} onCancel={()=>updateDialog(false)}>
+         <Form onSubmit={handleSubmit}>
+           <Form.Item>
+               {getFieldDecorator('username',{
+                   rules:[{required:true,message:'please input your project'}],
+               })(
+                  <Input placeholder="请输入试题类型"/>,
+               )}
+           </Form.Item>
+         </Form>
+         
         </Modal>
         </div>
         <div className={styles.tableType}>
@@ -84,6 +98,6 @@ TypePage.defaultProps={
     }
    }
  }
-export default connect(mapStateToProps,mapDispatchToProps)(TypePage);
+export default connect(mapStateToProps,mapDispatchToProps)(Form.create()(TypePage));
 
  

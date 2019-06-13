@@ -1,11 +1,14 @@
 import dva from 'dva';
 import './index.css';
+import createLoading from "dva-loading";
+
 
 // 1. Initialize
-const app = dva();
+const app = dva(createLoading());
 
 // 2. Plugins
-// app.use({});
+//引入全局loading
+// app.use();
 
 // 3. Model
 app.model(require('./models/user').default);

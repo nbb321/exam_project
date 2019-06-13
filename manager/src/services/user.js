@@ -23,3 +23,10 @@ export function View(){
     method:'GET'
   })
 }
+//获取所有的试题
+export function Condition(){
+    return request({
+      url:"/exam/questions/condition",
+      method:'GET'
+    })
+  }
