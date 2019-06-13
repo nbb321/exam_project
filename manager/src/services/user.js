@@ -24,9 +24,26 @@ export function View(){
   })
 }
 //获取所有的试题
-export function Condition(){
+export function Subject(){
     return request({
-      url:"/exam/questions/condition",
-      method:'GET'
+        url:"/exam/subject",
+        method:"GET"
     })
-  }
+}
+
+
+export function ExamType(){
+    return request({
+        url:"/exam/examType",
+        method:"GET"
+    })
+}
+
+//查询
+export function Condition(params){
+    return request({
+        url:"/exam/questions/condition",
+        method:"POST",
+        data:params
+    })
+}

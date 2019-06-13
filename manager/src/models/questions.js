@@ -1,4 +1,4 @@
-import {Type,View,Condition} from '@/services';
+import {Type,View,Subject,ExamType,Condition} from '@/services';
 
 export default {
     // 命名空间
@@ -8,8 +8,11 @@ export default {
     state: {
         TypeList:[],
         ViewList:[],
-        conditionList:[],
-        examTypeList:[]
+        subjectList:[],
+        examTypeList:[],
+        subject_id:"",
+        exam_id:"",
+        questions_type_id:""
     },
   
     subscriptions: {
@@ -21,36 +24,45 @@ export default {
     effects: {
         *type({payload}, {call, put}){
             let data = yield call(Type);
+            // console.log(data);
             yield put({
                 type:"typeUpdata",
                 payload:data.data
             })
-            // console.log(data.data)//获取的是数组
         },
         *view({payload}, {call, put}){
             let data = yield call(View);
-            // console.log(data)
+            // console.log(data.data)
             yield put({
                 type:"viewUpdata",
                 payload:data.data
             })
         },
-        *condition({payload}, {call, put}){
-            let data = yield call(Condition);
-            // console.log(data)
+        *subject({payload}, {call, put}){
+            let data = yield call(Subject);
+            // console.log(data.data)
             yield put({
-                type:"conditaionUpdate",
+                type:"subjectUpdata",
                 payload:data.data
             })
         },
         *examType({payload}, {call, put}){
-            let data = yield call(Condition);
-            // console.log(data)
+            let data = yield call(ExamType);
+            // console.log(data.data)
             yield put({
                 type:"examTypeUpdata",
                 payload:data.data
             })
         },
+        *condition({payload}, {call, put}){
+            let data = yield call(Condition);
+            console.log(data.data)
+            // yield put({
+            //     type:"conditionUpdata",
+            //     payload:data.data
+            // })
+        }
+        
     },
   
     // 同步操作
@@ -61,16 +73,15 @@ export default {
         viewUpdata(state, {payload}) {
             return { ...state, ViewList:payload };
         },
-        conditaionUpdate(state, {payload}) {
-            return { ...state, conditionList:payload };
+        subjectUpdata(state, {payload}) {
+            return { ...state, subjectList:payload };
         },
         examTypeUpdata(state, {payload}) {
             return { ...state, examTypeList:payload };
         },
-
-        
+        // condition(state, {payload}) {
+        //     return { ...state, examTypeList:payload };
+        // }
     },
   
   };
-
-
