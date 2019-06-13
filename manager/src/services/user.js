@@ -24,3 +24,19 @@ export function View(){
         method:"GET"
     })
 }
+
+
+export function Subject(){
+    return request({
+        url:"/exam/subject",
+        method:"GET"
+    })
+}
+
+
+export function ExamType(){
+    return request({
+        url:"/exam/examType",
+        method:"GET"
+    })
+}

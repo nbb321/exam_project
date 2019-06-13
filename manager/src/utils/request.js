@@ -10,7 +10,7 @@ service.interceptors.request.use(
     //  判断是否有登录
     if(getToken()){
       //让每个请求携带authorization
-      config.headers['authorization']=getToken()
+      config.headers['authorization']=getToken();
     }
     return config
   },

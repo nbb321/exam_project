@@ -7,7 +7,7 @@ function RouterConfig({ history }) {
     <Router history={history}>
       <Switch>
         <Route path="/login" component={LoginPage} />
-        <Route path="/"  component={IndexPage} />
+        <Route path="/" component={IndexPage} />
       </Switch>
     </Router>
   );

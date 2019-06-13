@@ -10,7 +10,7 @@ import './index.scss';
         // 3.跳转主页面
         message.success('登陆成功');
         let pathName = decodeURIComponent(props.history.location.search.split('=')[1]);
-        props.history.replace(pathName);
+        props.history.replace(pathName||"/");
       }else if(props.isLogin === -1){
         // 登陆失败
         message.error('用户名或密码错误')

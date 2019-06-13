@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd';
-import {Route, Switch} from 'dva/router';
+import {Route, Switch,Redirect} from 'dva/router';
 import Menu from "@/components/Menu.js"
 import styles from "./index.scss"
 import Add from "./Questions/Add"
@@ -20,15 +20,11 @@ function IndexPage(psrops){
       </Sider>
       <Content>
           <Switch>
+            <Redirect from="/" exact to="/questions/add" ></Redirect>
             <Route path="/questions/add" component={Add}></Route>
             <Route path="/questions/type" component={Type}></Route>
             <Route path="/questions/view" component={View}></Route>
           </Switch>
-      </Content>
-      <Content>
-          <Switch>
-            <Route path="/user/add" component={null}></Route>
-            <Route path="/user/show" component={null}></Route>          </Switch>
       </Content>
     </Layout>
     

@@ -5,7 +5,16 @@ import { Input ,Select, Button} from 'antd';
 import  styles from './index.scss';
 
   const { Option } = Select;
+
   function AddPage(props){  
+    useEffect(()=>{
+      props.Subject();
+      props.ExamType();
+      props.Type();
+    },[])
+
+    let {subjectList,examTypeList,TypeList}=props;
+    // console.log(TypeList)
      return <div className={styles.content}>
         <h2 className={styles.title}>添加试题</h2>
         <div className={styles.main}>
@@ -17,26 +26,32 @@ import  styles from './index.scss';
                     </div>
                     <div>
                          <p>请选择考试类型：</p>
-                        <Select defaultValue="lucy" style={{ width: 120 }}>
-                            <Option value="jack">Jack</Option>
-                            <Option value="lucy">Lucy</Option>
-                            <Option value="Yiminghe">yiminghe</Option>
+                        <Select defaultValue="周考一" style={{ width: 120 }}>
+                            {
+                                examTypeList&&examTypeList.map((item,index)=>{
+                                return <Option key={item.exam_id} value={item.exam_name}>{item.exam_name}</Option>
+                                })
+                            }
                         </Select>
                       </div>
                       <div>
                          <p>请选择课程类型：</p>
-                        <Select defaultValue="lucy" style={{ width: 120 }}>
-                            <Option value="jack">Jack</Option>
-                            <Option value="lucy">Lucy</Option>
-                            <Option value="Yiminghe">yiminghe</Option>
+                        <Select defaultValue="javaScript上" style={{ width: 120 }}>
+                            {
+                                subjectList&&subjectList.map((item,index)=>{
+                                    return <Option className={styles.li} key={index} value={item.subject_text}>{item.subject_text}</Option>
+                                })
+                            }
                         </Select>
                       </div>
                       <div>
                          <p>请选择题目类型：</p>
-                        <Select defaultValue="lucy" style={{ width: 120 }}>
-                            <Option value="jack">Jack</Option>
-                            <Option value="lucy">Lucy</Option>
-                            <Option value="Yiminghe">yiminghe</Option>
+                        <Select defaultValue="简答题" style={{ width: 120 }}>
+                            {
+                                TypeList&&TypeList.map((item,index)=>{
+                                return <Option key={item.questions_type_id} value={item.questions_type_text}>{item.questions_type_text}</Option>
+                                })
+                            }
                         </Select>
                       </div>
                       <div className={styles.markcont}>
@@ -58,12 +73,26 @@ import  styles from './index.scss';
   const mapStateToProps=state=>{
       // console.log("state",state)
       return{
-       
+        ...state.questions
       }
   }
   const mapDispatchToProps=dispatch=>{
       return{
-       
+        Subject(){
+            dispatch({
+              type:"questions/subject"
+            })
+          },
+          ExamType(){
+            dispatch({
+              type:"questions/examType"
+            })
+          },
+          Type(){
+            dispatch({
+              type:"questions/type"
+            })
+          }
       }
   }
 export default connect(mapStateToProps,mapDispatchToProps)(AddPage)
