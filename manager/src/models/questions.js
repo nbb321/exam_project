@@ -10,9 +10,7 @@ export default {
         ViewList:[],
         subjectList:[],
         examTypeList:[],
-        subject_id:"",
-        exam_id:"",
-        questions_type_id:""
+        conditionList:[]
     },
   
     subscriptions: {
@@ -55,12 +53,12 @@ export default {
             })
         },
         *condition({payload}, {call, put}){
-            let data = yield call(Condition);
+            let data = yield call(Condition,payload);
             console.log(data.data)
-            // yield put({
-            //     type:"conditionUpdata",
-            //     payload:data.data
-            // })
+            yield put({
+                type:"conditionUpdata",
+                payload:data.data
+            })
         }
         
     },
@@ -79,9 +77,9 @@ export default {
         examTypeUpdata(state, {payload}) {
             return { ...state, examTypeList:payload };
         },
-        // condition(state, {payload}) {
-        //     return { ...state, examTypeList:payload };
-        // }
+        condition(state, {payload}) {
+            return { ...state, conditionList:payload };
+        }
     },
   
   };

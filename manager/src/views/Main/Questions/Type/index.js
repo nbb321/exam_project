@@ -1,10 +1,13 @@
-import React,{useEffect} from 'react';
+import React,{useState,useEffect} from 'react';
 import { connect } from 'dva';
 import "antd/dist/antd.css";
 import styles from './index.scss';
-import { Table,  Button , Modal , Input } from 'antd';
+import { Table,  Button , Modal , Input ,Form} from 'antd';
 
 function TypePage(props){
+    //控制添加弹出框
+    let [showLoading,upLoading]=useState(false);
+
     let data=[];
      if (props.TypeList.length>0){
          data=props.TypeList
@@ -34,24 +37,32 @@ function TypePage(props){
   useEffect(()=>{
     props.Type();
   },[]);
+
+  const { getFieldDecorator } = props.form;
   return (
     <div className={styles.main}>
         <h2 className={styles.titType}>试题分类</h2>
         <div className={styles.typesContent}>
         <div className={styles.btn}>
-        <Button type="primary"  className={styles.btns}>
+        <Button type="primary"  onClick={()=>upLoading(true)} className={styles.btns}>
             +添加类型
         </Button>
-        <Modal
-        title="创建新类型"
-        okText="确认"
-        cancelText="取消"
-        >
-        <Input placeholder="请输入类型名称" />
+        <Modal visible={showLoading} onCancel={()=>upLoading(false)}>
+          <Form>
+            <Form.Item>
+                {getFieldDecorator('username', {
+                  rules: [{ required: true, message: 'Please input your username!' }],
+                })(
+                  <Input
+                    placeholder="请输入你要添加的值"
+                  />
+                )}
+            </Form.Item>
+          </Form>
         </Modal>
         </div>
         <div className={styles.tableType}>
-        <Table columns={columns}  dataSource={props.TypeList} />
+            <Table columns={columns}  dataSource={props.TypeList} />
         </div>
         </div>
     </div>
@@ -81,4 +92,4 @@ TypePage.defaultProps={
     }
    }
  }
-export default connect(mapStateToProps,mapDispatchToProps)(TypePage);
+export default connect(mapStateToProps,mapDispatchToProps)( Form.create()(TypePage));

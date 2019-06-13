@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState,useEffect} from 'react';
 import { Select, Button} from 'antd';
 import { connect } from 'dva';
 import styles from  './index.scss';
@@ -12,30 +12,32 @@ import styles from  './index.scss';
       props.Subject();
       props.ExamType();
       props.Type();
-      props.Condition();
-      // console.log(props.ViewList)
       }, []);
 
-    let {subjectList,examTypeList,TypeList,ViewList,subject_id,exam_id,questions_type_id}=props;
-      console.log(subjectList,examTypeList,TypeList,ViewList);
+      let {subjectList,examTypeList,TypeList,ViewList}=props;
+      let [subject_id,upSubject] = useState('');
+      let [exam_id,upExam_id] = useState('');
+      let [questions_type_id,upQuestion] = useState('');
 
     let handleClickLi=(id)=>{
-      subject_id=id;
+      upSubject(subject_id=id)
     }
 
     let handleChange=(value)=>{
-      exam_id=value;
+      upExam_id(exam_id=value);
     }
 
     let handleChangeId=(value)=>{
-      questions_type_id=value;
+      upQuestion(questions_type_id=value)
     }
 
     let handleOnClick=()=>{
-      console.log(subject_id,"2"+exam_id,"3"+questions_type_id);
       let {Condition}=props;
-      console.log(Condition)
-
+          Condition({
+            subject_id,
+            exam_id,
+            questions_type_id
+          })
     }
      return  <div className={styles.boxs}>
        <div className={styles.title}>查看试题</div>

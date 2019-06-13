@@ -1,15 +1,16 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout,Spin } from 'antd';
 import {Route, Switch,Redirect} from 'dva/router';
 import Menu from "@/components/Menu.js"
 import styles from "./index.scss"
 import Add from "./Questions/Add"
 import Type from "./Questions/Type"
 import View from "./Questions/View"
+import {connect} from "dva";
 
 const { Header, Content,Sider} = Layout;
 
-function IndexPage(psrops){
+function IndexPage(props){
   return <Layout className={styles.container}>
     <Header>
       <p>顶部</p>
@@ -25,6 +26,10 @@ function IndexPage(psrops){
             <Route path="/questions/type" component={Type}></Route>
             <Route path="/questions/view" component={View}></Route>
           </Switch>
+          {props.loading?
+          <div className={styles.loading}>
+          <Spin />
+          </div>:null}
       </Content>
     </Layout>
     
@@ -32,4 +37,14 @@ function IndexPage(psrops){
   
 }
 
-export default IndexPage;
+const mapStateToProps=state=>{
+  return{
+    loading:state.loading.global
+  }
+}
+const mapDispatchToProps=dispatch=>{
+  return{
+  
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(IndexPage);
