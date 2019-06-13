@@ -1,4 +1,4 @@
-import {Type,View,Subject,ExamType} from '@/services';
+import {Type,View,Subject,ExamType,Condition} from '@/services';
 
 export default {
     // 命名空间
@@ -9,7 +9,10 @@ export default {
         TypeList:[],
         ViewList:[],
         subjectList:[],
-        examTypeList:[]
+        examTypeList:[],
+        subject_id:"",
+        exam_id:"",
+        questions_type_id:""
     },
   
     subscriptions: {
@@ -50,6 +53,14 @@ export default {
                 type:"examTypeUpdata",
                 payload:data.data
             })
+        },
+        *condition({payload}, {call, put}){
+            let data = yield call(Condition);
+            console.log(data.data)
+            // yield put({
+            //     type:"conditionUpdata",
+            //     payload:data.data
+            // })
         }
         
     },
@@ -67,8 +78,10 @@ export default {
         },
         examTypeUpdata(state, {payload}) {
             return { ...state, examTypeList:payload };
-        }
-        
+        },
+        // condition(state, {payload}) {
+        //     return { ...state, examTypeList:payload };
+        // }
     },
   
   };

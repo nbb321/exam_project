@@ -40,3 +40,12 @@ export function ExamType(){
         method:"GET"
     })
 }
+
+//查询
+export function Condition(params){
+    return request({
+        url:"/exam/questions/condition",
+        method:"POST",
+        data:params
+    })
+}

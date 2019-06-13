@@ -29,7 +29,7 @@ import  styles from './index.scss';
                         <Select defaultValue="周考一" style={{ width: 120 }}>
                             {
                                 examTypeList&&examTypeList.map((item,index)=>{
-                                return <Option key={item.exam_id} value={item.exam_name}>{item.exam_name}</Option>
+                                return <Option key={item.exam_id} >{item.exam_name}</Option>
                                 })
                             }
                         </Select>
