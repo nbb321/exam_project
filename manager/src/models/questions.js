@@ -27,7 +27,7 @@ export default {
         },
         *view({payload}, {call, put}){
             let data = yield call(View);
-            // console.log(data.data)
+            // console.log(data)
             yield put({
                 type:"viewUpdata",
                 payload:data.data

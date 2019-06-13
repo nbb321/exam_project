@@ -13,7 +13,7 @@ function TypePage(props){
              item['key']=item.questions_type_sort
         })
      }
-  console.log(data)
+//   console.log(data)
     const columns = [
         {
           title: '类型ID',
@@ -26,7 +26,7 @@ function TypePage(props){
           key: 'questions_type_text',
         },
         {
-          title: 'Address',
+          title: '操作',
           dataIndex: 'address',
           key: 'address',
         },
@@ -38,11 +38,10 @@ function TypePage(props){
     
   },[]);
   return (
-// console.log(item.questions_type_id,item.questions_type_text,item.questions_type_sort)
     <div className={styles.main}>
-    <h2 className={styles.titType}>试题分类</h2>
-    <div className={styles.typesContent}>
-    <div className={styles.btn}>
+        <h2 className={styles.titType}>试题分类</h2>
+        <div className={styles.typesContent}>
+        <div className={styles.btn}>
         <Button type="primary"  className={styles.btns}>
             +添加类型
         </Button>
@@ -53,11 +52,11 @@ function TypePage(props){
         >
         <Input placeholder="请输入类型名称" />
         </Modal>
-    </div>
-    <div className={styles.tableType}>
-       <Table columns={columns}  dataSource={props.TypeList} />
-    </div>
-    </div>
+        </div>
+        <div className={styles.tableType}>
+        <Table columns={columns}  dataSource={props.TypeList} />
+        </div>
+        </div>
     </div>
 
   )
