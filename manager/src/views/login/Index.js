@@ -14,7 +14,7 @@ function LoginPage(props){
        //2.提示登录成功
        //3.跳转主页面  home
        let pathName=decodeURIComponent(props.history.location.search.split('=')[1]);
-       props.history.replace(pathName);
+       props.history.replace(pathName || "/");
      }else if(props.isLogin === -1){
       //登录失败
       message.error('用户名或密码错误')

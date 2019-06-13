@@ -2,7 +2,7 @@ import axios from "axios";
 import {getToken} from "./user"
 //create an axios instance  创建一个axios的实例
 const service = axios.create({
-  baseURL:'http://127.0.0.1:7001',
+  baseURL:'http://169.254.78.31:7001',
   timeout:5000
 })
 //request interceptor 请求体拦截器

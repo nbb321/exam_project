@@ -16,6 +16,9 @@ function ViewPage(props){
              
   </div>
 </div>
+
+
+
   
 }
 //props的类型检查
