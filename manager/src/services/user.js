@@ -3,9 +3,9 @@ import request from '../utils/request';
 //登录接口
 export function login(params){
 return request({
-    url:"/user/login",
-    method:"POST",
-    data:params
+        url:"/user/login",
+        method:"POST",
+        data:params
     })
 }
 
@@ -25,7 +25,7 @@ export function View(){
     })
 }
 
-
+ 
 export function Subject(){
     return request({
         url:"/exam/subject",
@@ -41,6 +41,15 @@ export function ExamType(){
     })
 }
 
+//添加试题
+export function Addquest(params){
+    return request({
+            url:"/exam/questions",
+            method:"POST",
+            data:params
+    })
+}
+
 //查询
 export function Condition(params){
     console.log(params.subject_id,params.exam_id,params.questions_type_id);
@@ -49,42 +58,52 @@ export function Condition(params){
         url:"/exam/questions/condition?subject_id="+params.subject_id+"&exam_id="+params.exam_id+"&questions_type_id="+params.questions_type_id,
         method:"GET",
         data:params
-    })
-  }else if(params.subject_id!==""&&params.exam_id===""&&params.questions_type_id===""){
-    return request({
-        url:"/exam/questions/condition?subject_id="+params.subject_id,
-        method:"GET",
-        data:params
-    })
-  }else if(params.subject_id!==""&&params.exam_id!==""&&params.questions_type_id===""){
-    return request({
-        url:"/exam/questions/condition?subject_id="+params.subject_id+"&exam_id="+params.exam_id,
-        method:"GET",
-        data:params
-    })
-  }else if(params.subject_id===""&&params.exam_id!==""&&params.questions_type_id!==""){
-    return request({
-        url:"/exam/questions/condition?exam_id="+params.exam_id+"&questions_type_id="+params.questions_type_id,
-        method:"GET",
-        data:params
-    })
-  }else if(params.subject_id===""&&params.exam_id===""&&params.questions_type_id!==""){
-    return request({
-        url:"/exam/questions/condition?questions_type_id="+params.questions_type_id,
-        method:"GET",
-        data:params
-    })
-  }else if(params.subject_id!==""&&params.exam_id===""&&params.questions_type_id!==""){
-    return request({
-        url:"/exam/questions/condition?subject_id="+params.subject_id+"&questions_type_id="+params.questions_type_id,
-        method:"GET",
-        data:params
-    })
-  }else if(params.subject_id===""&&params.exam_id!==""&&params.questions_type_id===""){
-    return request({
-        url:"/exam/questions/condition?exam_id="+params.exam_id,
-        method:"GET",
-        data:params
-    })
-  }
+        })
+    }
 }
+//请求用户id
+export function UserInfo(){
+    return request({
+            url:"/user/userInfo",
+            method:"GET"
+    })
+}
+//   }else if(params.subject_id!==""&&params.exam_id===""&&params.questions_type_id===""){
+//     return request({
+//         url:"/exam/questions/condition?subject_id="+params.subject_id,
+//         method:"GET",
+//         data:params
+//     })
+//   }else if(params.subject_id!==""&&params.exam_id!==""&&params.questions_type_id===""){
+//     return request({
+//         url:"/exam/questions/condition?subject_id="+params.subject_id+"&exam_id="+params.exam_id,
+//         method:"GET",
+//         data:params
+//     })
+//   }else if(params.subject_id===""&&params.exam_id!==""&&params.questions_type_id!==""){
+//     return request({
+//         url:"/exam/questions/condition?exam_id="+params.exam_id+"&questions_type_id="+params.questions_type_id,
+//         method:"GET",
+//         data:params
+//     })
+//   }else if(params.subject_id===""&&params.exam_id===""&&params.questions_type_id!==""){
+//     return request({
+//         url:"/exam/questions/condition?questions_type_id="+params.questions_type_id,
+//         method:"GET",
+//         data:params
+//     })
+//   }else if(params.subject_id!==""&&params.exam_id===""&&params.questions_type_id!==""){
+//     return request({
+//         url:"/exam/questions/condition?subject_id="+params.subject_id+"&questions_type_id="+params.questions_type_id,
+//         method:"GET",
+//         data:params
+//     })
+//   }else if(params.subject_id===""&&params.exam_id!==""&&params.questions_type_id===""){
+//     return request({
+//         url:"/exam/questions/condition?exam_id="+params.exam_id,
+//         method:"GET",
+//         data:params
+//     })
+//   }
+// }
+

@@ -7,7 +7,7 @@ import { Table,  Button , Modal , Input ,Form} from 'antd';
 function TypePage(props){
     //控制添加弹出框
     let [showLoading,upLoading]=useState(false);
-
+    let [iptValue,upValue]=useState("")
     let data=[];
      if (props.TypeList.length>0){
          data=props.TypeList
@@ -38,6 +38,11 @@ function TypePage(props){
     props.Type();
   },[]);
 
+  let  handleSubmit=(e)=>{
+      props.form.validateFields((err, values) => {
+        console.log(values)
+      })
+  }
   const { getFieldDecorator } = props.form;
   return (
     <div className={styles.main}>
@@ -47,14 +52,23 @@ function TypePage(props){
         <Button type="primary"  onClick={()=>upLoading(true)} className={styles.btns}>
             +添加类型
         </Button>
-        <Modal visible={showLoading} onCancel={()=>upLoading(false)}>
-          <Form>
+        <Modal visible={showLoading}
+         onCancel={()=>upLoading(false)}
+         onOk={()=>{
+          upLoading(false);
+          console.log(iptValue)
+         }}
+         >
+          <Form onSubmit={handleSubmit} className="login-form">
             <Form.Item>
                 {getFieldDecorator('username', {
                   rules: [{ required: true, message: 'Please input your username!' }],
                 })(
                   <Input
                     placeholder="请输入你要添加的值"
+                    onChange={(e)=>{
+                      upValue(e.target.value)
+                    }}
                   />
                 )}
             </Form.Item>
