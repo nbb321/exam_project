@@ -1,5 +1,5 @@
 import {Type,View,Subject,ExamType,Condition,Addquest,UserInfo} from '@/services';
-
+// import { routerRedux } from 'dva/router';
 export default {
     // 命名空间
     namespace: 'questions',
@@ -11,12 +11,14 @@ export default {
         subjectList:[],
         examTypeList:[],
         conditionList:[],
-        user_id:""
+        user_id:"",
+        Objs:{}
+        
     },
   
     subscriptions: {
-      setup({ dispatch, history }) {  // eslint-disable-line
-      },
+        setup ({ dispatch, history }) {
+        },
     },
   
     // 异步操作
@@ -63,21 +65,21 @@ export default {
         },
         *addquest({payload}, {call, put}){
             let data = yield call(Addquest,payload);
-            console.log(data);
-            
-            // yield put({
-            //     type:"AddquestUpdata",
-            //     payload:data.data
-            // })
+            console.log(data)
         },
         *userInfo({payload}, {call, put}){
             let data = yield call(UserInfo);
-            // console.log(data.data.user_id)
             yield put({
                 type:"userInfotUpdata",
                 payload:data.data.user_id
             })
         },
+        *clickItem({payload}, {call, put}){
+            yield put({
+                type:"ClickUpdata",
+                payload
+            })
+        }
         
     },
   
@@ -95,16 +97,17 @@ export default {
         examTypeUpdata(state, {payload}) {
             return { ...state, examTypeList:payload };
         },
-        condition(state, {payload}) {
+        conditionUpdata(state, {payload}) {
             return { ...state, conditionList:payload };
         },
         userInfotUpdata(state, {payload}) {
             console.log(payload)
             return { ...state, user_id:payload };
-        } 
-        // AddquestUpdata(state, {payload}) {
-        //     return { ...state, conditionList:payload };
-        // }
+        }, 
+        ClickUpdata(state, {payload}) {
+            console.log(payload)
+            return { ...state, Objs:payload };
+        }
     },
   
   };

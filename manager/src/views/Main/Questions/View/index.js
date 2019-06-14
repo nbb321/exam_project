@@ -37,8 +37,13 @@ import styles from  './index.scss';
             subject_id,
             exam_id,
             questions_type_id
-          })
+          })  
     }
+
+    let handleClick=(item)=>{  
+        props.ClickItem(item)
+        props.history.push('/questions/default?id='+item.questions_type_id) 
+    } 
      return  <div className={styles.boxs}>
        <div className={styles.title}>查看试题</div>
        <div className={styles.top}>
@@ -79,19 +84,19 @@ import styles from  './index.scss';
           <div className={styles.center}>
                   {
                     ViewList&&ViewList.map((item,index)=>{
-                      return <div className={styles.center_Item} key={item.questions_id}>
-                        <div className={styles.Title}>{item.title}</div>
-                          <div className={styles.Item_Box}>
-                            <div className={styles.small_Item}>
-                                <span>{item.questions_type_text}</span>
-                                <span>{item.subject_text}</span>
-                                <span>{item.exam_name}</span>
+                      return <div key={item.questions_id} className={styles.center_Item} onClick={()=>handleClick(item)}>
+                                <div className={styles.Title}>{item.title}</div>
+                                  <div className={styles.Item_Box}>
+                                    <div className={styles.small_Item}>
+                                        <span>{item.questions_type_text}</span>
+                                        <span>{item.subject_text}</span>
+                                        <span>{item.exam_name}</span>
+                                    </div>
+                                    <p>编辑</p>
+                                  </div>
+                                <div className={styles.Item_Name}>{item.user_name}</div>
                             </div>
-                            <p>编辑</p>
-                          </div>
-                          <div className={styles.Item_Name}>{item.user_name}</div>
-                      </div>
-                    })
+                      })
                   } 
           </div>
        </div> 
@@ -137,7 +142,14 @@ import styles from  './index.scss';
           type:"questions/condition",
           payload
         })
+      },
+      ClickItem(payload){
+        dispatch({
+          type:"questions/clickItem",
+          payload
+        })
       }
+      
     }
   }
 export default connect(mapStateToProps,mapDispatchToProps)(ViewPage)

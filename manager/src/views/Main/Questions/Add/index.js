@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-// import Markdown from "@/components/Markdown";
 import { connect } from 'dva';
 import { Input ,Select, Button,Form} from 'antd';
 import  styles from './index.scss';

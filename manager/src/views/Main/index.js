@@ -6,6 +6,7 @@ import styles from "./index.scss"
 import Add from "./Questions/Add"
 import Type from "./Questions/Type"
 import View from "./Questions/View"
+import Default from "./Questions/Default"
 import {connect} from "dva";
 
 const { Header, Content,Sider} = Layout;
@@ -25,6 +26,7 @@ function IndexPage(props){
             <Route path="/questions/add" component={Add}></Route>
             <Route path="/questions/type" component={Type}></Route>
             <Route path="/questions/view" component={View}></Route>
+            <Route path="/questions/default" component={Default}></Route>
           </Switch>
           {props.loading?
           <div className={styles.loading}>
