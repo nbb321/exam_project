@@ -75,9 +75,9 @@ function TypePage(props){
           </Form>
         </Modal>
         </div>
-        <div className={styles.tableType}>
-            <Table columns={columns}  dataSource={props.TypeList} />
-        </div>
+            <div className={styles.tableType}>
+                <Table columns={columns}  dataSource={props.TypeList} />
+            </div>
         </div>
     </div>
 

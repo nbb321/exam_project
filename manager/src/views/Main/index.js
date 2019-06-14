@@ -7,6 +7,7 @@ import Add from "./Questions/Add"
 import Type from "./Questions/Type"
 import View from "./Questions/View"
 import Default from "./Questions/Default"
+import EditQuestions from "./Questions/EditQuestions"
 import {connect} from "dva";
 
 const { Header, Content,Sider} = Layout;
@@ -27,6 +28,7 @@ function IndexPage(props){
             <Route path="/questions/type" component={Type}></Route>
             <Route path="/questions/view" component={View}></Route>
             <Route path="/questions/default" component={Default}></Route>
+            <Route path="/questions/editQuestions" component={EditQuestions}></Route>
           </Switch>
           {props.loading?
           <div className={styles.loading}>

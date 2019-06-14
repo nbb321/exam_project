@@ -56,6 +56,14 @@ export function UserInfo(){
             method:"GET"
     })
 }
+//更新试题
+export function Update(params){
+    return request({
+            url:"/exam/questions/update",
+            method:"PUT",
+            data:params
+    })
+}
 //查询
 export function Condition(params){
     console.log(params.subject_id,params.exam_id,params.questions_type_id);

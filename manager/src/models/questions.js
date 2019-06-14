@@ -1,4 +1,4 @@
-import {Type,View,Subject,ExamType,Condition,Addquest,UserInfo} from '@/services';
+import {Type,View,Subject,ExamType,Condition,Addquest,UserInfo,Update} from '@/services';
 // import { routerRedux } from 'dva/router';
 export default {
     // 命名空间
@@ -11,6 +11,8 @@ export default {
         subjectList:[],
         examTypeList:[],
         conditionList:[],
+        compileList:[],
+        UpdateList:[],
         user_id:"",
         Objs:{}
         
@@ -63,10 +65,12 @@ export default {
                 payload:data.data
             })
         },
+        //添加试题
         *addquest({payload}, {call, put}){
             let data = yield call(Addquest,payload);
             console.log(data)
         },
+        // 用户名
         *userInfo({payload}, {call, put}){
             let data = yield call(UserInfo);
             yield put({
@@ -74,12 +78,30 @@ export default {
                 payload:data.data.user_id
             })
         },
+        //点击详情
         *clickItem({payload}, {call, put}){
             yield put({
                 type:"ClickUpdata",
                 payload
             })
-        }
+        },
+        //点击编辑
+        *compile({payload}, {call, put}){
+            yield put({
+                type:"compileUpdata",
+                payload
+            })
+        },
+        //编辑页
+        *update({payload}, {call, put}){
+            let data = yield call(Update,payload);
+            console.log(data)
+            // yield put({
+            //     type:"DataUpdata",
+            //     payload:data.data
+            // })
+        },
+        
         
     },
   
@@ -101,13 +123,17 @@ export default {
             return { ...state, conditionList:payload };
         },
         userInfotUpdata(state, {payload}) {
-            console.log(payload)
             return { ...state, user_id:payload };
         }, 
         ClickUpdata(state, {payload}) {
-            console.log(payload)
             return { ...state, Objs:payload };
-        }
+        },
+        compileUpdata(state, {payload}) {
+            return { ...state, compileList:payload };
+        },
+        // DataUpdata(state, {payload}) {
+        //     return { ...state, UpdateList:payload };
+        // },
     },
   
   };

@@ -14,23 +14,24 @@ import styles from  './index.scss';
       props.Type();
       }, []);
 
-      let {subjectList,examTypeList,TypeList,ViewList}=props;
-      let [subject_id,upSubject] = useState('');
-      let [exam_id,upExam_id] = useState('');
-      let [questions_type_id,upQuestion] = useState('');
+    let {subjectList,examTypeList,TypeList,ViewList}=props;
+    let [subject_id,upSubject] = useState('');
+    let [exam_id,upExam_id] = useState('');
+    let [questions_type_id,upQuestion] = useState('');
 
+    //改变课程类型
     let handleClickLi=(id)=>{
       upSubject(subject_id=id)
     }
-
+    //改变考试类型
     let handleChange=(value)=>{
       upExam_id(exam_id=value);
-    }
-
+    } 
+    //改变题目类型
     let handleChangeId=(value)=>{
       upQuestion(questions_type_id=value)
     }
-
+    //点击查询
     let handleOnClick=()=>{
       let {Condition}=props;
           Condition({
@@ -39,7 +40,13 @@ import styles from  './index.scss';
             questions_type_id
           })  
     }
-
+    //点击编辑
+    let ClickCompile=(item)=>{
+      props.Compile(item);
+      //跳转添加试题页
+      props.history.push('/questions/editQuestions?id='+item.questions_type_id) 
+    }
+    //点击跳转详情
     let handleClick=(item)=>{  
         props.ClickItem(item)
         props.history.push('/questions/default?id='+item.questions_type_id) 
@@ -84,19 +91,21 @@ import styles from  './index.scss';
           <div className={styles.center}>
                   {
                     ViewList&&ViewList.map((item,index)=>{
-                      return <div key={item.questions_id} className={styles.center_Item} onClick={()=>handleClick(item)}>
-                                <div className={styles.Title}>{item.title}</div>
-                                  <div className={styles.Item_Box}>
-                                    <div className={styles.small_Item}>
-                                        <span>{item.questions_type_text}</span>
-                                        <span>{item.subject_text}</span>
-                                        <span>{item.exam_name}</span>
-                                    </div>
-                                    <p>编辑</p>
-                                  </div>
-                                <div className={styles.Item_Name}>{item.user_name}</div>
+                      return <div key={item.questions_id} className={styles.center_Item}>
+                                <div className={styles.left} onClick={()=>handleClick(item)}>
+                                    <div className={styles.Title}>{item.title}</div>
+                                      <div className={styles.Item_Box}>
+                                        <div className={styles.small_Item}>
+                                            <span>{item.questions_type_text}</span>
+                                            <span>{item.subject_text}</span>
+                                            <span>{item.exam_name}</span>
+                                        </div>
+                                      </div>
+                                    <div className={styles.Item_Name}>{item.user_name}</div>
+                                </div>
+                                <p className={styles.compile} onClick={()=>ClickCompile(item)}>编辑</p>
                             </div>
-                      })
+                         })
                   } 
           </div>
        </div> 
@@ -148,8 +157,13 @@ import styles from  './index.scss';
           type:"questions/clickItem",
           payload
         })
+      },
+      Compile(payload){
+        dispatch({
+          type:"questions/compile",
+          payload
+        })
       }
-      
     }
   }
 export default connect(mapStateToProps,mapDispatchToProps)(ViewPage)
