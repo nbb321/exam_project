@@ -64,6 +64,17 @@ export function Update(params){
             data:params
     })
 }
+//添加类型
+export function insertQuestionsType(params){
+    console.log(params);
+    if(params.text!==""&&params.sort!==""){
+        return request({
+            url:"/exam/insertQuestionsType?text="+params.text+"&sort"+params.sort,
+            method:"GET"
+        })
+    }
+}
+
 //查询
 export function Condition(params){
     console.log(params.subject_id,params.exam_id,params.questions_type_id);

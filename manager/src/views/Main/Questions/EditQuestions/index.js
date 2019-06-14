@@ -18,10 +18,7 @@ import Editor from 'for-editor';
     //点击提交，获取所有的参数
     let handleSubmit = e => {
       props.form.validateFields((err, values) => {
-          console.log(typeof values.valueowen)
-          console.log(typeof compileList.questions_id)
         let {Update}=props;
-        // if (values.titleText!==""&&values.questions_type_id!==""&&values.value!==""&&values.subject_id!==""&&values.exam_id!==""&&values.questions_answer!=="") {
             Update({
                 questions_id:compileList.questions_id,
                 title:values.titleText,
@@ -31,7 +28,6 @@ import Editor from 'for-editor';
                 questions_type_id:values.questions_type_id,
                 exam_id:values.exam_id
           })
-        // }
       });
     };
      return <Form onSubmit={handleSubmit} className={styles.content}>

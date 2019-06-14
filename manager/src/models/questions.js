@@ -1,4 +1,4 @@
-import {Type,View,Subject,ExamType,Condition,Addquest,UserInfo,Update} from '@/services';
+import {Type,View,Subject,ExamType,Condition,Addquest,UserInfo,Update,insertQuestionsType} from '@/services';
 // import { routerRedux } from 'dva/router';
 export default {
     // 命名空间
@@ -12,7 +12,7 @@ export default {
         examTypeList:[],
         conditionList:[],
         compileList:[],
-        UpdateList:[],
+        insertList:[],
         user_id:"",
         Objs:{}
         
@@ -96,10 +96,15 @@ export default {
         *update({payload}, {call, put}){
             let data = yield call(Update,payload);
             console.log(data)
-            // yield put({
-            //     type:"DataUpdata",
-            //     payload:data.data
-            // })
+        },
+        //添加类型
+        *insertQuestionsType({payload}, {call, put}){
+            let data = yield call(insertQuestionsType,payload);
+            console.log(data);
+            yield put({
+                type:"insertQuestionsUpdata",
+                payload:data.data
+            })
         },
         
         
@@ -131,9 +136,9 @@ export default {
         compileUpdata(state, {payload}) {
             return { ...state, compileList:payload };
         },
-        // DataUpdata(state, {payload}) {
-        //     return { ...state, UpdateList:payload };
-        // },
+        insertQuestionsUpdata(state, {payload}) {
+            return { ...state, insertList:payload };
+        },
     },
   
   };

@@ -7,12 +7,14 @@ import { Table,  Button , Modal , Input ,Form} from 'antd';
 function TypePage(props){
     //控制添加弹出框
     let [showLoading,upLoading]=useState(false);
-    let [iptValue,upValue]=useState("")
+    //获取更改value值
+    let [iptValue,upValue]=useState("");
     let data=[];
+    //防止key值重复
      if (props.TypeList.length>0){
          data=props.TypeList
         data.forEach((item)=>{
-             item['key']=item.questions_type_sort
+             item.key=item.questions_type_sort
         })
      }
     const columns = [
@@ -36,11 +38,14 @@ function TypePage(props){
   //获取login
   useEffect(()=>{
     props.Type();
+    if(iptValue){
+      props.insertQuestionsType();
+    }
   },[]);
 
-  let  handleSubmit=(e)=>{
+  let handleSubmit=(e)=>{
       props.form.validateFields((err, values) => {
-        console.log(values)
+      
       })
   }
   const { getFieldDecorator } = props.form;
@@ -55,8 +60,11 @@ function TypePage(props){
         <Modal visible={showLoading}
          onCancel={()=>upLoading(false)}
          onOk={()=>{
-          upLoading(false);
-          console.log(iptValue)
+            props.insertQuestionsType({
+              text:iptValue,
+              sort:new Date().getTime()
+            })
+            upLoading(false);
          }}
          >
           <Form onSubmit={handleSubmit} className="login-form">
@@ -67,7 +75,7 @@ function TypePage(props){
                   <Input
                     placeholder="请输入你要添加的值"
                     onChange={(e)=>{
-                      upValue(e.target.value)
+                      upValue(e.target.value);
                     }}
                   />
                 )}
@@ -102,6 +110,12 @@ TypePage.defaultProps={
     Type(){
       dispatch({
         type:'questions/type'
+      })
+    },
+    insertQuestionsType(payload){
+      dispatch({
+        type:'questions/insertQuestionsType',
+        payload
       })
     }
    }
