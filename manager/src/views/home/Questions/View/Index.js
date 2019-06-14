@@ -31,14 +31,19 @@ import styles from  './Index.scss';
     let handleChangeId=(value)=>{
       upQuestion(questions_type_id=value)
     }
-
+    //点击 查询
     let handleOnClick=()=>{
+        //把下拉框获取到的值利用models传给后台的接口   在利用props.ViewList 来进行渲染
       let {Condition}=props;
           Condition({
             subject_id,
             exam_id,
             questions_type_id
-          })
+          });
+    }
+    //点击每一个渲染渲染的列表
+    let clickViewItem=(item)=>{
+       console.log(item)
     }
      return  <div className={styles.boxs}>
        <div className={styles.title}>查看试题</div>
@@ -56,10 +61,10 @@ import styles from  './Index.scss';
           <div className={styles.top_Bom}>
             <div className={styles.Bom_item}>
                 <p>考试类型</p>
-                <Select onChange={handleChange}  defaultValue="" onChange={handleChange} style={{ width: 150,margin:15,height:35 }}>
+                <Select onChange={handleChange}  defaultValue=""  style={{ width: 150,margin:15,height:35 }}>
                   {
                     examTypeList&&examTypeList.map((item,index)=>{
-                      return <Option key={item.exam_id}  value={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
+                      return <Option key={item.exam_id}  value={item.exam_id}>{item.exam_name}</Option>
                     })
                   }
                 </Select>
@@ -80,7 +85,7 @@ import styles from  './Index.scss';
           <div className={styles.center}>
                   {
                     ViewList&&ViewList.map((item,index)=>{
-                      return <div className={styles.center_Item} key={item.questions_id}>
+                      return <div className={styles.center_Item} key={item.questions_id} onClick={()=>clickViewItem(item)}>
                         <div className={styles.Title}>{item.title}</div>
                           <div className={styles.Item_Box}>
                             <div className={styles.small_Item}>

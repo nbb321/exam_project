@@ -38,6 +38,7 @@ export default {
                 payload:data.data
             })
         },
+        //科目
         *subject({payload}, {call, put}){
             let data = yield call(Subject);
             // console.log(data.data)
@@ -46,6 +47,7 @@ export default {
                 payload:data.data
             })
         },
+        //考试类型
         *examType({payload}, {call, put}){
             let data = yield call(ExamType);
             // console.log(data.data)
@@ -54,13 +56,13 @@ export default {
                 payload:data.data
             })
         },
+        //View查询
         *condition({payload}, {call, put}){
-            let data = yield call(Condition);
-            console.log(data.data)
-            // yield put({
-            //     type:"conditionUpdata",
-            //     payload:data.data
-            // })
+            let data = yield call(Condition,payload);
+            yield put({
+                type:"conditionUpdata",
+                payload:data.data
+            })
         }
         
     },
@@ -79,9 +81,10 @@ export default {
         examTypeUpdata(state, {payload}) {
             return { ...state, examTypeList:payload };
         },
-        // condition(state, {payload}) {
-        //     return { ...state, examTypeList:payload };
-        // }
+        //每一次进行查询的时候ViewList进行渲染
+        conditionUpdata(state, {payload}) {
+            return { ...state, ViewList:payload };
+        }
     },
   
   };

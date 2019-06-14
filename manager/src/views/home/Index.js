@@ -26,7 +26,7 @@ function IndexPage(props){
           <Route path="/questions/type" component={Type}></Route>
           <Route path="/questions/view" component={View}></Route>
         </Switch>
-          {props.loading?<div className={styles.loading}><Spin indicator={antIcon} /></div>:null}
+          {props.loading?<div className={styles.loading}><Spin/></div>:null}
       </Content>
     </Layout>
   </Layout>
