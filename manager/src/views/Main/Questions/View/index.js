@@ -55,7 +55,7 @@ import styles from  './index.scss';
           <div className={styles.top_Bom}>
             <div className={styles.Bom_item}>
                 <p>考试类型</p>
-                <Select onChange={handleChange}  defaultValue="" onChange={handleChange} style={{ width: 150,margin:15,height:35 }}>
+                <Select onChange={handleChange}   onChange={handleChange} style={{ width: 150,margin:15,height:35 }}>
                   {
                     examTypeList&&examTypeList.map((item,index)=>{
                       return <Option key={item.exam_id}  value={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
@@ -65,7 +65,7 @@ import styles from  './index.scss';
             </div>
             <div className={styles.Bom_item}>
                 <p>题目类型</p>
-                <Select defaultValue="" onChange={handleChangeId} style={{ width: 150,margin:15,height:35 }}>
+                <Select  onChange={handleChangeId} style={{ width: 150,margin:15,height:35 }}>
                   {
                     TypeList&&TypeList.map((item,index)=>{
                       return <Option key={item.questions_type_id} value={item.questions_type_id}>{item.questions_type_text}</Option>
