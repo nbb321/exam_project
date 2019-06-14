@@ -1,4 +1,5 @@
 import {Type,View,Subject,ExamType,Condition} from '@/services';
+// import { routerRedux } from "dva/router";
 
 export default {
     // 命名空间
@@ -10,13 +11,26 @@ export default {
         ViewList:[],
         subjectList:[],
         examTypeList:[],
+        itemList:[],
         subject_id:"",
         exam_id:"",
         questions_type_id:""
     },
   
     subscriptions: {
+      /**
+     * 监听浏览器地址，当跳转到 /user 时进入该方法
+     * dispatch 触发器，用于触发 effects 中的 query 方法
+     * history 浏览器历史记录，主要用到它的 location 属性以获取地址栏地址
+     */
       setup({ dispatch, history }) {  // eslint-disable-line
+        //  history.listen((location) => {
+        //   console.log(location)
+        //   dispatch({
+        //     type: 'query',
+        //     payload: location.state,
+        //   })
+        //  }); 
       },
     },
   
@@ -63,7 +77,18 @@ export default {
                 type:"conditionUpdata",
                 payload:data.data
             })
-        }
+        },
+        //从view里传过来的每一项值点击进行跳转路由
+        //遇到问题  Warning: Hash history cannot push state; it is ignored
+        //this.props.history.push({ pathname: `${url}`, state: { nodeType: nodeType }}) //1
+        //yield put(routerRedux.push('/question/detail?id='+payload.questions_id,{item:payload}))
+        *redirect({payload}, {put}){
+            yield put({
+                type:"redirectUpdata",
+                payload
+            })
+        },
+        
         
     },
   
@@ -84,7 +109,11 @@ export default {
         //每一次进行查询的时候ViewList进行渲染
         conditionUpdata(state, {payload}) {
             return { ...state, ViewList:payload };
+        },
+        redirectUpdata(state,{payload}){
+            return {...state,itemList:payload}
         }
+
     },
   
   };

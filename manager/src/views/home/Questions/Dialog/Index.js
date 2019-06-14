@@ -112,26 +112,12 @@ import Editor from 'for-editor';
   const mapStateToProps=state=>{
       // console.log("state",state)
       return{
-        ...state.questions
+        
       }
   }
   const mapDispatchToProps=dispatch=>{
       return{
-        Subject(){
-            dispatch({
-              type:"questions/subject"
-            })
-          },
-          ExamType(){
-            dispatch({
-              type:"questions/examType"
-            })
-          },
-          Type(){
-            dispatch({
-              type:"questions/type"
-            })
-          }
+        
       }
   }
 export default connect(mapStateToProps,mapDispatchToProps)(Form.create()(AddPage))

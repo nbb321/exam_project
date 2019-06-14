@@ -1,15 +1,15 @@
 import React from 'react';
-import {Layout,Icon,Spin} from 'antd';
+import {Layout,Spin} from 'antd';
 import { Route, Switch,Redirect } from 'dva/router';
 import Menu from '@/components/Menu'
 import styles from './Index.scss'
 import Add  from "./Questions/Add/Index"
 import Type from "./Questions/Type/Index"
 import View  from "./Questions/View/Index"
+import Dialog from "./Questions/Dialog/Index"
 import {connect} from "dva"
 
 const { Header, Content, Sider } = Layout;
-const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 function IndexPage(props){
   return <Layout className={styles.container}>
     <Header>
@@ -25,6 +25,7 @@ function IndexPage(props){
           <Route path="/questions/add" component={Add}></Route>
           <Route path="/questions/type" component={Type}></Route>
           <Route path="/questions/view" component={View}></Route>
+          <Route path="/questions/detail" component={Dialog}></Route>
         </Switch>
           {props.loading?<div className={styles.loading}><Spin/></div>:null}
       </Content>

@@ -1,10 +1,10 @@
-    
 import React, {useState,useEffect} from 'react';
 import { Select, Button} from 'antd';
+import { Link} from 'dva/router';
 import { connect } from 'dva';
 import styles from  './Index.scss';
 
-  const { Option } = Select;
+const { Option } = Select;
 
   function ViewPage(props){
 
@@ -41,9 +41,10 @@ import styles from  './Index.scss';
             questions_type_id
           });
     }
-    //点击每一个渲染渲染的列表
-    let clickViewItem=(item)=>{
-       console.log(item)
+    //点击每一项
+    let itemClick=(item)=>{
+        //遇到的路由跳转问题
+       props.itemList(item)
     }
      return  <div className={styles.boxs}>
        <div className={styles.title}>查看试题</div>
@@ -84,8 +85,8 @@ import styles from  './Index.scss';
           </div>
           <div className={styles.center}>
                   {
-                    ViewList&&ViewList.map((item,index)=>{
-                      return <div className={styles.center_Item} key={item.questions_id} onClick={()=>clickViewItem(item)}>
+                    ViewList&&ViewList.map((item)=>{
+                      return <Link className={styles.center_Item} key={item.questions_id} onClick={()=>itemClick(item)} to={{pathname:`/questions/detail?id=${item.questions_id}`}}>
                         <div className={styles.Title}>{item.title}</div>
                           <div className={styles.Item_Box}>
                             <div className={styles.small_Item}>
@@ -96,7 +97,7 @@ import styles from  './Index.scss';
                             <p>编辑</p>
                           </div>
                           <div className={styles.Item_Name}>{item.user_name}</div>
-                      </div>
+                      </Link>
                     })
                   } 
           </div>
@@ -111,7 +112,6 @@ import styles from  './Index.scss';
       
   }
   const mapStateToProps=state=>{
-      // console.log("state",state)
       return{
         ...state.questions
       }
@@ -143,7 +143,14 @@ import styles from  './Index.scss';
           type:"questions/condition",
           payload
         })
+      },
+      //传每一项
+      itemList(payload){
+          dispatch({
+            type:"questions/redirect",
+            payload  
+          })
       }
     }
   }
-export default connect(mapStateToProps,mapDispatchToProps)(ViewPage)
+export default connect(mapStateToProps, mapDispatchToProps)(ViewPage)
