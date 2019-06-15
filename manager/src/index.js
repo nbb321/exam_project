@@ -1,14 +1,16 @@
 import dva from 'dva';
 import './index.css';
+//引用polyfill补丁,解决路由警告
+import "@babel/polyfill"
+//ant的css样式
+import "antd/dist/antd.css";
+// 1. Initialize
 import createLoading from "dva-loading";
 
-
-// 1. Initialize
 const app = dva(createLoading());
 
 // 2. Plugins
-//引入全局loading
-// app.use();
+// app.use({});
 
 // 3. Model
 app.model(require('./models/user').default);

@@ -1,3 +1,1 @@
-export * from './user.js';
-export * from "./itemList.js"
-//用来发起请求
+export * from "./user.js"

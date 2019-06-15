@@ -1,3 +1,4 @@
+
 .li{
     display: inline-block;
     list-style: none;
@@ -28,6 +29,9 @@
     height: 120px;
     background: #fff;
     border-radius: 5px;
+}
+.active li:hover{
+    color: #0139FD;
 }
 .Btn{
     margin-left: 20px;
@@ -67,7 +71,7 @@
     height: 90px;
     border-bottom: 1px solid #ccc;
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
 }
 .Item_Box{
     width: 100%;
@@ -100,11 +104,17 @@
     background: #fff7e6;
     border-color: #ffd591;
 }
+.left{
+    flex:1;
+}
 .Title{
     margin-top: 5px;
 }
-.Item_Box p{
+.compile{
     color: #0139FD;
+    width: 100px;
+    text-align: center;
+    margin-top: 31px;
 }
 .Item_Name{
     margin-top: 4px;

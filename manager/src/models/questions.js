@@ -1,6 +1,5 @@
-import {Type,View,Subject,ExamType,Condition} from '@/services';
-// import { routerRedux } from "dva/router";
-
+import {Type,View,Subject,ExamType,Condition,Addquest,UserInfo,Update,insertQuestionsType,UserShow} from '@/services';
+// import { routerRedux } from 'dva/router';
 export default {
     // 命名空间
     namespace: 'questions',
@@ -11,34 +10,24 @@ export default {
         ViewList:[],
         subjectList:[],
         examTypeList:[],
-        itemList:[],
-        subject_id:"",
-        exam_id:"",
-        questions_type_id:""
+        conditionList:[],
+        compileList:[],
+        insertList:[],
+        usershowList:[],
+        user_id:"",
+        Objs:{}
+        
     },
   
     subscriptions: {
-      /**
-     * 监听浏览器地址，当跳转到 /user 时进入该方法
-     * dispatch 触发器，用于触发 effects 中的 query 方法
-     * history 浏览器历史记录，主要用到它的 location 属性以获取地址栏地址
-     */
-      setup({ dispatch, history }) {  // eslint-disable-line
-        //  history.listen((location) => {
-        //   console.log(location)
-        //   dispatch({
-        //     type: 'query',
-        //     payload: location.state,
-        //   })
-        //  }); 
-      },
+        setup ({ dispatch, history }) {
+        },
     },
   
     // 异步操作
     effects: {
         *type({payload}, {call, put}){
             let data = yield call(Type);
-            // console.log(data);
             yield put({
                 type:"typeUpdata",
                 payload:data.data
@@ -46,31 +35,26 @@ export default {
         },
         *view({payload}, {call, put}){
             let data = yield call(View);
-            // console.log(data.data)
             yield put({
                 type:"viewUpdata",
                 payload:data.data
             })
         },
-        //科目
         *subject({payload}, {call, put}){
             let data = yield call(Subject);
-            // console.log(data.data)
             yield put({
                 type:"subjectUpdata",
                 payload:data.data
             })
         },
-        //考试类型
         *examType({payload}, {call, put}){
             let data = yield call(ExamType);
-            // console.log(data.data)
             yield put({
                 type:"examTypeUpdata",
                 payload:data.data
             })
         },
-        //View查询
+        //点击查询
         *condition({payload}, {call, put}){
             let data = yield call(Condition,payload);
             yield put({
@@ -78,16 +62,51 @@ export default {
                 payload:data.data
             })
         },
-        //从view里传过来的每一项值点击进行跳转路由
-        //遇到问题  Warning: Hash history cannot push state; it is ignored
-        //this.props.history.push({ pathname: `${url}`, state: { nodeType: nodeType }}) //1
-        //yield put(routerRedux.push('/question/detail?id='+payload.questions_id,{item:payload}))
-        *redirect({payload}, {put}){
+        //添加试题
+        *addquest({payload}, {call, put}){
+            let data = yield call(Addquest,payload);
+            console.log(data)
+        },
+        // 用户名
+        *userInfo({payload}, {call, put}){
+            let data = yield call(UserInfo);
             yield put({
-                type:"redirectUpdata",
+                type:"userInfotUpdata",
+                payload:data.data.user_id
+            })
+        },
+        //点击详情
+        *clickItem({payload}, {call, put}){
+            yield put({
+                type:"ClickUpdata",
                 payload
             })
         },
+        //点击编辑
+        *compile({payload}, {call, put}){
+            yield put({
+                type:"compileUpdata",
+                payload
+            })
+        },
+        //编辑页
+        *update({payload}, {call, put}){
+            let data = yield call(Update,payload);
+            // console.log(data)
+        },
+        //添加类型
+        *insertQuestionsType({payload}, {call, put}){
+            let data = yield call(insertQuestionsType,payload);
+            // console.log(data);
+        },
+        //用户展示
+        *userShow({payload}, {call, put}){
+            let data = yield call(UserShow,payload);
+            yield put({
+                type:"userShowUpdata",
+                payload:data.data
+            })
+        }
         
         
     },
@@ -106,14 +125,23 @@ export default {
         examTypeUpdata(state, {payload}) {
             return { ...state, examTypeList:payload };
         },
-        //每一次进行查询的时候ViewList进行渲染
         conditionUpdata(state, {payload}) {
+            console.log(payload)
             return { ...state, ViewList:payload };
         },
-        redirectUpdata(state,{payload}){
-            return {...state,itemList:payload}
+        userInfotUpdata(state, {payload}) {
+            return { ...state, user_id:payload };
+        }, 
+        ClickUpdata(state, {payload}) {
+            return { ...state, Objs:payload };
+        },
+        compileUpdata(state, {payload}) {
+            return { ...state, compileList:payload };
+        },
+        userShowUpdata(state,{payload}){
+            return {...state,usershowList:payload}
         }
-
     },
   
   };
+  

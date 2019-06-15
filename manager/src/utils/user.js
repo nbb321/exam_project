@@ -1,12 +1,12 @@
-import Cookie from "js-cookie";
+import Cookie from 'js-cookie';
 
-const key='authorization';
-//获取token
+const key = 'authorization';
+// 获取token
 export function getToken(){
-    return Cookie.get(key);
+  return Cookie.get(key)
 }
 
-//设置Token
+// 设置token
 export function setToken(value){
-    Cookie.set(key,value,{expires:7})
+  Cookie.set(key, value, {expires: 7})
 }
