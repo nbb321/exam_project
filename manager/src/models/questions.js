@@ -1,4 +1,4 @@
-import {Type,View,Subject,ExamType,Condition,Addquest,UserInfo,Update,insertQuestionsType,UserShow} from '@/services';
+import {Type,View,Subject,ExamType,Condition,Addquest,UserInfo,Update,insertQuestionsType,UserShow,Useridentity,ApiAuthority,Relation} from '@/services';
 // import { routerRedux } from 'dva/router';
 export default {
     // 命名空间
@@ -14,6 +14,9 @@ export default {
         compileList:[],
         insertList:[],
         usershowList:[],
+        useridentityList:[],
+        apiAuthorityList:[],
+        relationList:[],
         user_id:"",
         Objs:{}
         
@@ -91,12 +94,12 @@ export default {
         },
         //编辑页
         *update({payload}, {call, put}){
-            let data = yield call(Update,payload);
+           yield call(Update,payload);
             // console.log(data)
         },
         //添加类型
         *insertQuestionsType({payload}, {call, put}){
-            let data = yield call(insertQuestionsType,payload);
+            yield call(insertQuestionsType,payload);
             // console.log(data);
         },
         //用户展示
@@ -104,6 +107,30 @@ export default {
             let data = yield call(UserShow,payload);
             yield put({
                 type:"userShowUpdata",
+                payload:data.data
+            })
+        },
+        //身份数据
+        *useridentity({payload}, {call, put}){
+            let data = yield call(Useridentity,payload);
+            yield put({
+                type:"useridentityUpdata",
+                payload:data.data
+            })
+        },
+        //api接口权限设置
+        *apiAuthority({payload}, {call, put}){
+            let data = yield call(ApiAuthority,payload);
+            yield put({
+                type:"apiAuthorityUpdata",
+                payload:data.data
+            })
+        },
+        //身份和api接口关系
+        *relation({payload}, {call, put}){
+            let data = yield call(Relation,payload);
+            yield put({
+                type:"relationUpdata",
                 payload:data.data
             })
         }
@@ -140,7 +167,17 @@ export default {
         },
         userShowUpdata(state,{payload}){
             return {...state,usershowList:payload}
+        },
+        useridentityUpdata(state,{payload}){
+            return {...state,useridentityList:payload}
+        },
+        apiAuthorityUpdata(state,{payload}){
+            return {...state,apiAuthorityList:payload}
+        },
+        relationUpdata(state,{payload}){
+            return {...state,relationList:payload}
         }
+
     },
   
   };

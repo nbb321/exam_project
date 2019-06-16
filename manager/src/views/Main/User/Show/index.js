@@ -2,38 +2,111 @@ import React,{useEffect} from 'react';
 import { connect } from 'dva';
 import "antd/dist/antd.css";
 import styles from './index.scss';
-import { Form,Tabs} from 'antd';
+import { Form,Tabs,Table} from 'antd';
 
 function UserIndex(props){
-     console.log(props)
+    // console.log(props)
+    let {usershowList,useridentityList,apiAuthorityList,relationList}=props;
+    usershowList.forEach( item => {
+       item.key=item.user_id;
+      });
+    useridentityList.forEach( item => {
+        item.key=item.identity_id;
+       });
+    apiAuthorityList.forEach( item => {
+      item.key=item.api_authority_id;
+    });
+    relationList.forEach( item => {
+        item.key=item.identity_api_authority_relation_id;
+      });
+
     //form表单提交按钮
     let handleSubmit=e=>{
       
     }
     useEffect(()=>{
        props.Usershow();
+       props.Useridentity();
+       props.ApiAuthority();
+       props.Relation();
     },[]);
   const { TabPane } = Tabs;
+  const columns = [
+    {
+       title: '用户名',
+       dataIndex: 'user_name'
+    },
+    {
+        title: '密码',
+        dataIndex: 'user_pwd',
+    },
+    {
+        title: '身份',
+        dataIndex: 'identity_text',
+    }]
+    const columnsIdentity = [
+        {
+           title: '身份名称',
+           dataIndex: 'identity_text'
+    }];
+    const columnsApiAuthority = [
+        {
+           title: 'api权限名称',
+           dataIndex: 'api_authority_text'
+        },
+        {
+            title: 'api权限url',
+            dataIndex: 'api_authority_url',
+        },
+        {
+            title: 'api权限方法',
+            dataIndex: 'api_authority_method',
+    }];
+    const columnsRelation = [
+        {
+           title: '身份名称',
+           dataIndex: 'identity_text'
+        },
+        {
+            title: 'api权限名称',
+            dataIndex: 'api_authority_text',
+        },
+        {
+            title: 'api权限url',
+            dataIndex: 'api_authority_url',
+        },
+        {
+            title: 'api权限方法',
+            dataIndex: 'api_authority_method',
+    }];
+
   return (
     <Form onSubmit={handleSubmit} className={styles.main}>
        <h2 className={styles.title}>用户展示</h2>
         <div className={styles.content}>
         <div className="card-container">
             <Tabs type="card">
-            <TabPane tab="Tab Title 1" key="1">
-                <p>Content of Tab Pane 1</p>
-                <p>Content of Tab Pane 1</p>
-                <p>Content of Tab Pane 1</p>
+            <TabPane tab="用户数据" key="1">
+               <h2>用户数据</h2>
+               <Table columns={columns}  dataSource={usershowList&&usershowList} />
             </TabPane>
-            <TabPane tab="Tab Title 2" key="2">
-                <p>Content of Tab Pane 2</p>
-                <p>Content of Tab Pane 2</p>
-                <p>Content of Tab Pane 2</p>
+            <TabPane tab="身份数据" key="2">
+              <h2>身份数据</h2>
+              <Table columns={columnsIdentity}  dataSource={useridentityList&&useridentityList} />
             </TabPane>
-            <TabPane tab="Tab Title 3" key="3">
-                <p>Content of Tab Pane 3</p>
-                <p>Content of Tab Pane 3</p>
-                <p>Content of Tab Pane 3</p>
+            <TabPane tab="api接口权限" key="3">
+              <h2>api接口权限</h2>
+              <Table columns={columnsApiAuthority}  dataSource={apiAuthorityList&&apiAuthorityList} />
+            </TabPane>
+            <TabPane tab="身份和api接口关系" key="4">
+              <h2>身份和api接口关系</h2>
+              <Table columns={columnsRelation}  dataSource={relationList&&relationList} />
+            </TabPane>
+            <TabPane tab="试图接口权限" key="5">
+              <h2>试图接口权限</h2>
+            </TabPane>
+            <TabPane tab="身份和试图关系" key="6">
+              <h2>身份和试图关系</h2>
             </TabPane>
             </Tabs>
         </div>
@@ -58,11 +131,32 @@ UserIndex.defaultProps={
  }
  const mapDispatchToProps=dispatch=>{
    return {
+    //展示身份
     Usershow(){
         dispatch({
           type:"questions/userShow"
         })
+      },
+    //展示身份数据
+    Useridentity(){
+        dispatch({
+          type:"questions/useridentity"
+        })
+      },
+    //api接口权限
+    ApiAuthority(){
+        dispatch({
+          type:"questions/apiAuthority"
+        })
+      },
+    //身份和api的关系
+    Relation(){
+        dispatch({
+          type:"questions/relation"
+        })
       }
- }
+   }
+  
+
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Form.create()(UserIndex));

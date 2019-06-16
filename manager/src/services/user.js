@@ -125,7 +125,28 @@ export function Condition(params){
 //用户展示
 export function UserShow(){
     return request({
+            url:"/user/user",
+            method:"GET"
+    })
+}
+//显示身份数据
+export function Useridentity(){
+    return request({
+            url:"/user/identity",
+            method:"GET"
+    })
+}
+//显示身份数据
+export function ApiAuthority(){
+    return request({
             url:"/user/api_authority",
+            method:"GET"
+    })
+}
+//显示身份和api接口关系
+export function Relation(){
+    return request({
+            url:"/user/identity_api_authority_relation",
             method:"GET"
     })
 }
