@@ -9,33 +9,24 @@ function TypePage(props){
     let [showLoading,upLoading]=useState(false);
     //获取更改value值
     let [iptValue,upValue]=useState("");
-    let data=[];
-    //防止key值重复
-     if (props.TypeList.length>0){
-         data=props.TypeList
-        data.forEach((item)=>{
-             item.key=item.questions_type_sort
-        })
-     }
-    const columns = [
-        {
-          title: '类型ID',
-          dataIndex: 'questions_type_id',
-          key: 'questions_type_id',
-        },
-        {
+    const {TypeList}=props;
+     TypeList.forEach( item=> {
+       item.key=item.questions_type_id;
+      });
+     const columns = [
+      {
+         title: '类型ID',
+         dataIndex: 'questions_type_id'
+      },
+      {
           title: '类型名称',
           dataIndex: 'questions_type_text',
-          key: 'questions_type_text',
-        },
-        {
+      },
+      {
           title: '操作',
-          dataIndex: 'address',
-          key: 'address',
-        },
-      ];
-      
-  //获取login
+          dataIndex: '',
+      }]
+    
   useEffect(()=>{
     props.Type();
     if(iptValue){
@@ -44,9 +35,6 @@ function TypePage(props){
   },[]);
 
   let handleSubmit=(e)=>{
-      props.form.validateFields((err, values) => {
-      
-      })
   }
   const { getFieldDecorator } = props.form;
   return (

@@ -88,7 +88,7 @@ import Editor from 'for-editor';
                               <Select  style={{ width: 120 }}>
                                   {
                                       subjectList&&subjectList.map((item,index)=>{
-                                          return <Option className={styles.li} value={item.subject_id} key={index} value={item.subject_id}>{item.subject_text}</Option>
+                                          return <Option className={styles.li}  key={index} value={item.subject_id}>{item.subject_text}</Option>
                                       })
                                   }
                              </Select>

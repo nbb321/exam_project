@@ -1,5 +1,5 @@
 import request from '../utils/request';
-
+//1.试卷管理
 //登录接口
 export function login(params){
 return request({
@@ -66,15 +66,46 @@ export function Update(params){
 }
 //添加类型
 export function insertQuestionsType(params){
-    console.log(params);
     if(params.text!==""&&params.sort!==""){
         return request({
-            url:"/exam/insertQuestionsType?text="+params.text+"&sort"+params.sort,
+            url:"/exam/insertQuestionsType?text="+params.text+"&sort="+params.sort,
             method:"GET"
         })
     }
 }
+//2.用户管理
 
+//添加身份
+export function Edit(params){
+    console.log(params.identity_text)
+    return request({
+            url:"/user/identity/edit?identity_text="+params.identity_text,
+            method:"GET",
+            data:params
+    })
+}
+//获取身份id
+export function Identityid(){
+    return request({
+        url:"/user/identity",
+        method:"GET"
+    })
+}
+//添加用户
+export function Adduser(params){
+    return request({
+            url:"/user",
+            method:"POST",
+            data:params
+    })
+}
+//用户id
+export function Userid(){
+    return request({
+        url:"/user/user",
+        method:"GET"
+    })
+}
 //查询
 export function Condition(params){
     console.log(params.subject_id,params.exam_id,params.questions_type_id);
@@ -122,4 +153,3 @@ export function Condition(params){
         })
       }
     }    
- 

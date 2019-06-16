@@ -27,7 +27,6 @@ export default {
     effects: {
         *type({payload}, {call, put}){
             let data = yield call(Type);
-            // console.log(data);
             yield put({
                 type:"typeUpdata",
                 payload:data.data
@@ -35,7 +34,6 @@ export default {
         },
         *view({payload}, {call, put}){
             let data = yield call(View);
-            // console.log(data.data)
             yield put({
                 type:"viewUpdata",
                 payload:data.data
@@ -43,7 +41,6 @@ export default {
         },
         *subject({payload}, {call, put}){
             let data = yield call(Subject);
-            // console.log(data.data)
             yield put({
                 type:"subjectUpdata",
                 payload:data.data
@@ -51,15 +48,14 @@ export default {
         },
         *examType({payload}, {call, put}){
             let data = yield call(ExamType);
-            // console.log(data.data)
             yield put({
                 type:"examTypeUpdata",
                 payload:data.data
             })
         },
+        //点击查询
         *condition({payload}, {call, put}){
             let data = yield call(Condition,payload);
-            console.log(data.data)
             yield put({
                 type:"conditionUpdata",
                 payload:data.data
@@ -101,10 +97,6 @@ export default {
         *insertQuestionsType({payload}, {call, put}){
             let data = yield call(insertQuestionsType,payload);
             console.log(data);
-            yield put({
-                type:"insertQuestionsUpdata",
-                payload:data.data
-            })
         },
         
         
@@ -125,7 +117,8 @@ export default {
             return { ...state, examTypeList:payload };
         },
         conditionUpdata(state, {payload}) {
-            return { ...state, conditionList:payload };
+            console.log(payload)
+            return { ...state, ViewList:payload };
         },
         userInfotUpdata(state, {payload}) {
             return { ...state, user_id:payload };
@@ -135,10 +128,7 @@ export default {
         },
         compileUpdata(state, {payload}) {
             return { ...state, compileList:payload };
-        },
-        insertQuestionsUpdata(state, {payload}) {
-            return { ...state, insertList:payload };
-        },
+        }
     },
   
   };

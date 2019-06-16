@@ -55,10 +55,10 @@ import styles from  './index.scss';
        <div className={styles.title}>查看试题</div>
        <div className={styles.top}>
           <div className={styles.top_Top}>
-            <div>
+            <div className={styles.active}>
               <span className={styles.top_Span}>课程类型：</span>
                 {
-                  subjectList&&subjectList.map((item,index)=>{
+                  subjectList&&subjectList.map((item)=>{
                     return <li onClick={()=>handleClickLi(item.subject_id)} className={styles.li} key={item.subject_id}>{item.subject_text}</li>
                   })
                 }
@@ -67,10 +67,10 @@ import styles from  './index.scss';
           <div className={styles.top_Bom}>
             <div className={styles.Bom_item}>
                 <p>考试类型</p>
-                <Select onChange={handleChange}   onChange={handleChange} style={{ width: 150,margin:15,height:35 }}>
+                <Select onChange={handleChange}  style={{ width: 150,margin:15,height:35 }}>
                   {
-                    examTypeList&&examTypeList.map((item,index)=>{
-                      return <Option key={item.exam_id}  value={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
+                    examTypeList&&examTypeList.map((item)=>{
+                      return <Option key={item.exam_id}  value={item.exam_id}>{item.exam_name}</Option>
                     })
                   }
                 </Select>
@@ -79,7 +79,7 @@ import styles from  './index.scss';
                 <p>题目类型</p>
                 <Select  onChange={handleChangeId} style={{ width: 150,margin:15,height:35 }}>
                   {
-                    TypeList&&TypeList.map((item,index)=>{
+                    TypeList&&TypeList.map((item)=>{
                       return <Option key={item.questions_type_id} value={item.questions_type_id}>{item.questions_type_text}</Option>
                     })
                   }                
@@ -90,7 +90,7 @@ import styles from  './index.scss';
           </div>
           <div className={styles.center}>
                   {
-                    ViewList&&ViewList.map((item,index)=>{
+                    ViewList&&ViewList.map((item)=>{
                       return <div key={item.questions_id} className={styles.center_Item}>
                                 <div className={styles.left} onClick={()=>handleClick(item)}>
                                     <div className={styles.Title}>{item.title}</div>
@@ -118,7 +118,7 @@ import styles from  './index.scss';
   ViewPage.defaultProps={
       
   }
-  const mapStateToProps=state=>{
+  const mapStateToProps=state=>{ 
       // console.log("state",state)
       return{
         ...state.questions
