@@ -6,28 +6,79 @@ import { Button ,Form,Input,Select} from 'antd';
 
 const { Option } = Select;
 
-function UserIndex(props){
+function UserPages(props){
+    //第一个添加
     //添加用户的change事件的初始值
-    let [changeId,UpChangeid]=useState("")
+    let [identity_id,UpChangeid]=useState("")
+
+    //第一个更新
+    //更新用户的用户change事件的初始值
+    let [user_id,UpUser]=useState("")
+    //更新用户的身份change事件的初始值
+    let [identity_ids,UpIdentity]=useState("")
+    
+    //第五个给身份设定Api权限
+    //给身份设定Api权限身份id改变的时候
+    let [identityId,updataidentity]=useState("")
+    //给身份设定Api权限api视图权限
+    let [portValue,updataport]=useState("")
+
+    //第六个给身份设置视图权限
+    //给身份设置视图权限身份id改变的时候
+    let [Viewidentity_id,updataidentityView]=useState("")
+    //给身份设定视图接口视图权限id
+    let [authority_id,upauthority_id]=useState("")
     useEffect(()=>{
         props.Identityid();
         props.Userid();
-        // props.Adduser()
-    },[]);
-    let {identityidList,useridList}=props;
-    console.log()
-    //form表单提交按钮
-    let handleSubmitOne=e=>{
+        props.Relation();
+        props.Authoritys()
         
+    },[]);
+    let {identityidList,useridList,relationList,authoritysList,setIdentityViewList}=props;
+
+    //第一个
+    //添加用户的change事件
+    let ChangeIdentityid=(value)=>{
+        UpChangeid(identity_id=value)
     }
     //添加用户
     let HandAdduser=e=>{
         e.preventDefault();
         props.form.validateFields((err, values) => {
-            console.log('Received values of form: ', values.user_Null,values.pwd);
+             props.Adduser({
+                user_name:values.user_Null,
+                user_pwd:values.pwd,
+                identity_id
+             })
             
         });
     }
+
+    //第一个
+    //更新用户的用户change事件
+    let changeUpdata=(value)=>{
+        UpUser(user_id=value);
+    }
+    //更新用户的身份change事件
+    let identityUpdara=(value)=>{
+        UpIdentity(identity_ids=value);
+    }
+    //点击更新用户
+    let handUpdate=e=>{
+        e.preventDefault();
+        props.form.validateFields((err, values) => {
+            props.UserUpdata({
+                user_id,
+                user_name:values.user_Child,
+                user_pwd:values.pwd,
+                identity_id:identity_ids,
+                avatar:""
+            })
+        })
+    }
+
+    //第二个
     //添加身份
     let addiDentity=(e)=>{
         e.preventDefault();
@@ -38,10 +89,72 @@ function UserIndex(props){
             });
         });
     }
-    //添加用户的change事件
-    let ChangeIdentityid=(value)=>{
-        UpChangeid(changeId=value)
-        console.log(changeId);
+
+    //第三个
+    //添加api接口权限
+    let handPermissions=(e)=>{
+        e.preventDefault();
+        props.form.validateFields((err, values) => {
+            props.AddEdit({
+                api_authority_text:values.Permission_Name,
+                api_authority_url:values.Permission_Url,
+                api_authority_method:values.Permission_method
+            })
+        })
+    }
+
+    //第四个
+    //添加视图权限
+   
+    let handView=e=>{
+        e.preventDefault();
+        props.form.validateFields((err, values) => {
+            let data=JSON.parse(values.view);
+             props.AuthorityView({
+                view_authority_text:data.view_authority_text,
+                view_id:data.view_id
+             })
+        })
+    }
+
+    //第五个
+    //给身份设定api权限身份id改变的时候
+    let handidentity=value=>{
+        updataidentity(identityId=value);
+    }
+    //给身份设定api权限身份权限改变的时候
+    let handApi_port=value=>{
+        updataport(portValue=value);
+    }
+    //给身份设定接口Api点击确定按钮
+    let handPort=e=>{
+        e.preventDefault();
+        props.form.validateFields((err, values) => {
+            props.SetIdentityApi({
+                identity_id:identityId,
+                api_authority_id:portValue
+            })
+        })
+    }
+
+    //第六个
+    //给身份设定视图接口权限身份id
+    let handView_dentity=value=>{
+        updataidentityView(Viewidentity_id=value);
+    }
+     //给身份设定视图接口视图权限id
+    let handid_dentity=value=>{
+        upauthority_id(authority_id=value);
+    }
+    //给身份设定视图接口点击事件
+    let handClicView=e=>{
+        e.preventDefault();
+        props.form.validateFields((err, values) => {
+            props.SetIdentityView({
+                identity_id:Viewidentity_id,
+                view_authority_id:authority_id
+            })
+        })
     }
     //重置按钮
   let handleReset=e=>{
@@ -51,7 +164,7 @@ function UserIndex(props){
   let [userVal,upShowuser]=useState(true);
   const { getFieldDecorator } = props.form;
   return (
-    <Form onSubmit={handleSubmitOne} className={styles.main}>
+    <Form  className={styles.main}>
        <h2 className={styles.title}>添加用户</h2>
         <div className={styles.content}>
             {/* 第一个 */}
@@ -76,7 +189,7 @@ function UserIndex(props){
                                 rules: [{ required: true, message: "身份id是必须得" }],
                                 initialValue: "请选择身份id"
                             })(
-                                <Select style={{ width: 140 }}>
+                                <Select style={{ width: 140 }} onChange={changeUpdata}>
                                     {
                                         useridList&&useridList.map((item)=>{
                                         return <Option key={item.user_id} value={item.user_id}>{item.user_name}</Option>
@@ -104,7 +217,7 @@ function UserIndex(props){
                                 rules: [{ required: true, message: "身份id是必须得" }],
                                 initialValue: "请选择身份id"
                             })(
-                                <Select style={{ width: 140 }}>
+                                <Select style={{ width: 140 }} onChange={identityUpdara}>
                                     {
                                         identityidList&&identityidList.map((item)=>{
                                         return <Option key={item.identity_id} value={item.identity_id}>{item.identity_text}</Option>
@@ -113,7 +226,7 @@ function UserIndex(props){
                                 </Select>
                             )}
                         </Form.Item>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" onClick={handUpdate}>
                             确定
                         </Button>
                         <Button style={{marginLeft:10 }} onClick={handleReset} >
@@ -209,7 +322,7 @@ function UserIndex(props){
                             />,
                         )}
                     </Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" onClick={handPermissions}>
                             确定
                     </Button>
                     <Button style={{marginLeft:10 }} onClick={handleReset} >
@@ -226,20 +339,18 @@ function UserIndex(props){
                     <Form.Item>
                         {getFieldDecorator('view', {
                             rules: [{ required: true, message: "视图是必须得" }],
-                            initialValue: "请选择视图"
+                            initialValue: "请选择已有视图"
                         })(
                         <Select style={{ width: 140 }}>
-                            <Option  value="是是是">对对对</Option>
-
-                            {/* {
-                                examTypeList&&examTypeList.map((item)=>{
-                                return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
+                             {
+                                relationList&&relationList.map((item,index)=>{
+                                return <Option key={item.identity_view_authority_relation_id} value={JSON.stringify(item)}>{item.view_authority_text}</Option>
                                 })
-                            } */}
+                            }
                         </Select>
                         )}
                     </Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" onClick={handView}>
                     确定
                     </Button>
                     <Button style={{marginLeft:10 }} onClick={handleReset} >
@@ -256,36 +367,32 @@ function UserIndex(props){
                     <Form.Item>
                         {getFieldDecorator('identity', {
                             rules: [{ required: true, message: "身份设置api是必须得" }],
-                            initialValue: "请选择身份设置api"
+                            initialValue: "请选择身份id"
                         })(
-                        <Select style={{ width: 140 }}>
-                            <Option  value="发发发">上位法</Option>
-
-                            {/* {
-                                examTypeList&&examTypeList.map((item,index)=>{
-                                return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
+                        <Select style={{ width: 140 }} onChange={handidentity}>
+                            { 
+                                identityidList&&identityidList.map((item)=>{
+                                    return <Option key={item.identity_id} value={item.identity_id}>{item.identity_text}</Option>
                                 })
-                            } */}
+                            }
                         </Select>
                         )}
                     </Form.Item>
                     <Form.Item>
                         {getFieldDecorator('Api_port', {
                             rules: [{ required: true, message: "api是必须得" }],
-                            initialValue: "请选api"
+                            initialValue: "请选api接口权限"
                         })(
-                        <Select style={{ width: 140 }}>
-                            <Option  value="apu">api</Option>
-
-                            {/* {
-                                examTypeList&&examTypeList.map((item,index)=>{
-                                return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
+                        <Select style={{ width: 140 }} onChange={handApi_port}>
+                            {
+                                authoritysList&&authoritysList.map((item,index)=>{
+                                return <Option key={item.api_authority_id} value={item.api_authority_id}>{item.api_authority_text}</Option>
                                 })
-                            } */}
+                            }
                         </Select>
                         )}
                     </Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" onClick={handPort}>
                     确定
                     </Button>
                     <Button style={{marginLeft:10 }} onClick={handleReset} >
@@ -304,14 +411,12 @@ function UserIndex(props){
                             rules: [{ required: true, message: "身份ID是必须得" }],
                             initialValue: "请选择身份id"
                         })(
-                        <Select style={{ width: 140 }}>
-                            <Option  value="发发发">上位法</Option>
-
-                            {/* {
-                                examTypeList&&examTypeList.map((item,index)=>{
-                                return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
+                        <Select style={{ width: 140 }} onChange={handView_dentity}>
+                            { 
+                                identityidList&&identityidList.map((item)=>{
+                                    return <Option key={item.identity_id} value={item.identity_id}>{item.identity_text}</Option>
                                 })
-                            } */}
+                            }
                         </Select>
                         )}
                     </Form.Item>
@@ -320,18 +425,16 @@ function UserIndex(props){
                             rules: [{ required: true, message: "视图权限id是必须得" }],
                             initialValue: "请选视图权限id"
                         })(
-                        <Select style={{ width: 140 }}>
-                            <Option  value="id">id</Option>
-
-                            {/* {
-                                examTypeList&&examTypeList.map((item,index)=>{
-                                return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
+                        <Select style={{ width: 140 }} onChange={handid_dentity}>
+                            {
+                                relationList&&relationList.map((item,index)=>{
+                                return <Option key={item.identity_view_authority_relation_id} value={item.identity_view_authority_relation_id}>{item.view_authority_text}</Option>
                                 })
-                            } */}
+                            }
                         </Select>
                         )}
                     </Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" onClick={handClicView}>
                     确定
                     </Button>
                     <Button style={{marginLeft:10 }} onClick={handleReset} >
@@ -346,11 +449,11 @@ function UserIndex(props){
   
 }
 //props的类型检查
-UserIndex.propTypes={
+UserPages.propTypes={
 
 }
 //props的默认值
-UserIndex.defaultProps={
+UserPages.defaultProps={
 
 }
  const mapStateToProps=state=>{
@@ -386,6 +489,53 @@ UserIndex.defaultProps={
           payload
         })
       },
- }
+      //更新用户
+      UserUpdata(payload){
+        dispatch({
+          type:"management/userUpdata",
+          payload
+        })
+      },
+     //添加api接口权限
+      AddEdit(payload){
+        dispatch({
+          type:"management/addEdit",
+          payload
+        })
+      },
+      //展示身份和视图权限关系
+      Relation(){
+        dispatch({
+          type:"management/relation"
+        })
+      },
+      //展示api接口权限数据
+      Authoritys(){
+        dispatch({
+          type:"management/authoritys"
+        })
+      },
+      //添加视图权限
+      AuthorityView(payload){
+        dispatch({
+            type:"management/authorityView",
+            payload
+          })
+      },
+      //给身份设定api接口权限
+      SetIdentityApi(payload){
+        dispatch({
+            type:"management/setIdentityApi",
+            payload
+          })
+      },
+      //给身份设定视图权限
+      SetIdentityView(payload){
+        dispatch({
+            type:"management/setIdentityView",
+            payload
+          })
+        }
+    }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Form.create()(UserIndex));
+export default connect(mapStateToProps,mapDispatchToProps)(Form.create()(UserPages));

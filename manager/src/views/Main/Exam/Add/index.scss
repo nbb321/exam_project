@@ -19,5 +19,27 @@
         background: #fff;
         border-radius: 5px;
         margin: 10px;
+        .cont_Item{
+            width: 60%;
+            height: 100%;
+            padding: 10px;
+            .names{
+                width: 80%;
+                margin: 0 auto;
+                height: 30px;
+            }
+            .keyValue{
+                margin-top: 10px;
+            }
+            p{
+                span{
+                    color: red;
+                    margin: 0 5px;
+                }
+            }
+        }
+        .bom{
+            margin-top: 20px;
+        }
     }
 }

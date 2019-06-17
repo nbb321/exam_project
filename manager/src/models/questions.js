@@ -1,4 +1,17 @@
-import {Type,View,Subject,ExamType,Condition,Addquest,UserInfo,Update,insertQuestionsType} from '@/services';
+import {Type,View,Subject,ExamType,Condition,Addquest,UserInfo,Update,insertQuestionsType, UserShow,
+    Useridentity,
+    ApiAuthority,
+    Relation,
+    ViewAuthority,
+    IdentityView} from '@/services';
+// import {
+//     UserShow,
+//     Useridentity,
+//     ApiAuthority,
+//     Relation,
+//     ViewAuthority,
+//     IdentityView
+// } from "@/services"
 // import { routerRedux } from 'dva/router';
 export default {
     // 命名空间
@@ -13,8 +26,14 @@ export default {
         conditionList:[],
         compileList:[],
         insertList:[],
+        usershowList:[],
+        useridentityList:[],
+        apiAuthorityList:[],
+        relationList:[],
+        viewauthorityList:[],
+        identityviewList:[],
         user_id:"",
-        Objs:{}
+        Objs:{},
         
     },
   
@@ -98,8 +117,55 @@ export default {
             let data = yield call(insertQuestionsType,payload);
             console.log(data);
         },
-        
-        
+
+        //用户展示
+        *userShow({payload}, {call, put}){
+            let data = yield call(UserShow,payload);
+            yield put({
+                type:"userShowUpdata",
+                payload:data.data
+            })
+        },
+        //身份数据
+        *useridentity({payload}, {call, put}){
+            let data = yield call(Useridentity,payload);
+            yield put({
+                type:"useridentityUpdata",
+                payload:data.data
+            })
+        },
+        //api接口权限设置
+        *apiAuthority({payload}, {call, put}){
+            let data = yield call(ApiAuthority,payload);
+            yield put({
+                type:"apiAuthorityUpdata",
+                payload:data.data
+            })
+        },
+        //身份和api接口关系
+        *relation({payload}, {call, put}){
+            let data = yield call(Relation,payload);
+            yield put({
+                type:"relationUpdata",
+                payload:data.data
+            })
+        },
+        //试图接口权限
+        *viewAuthority({payload},{call,put}){
+            let data=yield call(ViewAuthority,payload);
+            yield put({
+                type:"viewAuthorityUpdata",
+                payload:data.data
+            })
+        },
+        //展示身份和视图权限关系
+        *identityview({payload},{call,put}){
+            let data=yield call(IdentityView,payload);
+            yield put({
+                type:"identityviewUpdata",
+                payload:data.data
+            })
+        }
     },
   
     // 同步操作
@@ -117,7 +183,6 @@ export default {
             return { ...state, examTypeList:payload };
         },
         conditionUpdata(state, {payload}) {
-            console.log(payload)
             return { ...state, ViewList:payload };
         },
         userInfotUpdata(state, {payload}) {
@@ -128,8 +193,25 @@ export default {
         },
         compileUpdata(state, {payload}) {
             return { ...state, compileList:payload };
+        },
+        userShowUpdata(state,{payload}){
+            return {...state,usershowList:payload}
+        },
+        useridentityUpdata(state,{payload}){
+            return {...state,useridentityList:payload}
+        },
+        apiAuthorityUpdata(state,{payload}){
+            return {...state,apiAuthorityList:payload}
+        },
+        relationUpdata(state,{payload}){
+            return {...state,relationList:payload}
+        },
+        viewAuthorityUpdata(state,{payload}){
+            return {...state,viewauthorityList:payload}
+        },
+        identityviewUpdata(state,{payload}){
+            return {...state,identityviewList:payload}
         }
     },
-  
   };
   
