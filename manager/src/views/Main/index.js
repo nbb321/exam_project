@@ -9,6 +9,8 @@ import View from "./Questions/View"
 import Default from "./Questions/Default"
 import userAdd from "./User/Add"
 import userShow from "./User/Show"
+import addExam from "./Exam/Add"
+import examList from "./Exam/List"
 import EditQuestions from "./Questions/EditQuestions"
 import {connect} from "dva";
 
@@ -38,6 +40,8 @@ function IndexPage(props){
             <Route path="/questions/editQuestions" component={EditQuestions}></Route>
             <Route path="/user/add" component={userAdd}></Route>
             <Route path="/user/show" component={userShow}></Route>
+            <Route path="/exam/add" component={addExam}></Route>
+            <Route path="/exam/list" component={examList}></Route>
           </Switch>
           {props.loading?
           <div className={styles.loading}>

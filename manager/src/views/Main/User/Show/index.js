@@ -5,21 +5,26 @@ import styles from './index.scss';
 import { Form,Tabs,Table} from 'antd';
 
 function UserIndex(props){
-    // console.log(props)
-    let {usershowList,useridentityList,apiAuthorityList,relationList}=props;
+    // console.log(props.identityviewList)
+    let {usershowList,useridentityList,apiAuthorityList,relationList,viewauthorityList,identityviewList}=props;
     usershowList.forEach( item => {
        item.key=item.user_id;
-      });
+    });
     useridentityList.forEach( item => {
         item.key=item.identity_id;
-       });
+    });
     apiAuthorityList.forEach( item => {
       item.key=item.api_authority_id;
     });
     relationList.forEach( item => {
         item.key=item.identity_api_authority_relation_id;
-      });
-
+    });
+    viewauthorityList.forEach( item => {
+        item.key=item.view_authority_id;
+    });
+    identityviewList.forEach( item => {
+        item.key=item.identity_view_authority_relation_id;
+    });
     //form表单提交按钮
     let handleSubmit=e=>{
       
@@ -29,6 +34,8 @@ function UserIndex(props){
        props.Useridentity();
        props.ApiAuthority();
        props.Relation();
+       props.ViewAuthority();
+       props.IdentityView();
     },[]);
   const { TabPane } = Tabs;
   const columns = [
@@ -79,7 +86,28 @@ function UserIndex(props){
             title: 'api权限方法',
             dataIndex: 'api_authority_method',
     }];
-
+    const columnsViewauthority=[
+        {
+           title: '试图权限名称',
+           dataIndex: 'view_authority_text'
+        },
+        {
+            title: '试图id',
+            dataIndex: 'view_id',
+        }];
+    const columsIdentityview=[
+        {
+           title: '身份',
+           dataIndex: 'identity_text'
+        },
+        {
+            title: '试图名称',
+            dataIndex: 'view_authority_text',
+        },
+        {
+            title: '试图id',
+            dataIndex: 'view_id',
+        }];
   return (
     <Form onSubmit={handleSubmit} className={styles.main}>
        <h2 className={styles.title}>用户展示</h2>
@@ -104,9 +132,11 @@ function UserIndex(props){
             </TabPane>
             <TabPane tab="试图接口权限" key="5">
               <h2>试图接口权限</h2>
+              <Table columns={columnsViewauthority}  dataSource={viewauthorityList&&viewauthorityList} />
             </TabPane>
-            <TabPane tab="身份和试图关系" key="6">
-              <h2>身份和试图关系</h2>
+            <TabPane tab="身份和视图权限关系" key="6">
+              <h2>身份和视图权限关系</h2>
+              <Table columns={columsIdentityview}  dataSource={identityviewList&&identityviewList} />
             </TabPane>
             </Tabs>
         </div>
@@ -154,7 +184,19 @@ UserIndex.defaultProps={
         dispatch({
           type:"questions/relation"
         })
-      }
+      },
+   //获取试图接口权限数据
+   ViewAuthority(){
+       dispatch({
+           type:"questions/viewAuthority"
+       })
+   },
+   //获取身份和试图权限关系
+   IdentityView(){
+    dispatch({
+        type:"questions/identityview"
+    })
+}
    }
   
 

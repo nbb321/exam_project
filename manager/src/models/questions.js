@@ -1,4 +1,21 @@
-import {Type,View,Subject,ExamType,Condition,Addquest,UserInfo,Update,insertQuestionsType,UserShow,Useridentity,ApiAuthority,Relation} from '@/services';
+import {
+    Type,
+    View,
+    Subject,
+    ExamType,
+    Condition,
+    Addquest,
+    UserInfo,
+    Update,
+    insertQuestionsType,
+    UserShow,
+    Useridentity,
+    ApiAuthority,
+    Relation,
+    ViewAuthority,
+    IdentityView,
+    Examlist
+} from '@/services';
 // import { routerRedux } from 'dva/router';
 export default {
     // 命名空间
@@ -17,6 +34,9 @@ export default {
         useridentityList:[],
         apiAuthorityList:[],
         relationList:[],
+        viewauthorityList:[],
+        identityviewList:[],
+        examList:[],
         user_id:"",
         Objs:{}
         
@@ -133,7 +153,31 @@ export default {
                 type:"relationUpdata",
                 payload:data.data
             })
-        }
+        },
+        //试图接口权限
+        *viewAuthority({payload},{call,put}){
+            let data=yield call(ViewAuthority,payload);
+            yield put({
+                type:"viewAuthorityUpdata",
+                payload:data.data
+            })
+        },
+        //展示身份和视图权限关系
+        *identityview({payload},{call,put}){
+            let data=yield call(IdentityView,payload);
+            yield put({
+                type:"identityviewUpdata",
+                payload:data.data
+            })
+        },
+        //试卷列表
+        *examlist({payload},{call,put}){
+            let data=yield call(Examlist,payload);
+            yield put({
+                type:"examlistUpdata",
+                payload:data.exam
+            })
+        },
         
         
     },
@@ -176,6 +220,15 @@ export default {
         },
         relationUpdata(state,{payload}){
             return {...state,relationList:payload}
+        },
+        viewAuthorityUpdata(state,{payload}){
+            return {...state,viewauthorityList:payload}
+        },
+        identityviewUpdata(state,{payload}){
+            return {...state,identityviewList:payload}
+        },
+        examlistUpdata(state,{payload}){
+            return {...state,examList:payload}
         }
 
     },

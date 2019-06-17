@@ -150,4 +150,25 @@ export function Relation(){
             method:"GET"
     })
 }
+//显示身份和api接口关系
+export function ViewAuthority(){
+    return request({
+            url:"/user/view_authority",
+            method:"GET"
+    })
+}
+//展示身份和视图权限关系
+export function IdentityView(){
+    return request({
+            url:"/user/identity_view_authority_relation",
+            method:"GET"
+    })
+}
+//试卷列表
+export function Examlist(){
+    return request({
+            url:"/exam/exam",
+            method:"GET"
+    })
+}
  
