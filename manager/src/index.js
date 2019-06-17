@@ -5,8 +5,9 @@ import "@babel/polyfill"
 //ant的css样式
 import "antd/dist/antd.css";
 // 1. Initialize
+import createLoading from "dva-loading";
 
-const app = dva();
+const app = dva(createLoading());
 
 // 2. Plugins
 // app.use({});
@@ -14,6 +15,7 @@ const app = dva();
 // 3. Model
 app.model(require('./models/user').default);
 app.model(require('./models/questions').default);
+app.model(require('./models/management').default);
 
 // 4. Router
 app.router(require('./router').default);

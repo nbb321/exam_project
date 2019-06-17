@@ -21,7 +21,8 @@ export default {
           if (!getToken()){
             // 利用redux做路由跳转
             dispatch(routerRedux.replace({
-              pathname: `/login?redirect=${encodeURIComponent(pathname)}`,
+              pathname: `/login`,
+              search:`?redirect=${encodeURIComponent(pathname)}`
             }))
           }
         }else{
@@ -40,7 +41,6 @@ export default {
   // 异步操作
   effects: {
     *login({payload}, {call, put}){
-      console.log('payload...', payload, login);
       let data = yield call(login, payload);
       console.log('data...', data);
       // 设置登陆态到cookie里
