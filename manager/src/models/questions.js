@@ -1,18 +1,18 @@
-import {Type,View,Subject,ExamType,Condition,Addquest,UserInfo,Update,insertQuestionsType, UserShow,
+import {Type,View,
+    Subject,
+    ExamType,
+    Condition,
+    Addquest,
+    UserInfo,
+    Update,
+    insertQuestionsType,
+    //用户展示 
+    UserShow,
     Useridentity,
     ApiAuthority,
     Relation,
     ViewAuthority,
     IdentityView} from '@/services';
-// import {
-//     UserShow,
-//     Useridentity,
-//     ApiAuthority,
-//     Relation,
-//     ViewAuthority,
-//     IdentityView
-// } from "@/services"
-// import { routerRedux } from 'dva/router';
 export default {
     // 命名空间
     namespace: 'questions',
@@ -26,6 +26,7 @@ export default {
         conditionList:[],
         compileList:[],
         insertList:[],
+        //用户管理
         usershowList:[],
         useridentityList:[],
         apiAuthorityList:[],
@@ -117,7 +118,7 @@ export default {
             let data = yield call(insertQuestionsType,payload);
             console.log(data);
         },
-
+        //``````````````用户管理````````
         //用户展示
         *userShow({payload}, {call, put}){
             let data = yield call(UserShow,payload);
@@ -194,6 +195,7 @@ export default {
         compileUpdata(state, {payload}) {
             return { ...state, compileList:payload };
         },
+        //············用户管理··········
         userShowUpdata(state,{payload}){
             return {...state,usershowList:payload}
         },

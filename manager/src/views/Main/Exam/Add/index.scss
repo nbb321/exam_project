@@ -29,7 +29,7 @@
                 height: 30px;
             }
             .keyValue{
-                margin-top: 10px;
+                margin-top: 15px;
             }
             p{
                 span{
@@ -38,8 +38,21 @@
                 }
             }
         }
+        .inline{
+            display: flex;
+            p{
+                width: 30px;
+                text-align: center;
+                font-weight: bold;
+                line-height: 30px;
+                
+            }
+        }
         .bom{
             margin-top: 20px;
         }
     }
+}
+.main .content .cont_Item .keyValue .formThing{
+    margin-bottom: 0px;
 }

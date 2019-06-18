@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import { connect } from 'dva';
 import "antd/dist/antd.css";
 import styles from './index.scss';
@@ -14,69 +14,34 @@ function UserIndex(props){
       props.Subject();
     },[]);
 
+ const [startVal,changeStartVal]=useState(0)
+ const [endVal,changeEndVal]=useState(0)
+
   const { getFieldDecorator } = props.form;
-  let [startValue,updStartValue]=useState(null)
-  let [endValue,upEndValue]=useState(null)
-  let [endOpen,upEndOpen]=useState(false)
-  let disabledStartDate = startValue => {
-    const endValue = endValue;
-    if (!startValue || !endValue) {
-      return false;
-    }
-    return startValue.valueOf() > endValue.valueOf();
-  };
-
-  let disabledEndDate = endValue => {
-    const startValue = startValue;
-    if (!endValue || !startValue) {
-      return false;
-    }
-    return endValue.valueOf() <= startValue.valueOf();
-  };
-  let [field,upfield]=useState("");
-  let  onChange = (field, value) => {
-    
-    field=value
-    // upfield(field=value)
-  };
-
-  let onStartChange = value => {
-  onChange('startValue', value);
-  };
-
-  let onEndChange = value => {
-  onChange('endValue', value);
-  };
- 
-  let handleStartOpenChange = open => {
-    if (!open) {
-      upEndOpen(endOpen=true)
-      //setState({ endOpen: true });
-    }
-  };
-
-  let handleEndOpenChange = open => {
-    upEndOpen(endOpen=open)
-    //setState({ endOpen: open });
-  };
-
-  let onChanges=value=>{
-    console.log(value)
-  }
   let handClick=e=>{
     e.preventDefault();
     props.form.validateFields((err, values) => {
       console.log(values)
     })
   }
+  
+const dateToMs=(date)=> {
+  let result = new Date(date).getTime();
+  changeStartVal(result)
+}
+const endDateToMs=(date)=> {
+  let result = new Date(date).getTime();
+  changeEndVal(result)
+}
+console.log(startVal,endVal)
   return (
-    <Form className={styles.main}>
+    <Form className={styles.main} onSubmit={handClick}>
        <h2 className={styles.title}>添加考试</h2>
         <div className={styles.content}>
             <div className={styles.cont_Item}>
               <div className={styles.keyValue}>
                   <p><span>*</span>试卷名称</p>
-                  <Form.Item>
+                  <Form.Item className={styles.formThing}>
                       {getFieldDecorator('titleText', {
                           validateTrigger:"onBlur",
                           rules: [{ required: true, message: '标题不能为空' }],
@@ -87,15 +52,14 @@ function UserIndex(props){
               </div>
               <div className={styles.keyValue}>
                   <p><span>*</span>选择考试类型</p>
-                  <Form.Item>
+                  <Form.Item className={styles.formThing}>
                       {getFieldDecorator('examType', {
-                          rules: [{ required: true, message: "考试类型不能为空" }],
-                          initialValue: ""
+                          rules: [{ required: true, message: "考试类型不能为空" }]
                       })(
-                      <Select style={{ width: 140,height:30 }}>
+                      <Select style={{ width: 140,height:30 }} >
                           {
                               examTypeList&&examTypeList.map((item,index)=>{
-                              return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
+                              return <Option key={index} value={item.exam_id}>{item.exam_name}</Option>
                               })
                           }
                     </Select>
@@ -104,10 +68,9 @@ function UserIndex(props){
               </div>
               <div className={styles.keyValue}>
                   <p><span>*</span>选择课程</p>
-                  <Form.Item>
+                  <Form.Item className={styles.formThing}>
                       {getFieldDecorator('select_courses', {
-                          rules: [{ required: true, message: "课程不能为空" }],
-                          initialValue: ""
+                          rules: [{ required: true, message: "课程不能为空" }]
                       })(
                       <Select style={{ width: 140,height:30 }}>
                           {
@@ -121,39 +84,51 @@ function UserIndex(props){
               </div>
               <div className={styles.keyValue}>
                   <p><span>*</span>设置题量</p>
-                  <Form.Item>
-                      <InputNumber min={3} max={10} onChange={onChanges} />
+                  <Form.Item className={styles.formThing}>
+                          {getFieldDecorator('number', {
+                                rules: [{ required: true, message: "数组不能为空" }]
+                            })( 
+                            <InputNumber min={3} max={10} />
+                          )}
                   </Form.Item>
               </div>
               <div className={styles.keyValue}>
                   <p><span>*</span>考试时间</p>
-                      <Form.Item>
-                          <DatePicker
-                            disabledDate={disabledStartDate}
-                            showTime
-                            format="YYYY-MM-DD HH:mm:ss"
-                            value={startValue}
-                            placeholder="Start"
-                            onChange={onStartChange}
-                            onOpenChange={handleStartOpenChange}
-                          />
-                      </Form.Item>
-                      <Form.Item>
-                          <DatePicker
-                              disabledDate={disabledEndDate}
-                              showTime
-                              format="YYYY-MM-DD HH:mm:ss"
-                              value={endValue}
-                              placeholder="End"
-                              onChange={onEndChange}
-                              open={endOpen}
-                              onOpenChange={handleEndOpenChange}
+                 <div className={styles.inline}>
+                    <Form.Item className={styles.formThing}>
+                          {getFieldDecorator('startTime', {
+                              rules: [{ required: true, message: "数组不能为空" }]
+                            })( 
+                                <DatePicker
+                                showTime
+                                format="YYYY-MM-DD HH:mm:ss"
+                                placeholder="开始时间"
+                                onChange={(e)=>{
+                                    dateToMs(e._d)
+                                }}
                             />
+                          )}
                       </Form.Item>
-                </div> 
-                <div className={styles.bom}>
-                  <Button  type="primary" onClick={handClick}>创建试卷</Button>
-                </div>
+                       <p>-</p>
+                      <Form.Item>
+                          {getFieldDecorator('endTime', {
+                              rules: [{ required: true, message: "数组不能为空" }]
+                            })( 
+                                <DatePicker
+                                showTime
+                                format="YYYY-MM-DD HH:mm:ss"
+                                placeholder="结束时间"
+                                onChange={(e)=>{
+                                  endDateToMs(e._d)
+                                }}
+                            />
+                          )}
+                      </Form.Item> 
+                 </div>  
+              </div>
+              <div className={styles.bom}>
+                  <Button  type="primary" >创建试卷</Button>
+              </div>
             </div> 
         </div>
     </Form>

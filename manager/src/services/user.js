@@ -158,10 +158,7 @@ export function SetIdentityApi(params){
             data:params
     })
 }
-
-
 // ````````````````````````````````````
-
 //用户展示
 export function UserShow(){
     return request({
@@ -205,6 +202,15 @@ export function IdentityView(){
     })
 }
 
+//3.考试管理
+//创建试卷
+export function establishExam(params){
+    return request({
+            url:"/exam/exam",
+            method:"POST",
+            data:params
+    })
+}
 
 //查询
 export function Condition(params){

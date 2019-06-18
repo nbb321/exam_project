@@ -11,11 +11,16 @@ const app = dva(createLoading());
 
 // 2. Plugins
 // app.use({});
-
 // 3. Model
+
+//登陆
 app.model(require('./models/user').default);
+//试卷管理
 app.model(require('./models/questions').default);
+//用户管理
 app.model(require('./models/management').default);
+//考试管理
+app.model(require('./models/exam').default);
 
 // 4. Router
 app.router(require('./router').default);
