@@ -59,6 +59,7 @@ function TypePage(props){
             <Form.Item>
                 {getFieldDecorator('username', {
                   rules: [{ required: true, message: 'Please input your username!' }],
+                  initialValue: "张三"
                 })(
                   <Input
                     placeholder="请输入你要添加的值"

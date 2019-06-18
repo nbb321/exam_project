@@ -18,7 +18,6 @@ function UserIndex(props){
        props.IdentityView();
     },[]);
     let {usershowList,useridentityList,apiAuthorityList,relationList,viewauthorityList,identityviewList}=props;
-    console.log(viewauthorityList)
     usershowList.forEach( item => {
         item.key=item.user_id;
      });
@@ -115,7 +114,7 @@ function UserIndex(props){
                 <div className="card-container">
                     <Tabs type="card">
                     <TabPane tab="用户数据" key="1">
-                       <h2>用户数据</h2>
+                       <h2 style={{fontSize:20,marginLeft:3}}>用户数据</h2>
                        <Table columns={columns}  dataSource={usershowList&&usershowList} />
                     </TabPane>
                     <TabPane tab="身份数据" key="2">
@@ -188,15 +187,15 @@ function UserIndex(props){
            //获取试图接口权限数据
            ViewAuthority(){
                dispatch({
-                   type:"questionsiewAuthority"
+                   type:"questions/viewAuthority"
                })
            },
            //获取身份和试图权限关系
            IdentityView(){
             dispatch({
                 type:"questions/identityview"
-            })
-        }
+                })
+              }
            }
           
         

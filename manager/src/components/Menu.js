@@ -17,7 +17,7 @@ function MenuComp(props){
             key="questions"
             title={
               <span>
-                <Icon type="user" />
+                <Icon type="box-plot" />
                 试题管理
               </span>
             }
@@ -52,7 +52,7 @@ function MenuComp(props){
             key="exam"
             title={
               <span>
-                <Icon type="user" />
+                <Icon type="schedule" />
                 考试管理
               </span>
             }
@@ -68,13 +68,13 @@ function MenuComp(props){
             key="class"
             title={
               <span>
-                <Icon type="user" />
+                <Icon type="project" />
                 班级管理
               </span>
             }
           >
       <Menu.Item key="8">
-        <Link to="/class/class">班级管理</Link>
+        <Link to="/class/grade">班级管理</Link>
       </Menu.Item>
       <Menu.Item key="9">
         <Link to="/class/classroom">教室管理</Link>
@@ -87,7 +87,7 @@ function MenuComp(props){
             key="paper"
             title={
               <span>
-                <Icon type="user" />
+                <Icon type="profile" />
                 阅卷管理
               </span>
             }

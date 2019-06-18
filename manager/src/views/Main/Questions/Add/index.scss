@@ -13,22 +13,32 @@ html,body,#root{
 .content{
     display: flex;
     flex-direction: column;
-    margin-left: 30px;
+    // margin-left: 30px;
     width: 100%;
+    margin: 0 auto;
     height: 100%;
-    overflow-y: auto;
+    padding: 0 10px;
+    .title{
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        font-size: 16px;
+        color: #000;
+    }
     .main{
         width: 100%;
         background: #fff;
         flex:1;
         padding-left: 20px;
         box-sizing: border-box;
+        border-radius: 10px;
     }
     .markcont{
         width:500px;
         overflow: hidden;
+        margin-top: 7px;
         p{
-            font-size: 20px;
+            font-size: 15px;
         }
         input{
             height: 45px;

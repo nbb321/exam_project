@@ -150,7 +150,7 @@ export default {
                 payload:data.data
             })
         },
-        //试图接口权限
+        //获取视图权限数据
         *viewAuthority({payload},{call,put}){
             let data=yield call(ViewAuthority,payload);
             yield put({

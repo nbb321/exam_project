@@ -32,8 +32,7 @@ function UserPages(props){
         props.Identityid();
         props.Userid();
         props.Relation();
-        props.Authoritys()
-        
+        props.Authoritys()  
     },[]);
     let {identityidList,useridList,relationList,authoritysList,setIdentityViewList}=props;
 
@@ -157,9 +156,27 @@ function UserPages(props){
         })
     }
     //重置按钮
-  let handleReset=e=>{
+  let handleReset1=e=>{
       props.form.resetFields()
   }
+  let handleReset2=e=>{
+    props.form.resetFields()
+}
+let handleReset3=e=>{
+    props.form.resetFields()
+}
+let handleReset4=e=>{
+    props.form.resetFields()
+}
+let handleReset5=e=>{
+    props.form.resetFields()
+}
+let handleReset6=e=>{
+    props.form.resetFields()
+}
+let handleReset7=e=>{
+    props.form.resetFields()
+}
   let [showVal,upShowVal]=useState(false);
   let [userVal,upShowuser]=useState(true);
   const { getFieldDecorator } = props.form;
@@ -170,7 +187,7 @@ function UserPages(props){
             {/* 第一个 */}
             <div className={styles.cont_Item}>
                 <div className={styles.top}>
-                    <Button  className={styles.color} onClick={()=>{
+                    <Button className={styles.color} onClick={()=>{
                         upShowVal(false);
                         upShowuser(true)
                     }} >
@@ -229,7 +246,7 @@ function UserPages(props){
                         <Button type="primary" htmlType="submit" onClick={handUpdate}>
                             确定
                         </Button>
-                        <Button style={{marginLeft:10 }} onClick={handleReset} >
+                        <Button style={{marginLeft:10 }} onClick={handleReset1} >
                             重置
                         </Button>
                     </div>:null}
@@ -265,7 +282,7 @@ function UserPages(props){
                         <Button type="primary" htmlType="submit" onClick={HandAdduser}>
                             确定
                         </Button>
-                        <Button style={{marginLeft:10 }} onClick={handleReset} >
+                        <Button style={{marginLeft:10 }} onClick={handleReset2} >
                             重置
                         </Button>
                     </div>:null}
@@ -287,7 +304,7 @@ function UserPages(props){
                     <Button type="primary" htmlType="submit" onClick={addiDentity}>
                             确定
                     </Button>
-                    <Button style={{marginLeft:10 }} onClick={handleReset} >
+                    <Button style={{marginLeft:10 }} onClick={handleReset3} >
                             重置
                     </Button>
                 </div>
@@ -325,7 +342,7 @@ function UserPages(props){
                     <Button type="primary" htmlType="submit" onClick={handPermissions}>
                             确定
                     </Button>
-                    <Button style={{marginLeft:10 }} onClick={handleReset} >
+                    <Button style={{marginLeft:10 }} onClick={handleReset4} >
                             重置
                     </Button>
                 </div>
@@ -353,7 +370,7 @@ function UserPages(props){
                     <Button type="primary" htmlType="submit" onClick={handView}>
                     确定
                     </Button>
-                    <Button style={{marginLeft:10 }} onClick={handleReset} >
+                    <Button style={{marginLeft:10 }} onClick={handleReset5} >
                     重置
                     </Button>
                 </div>
@@ -395,7 +412,7 @@ function UserPages(props){
                     <Button type="primary" htmlType="submit" onClick={handPort}>
                     确定
                     </Button>
-                    <Button style={{marginLeft:10 }} onClick={handleReset} >
+                    <Button style={{marginLeft:10 }} onClick={handleReset6} >
                     重置
                     </Button>
                 </div>
@@ -437,7 +454,7 @@ function UserPages(props){
                     <Button type="primary" htmlType="submit" onClick={handClicView}>
                     确定
                     </Button>
-                    <Button style={{marginLeft:10 }} onClick={handleReset} >
+                    <Button style={{marginLeft:10 }} onClick={handleReset7} >
                     重置
                     </Button>
                 </div>

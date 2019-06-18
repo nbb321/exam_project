@@ -16,7 +16,8 @@ import ExamAdd from "./Exam/Add"
 import ExamShow from "./Exam/List"
 import EditQuestions from "./Questions/EditQuestions"
 import {connect} from "dva";
-
+//班级管理
+import Grade from "./Class/Grade";
 const { Header, Content,Sider} = Layout;
 
 function IndexPage(props){
@@ -45,6 +46,9 @@ function IndexPage(props){
             <Route path="/user/show" component={userShow}></Route>
             <Route path="/exam/add" component={ExamAdd}></Route>
             <Route path="/exam/list" component={ExamShow}></Route>
+            <Route path="/class/grade" component={Grade}></Route>
+            {/* <Route path="/class/classroom" component={ExamAdd}></Route>
+            <Route path="/class/student" component={ExamShow}></Route> */}
           </Switch>
           {props.loading?
           <div className={styles.loading}>

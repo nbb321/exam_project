@@ -190,10 +190,10 @@ export function Relation(){
             method:"GET"
     })
 }
-//显示身份和api接口关系
+//获取视图权限数据
 export function ViewAuthority(){
     return request({
-            url:"/useriew_authority",
+            url:"/user/view_authority",
             method:"GET"
     })
 }

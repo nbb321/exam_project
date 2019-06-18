@@ -34,8 +34,7 @@ import Editor from 'for-editor';
     };
 
      return <Form onSubmit={handleSubmit} className={styles.content}>
-     <div className={styles.content}>
-        <h2 className={styles.title}>添加试题</h2>
+        <div className={styles.title}>查看试题</div>
               <div className={styles.main}>
                     <div className={styles.markcont}>
                         <p>题目信息</p>
@@ -114,7 +113,7 @@ import Editor from 'for-editor';
                         
                       </div>
                       <div className={styles.markcont}>
-                        <h2>答案信息</h2>
+                        <p>答案信息</p>
                         <Form.Item>
                             {getFieldDecorator('valueowen', {
                                 rules: [{ required: true, message: "答案信息必填" }],
@@ -127,7 +126,6 @@ import Editor from 'for-editor';
                       </div>
                       <Button type="primary" htmlType="submit" >提交</Button>
                 </div>
-            </div> 
         </Form>
     
 }

@@ -3,12 +3,11 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 0 10px;
-    // background: #ccc;
+    padding:0 10px;
     .title{
         width: 100%;
-        height: 40px;
-        line-height: 40px;
+        height: 50px;
+        line-height: 50px;
         font-size: 16px;
         margin-left: 20px;
     }
@@ -20,11 +19,5 @@
         background: #fff;
         border-radius: 5px;
         margin:0 10px;
-        overflow-y: auto;
     }
-}
-.ant-form{
-    width:100%;
-    height:100%;
-    background:#fff;
 }

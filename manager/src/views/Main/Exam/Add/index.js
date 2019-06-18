@@ -121,31 +121,35 @@ function UserIndex(props){
               </div>
               <div className={styles.keyValue}>
                   <p><span>*</span>设置题量</p>
-                  <InputNumber min={3} max={10} onChange={onChanges} />
+                  <Form.Item>
+                      <InputNumber min={3} max={10} onChange={onChanges} />
+                  </Form.Item>
               </div>
               <div className={styles.keyValue}>
                   <p><span>*</span>考试时间</p>
-                      <div>
-                        <DatePicker
-                          disabledDate={disabledStartDate}
-                          showTime
-                          format="YYYY-MM-DD HH:mm:ss"
-                          value={startValue}
-                          placeholder="Start"
-                          onChange={onStartChange}
-                          onOpenChange={handleStartOpenChange}
-                        />
-                        <DatePicker
-                          disabledDate={disabledEndDate}
-                          showTime
-                          format="YYYY-MM-DD HH:mm:ss"
-                          value={endValue}
-                          placeholder="End"
-                          onChange={onEndChange}
-                          open={endOpen}
-                          onOpenChange={handleEndOpenChange}
-                        />
-                     </div>
+                      <Form.Item>
+                          <DatePicker
+                            disabledDate={disabledStartDate}
+                            showTime
+                            format="YYYY-MM-DD HH:mm:ss"
+                            value={startValue}
+                            placeholder="Start"
+                            onChange={onStartChange}
+                            onOpenChange={handleStartOpenChange}
+                          />
+                      </Form.Item>
+                      <Form.Item>
+                          <DatePicker
+                              disabledDate={disabledEndDate}
+                              showTime
+                              format="YYYY-MM-DD HH:mm:ss"
+                              value={endValue}
+                              placeholder="End"
+                              onChange={onEndChange}
+                              open={endOpen}
+                              onOpenChange={handleEndOpenChange}
+                            />
+                      </Form.Item>
                 </div> 
                 <div className={styles.bom}>
                   <Button  type="primary" onClick={handClick}>创建试卷</Button>
