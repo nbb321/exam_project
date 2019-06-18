@@ -16,33 +16,46 @@ function UserIndex(props){
 
  const [startVal,changeStartVal]=useState(0)
  const [endVal,changeEndVal]=useState(0)
-
-  const { getFieldDecorator } = props.form;
-  let handClick=e=>{
+ const { getFieldDecorator } = props.form;
+ const dateToMs=(date)=> {
+    let result = new Date(date).getTime();
+    changeStartVal(result)
+  }
+  const endDateToMs=(date)=> {
+    let result = new Date(date).getTime();
+    changeEndVal(result)
+  }
+  console.log(startVal,endVal)
+  let handleSubmit=e=>{
     e.preventDefault();
     props.form.validateFields((err, values) => {
-      console.log(values)
+      console.log(values);
     })
   }
-  
-const dateToMs=(date)=> {
-  let result = new Date(date).getTime();
-  changeStartVal(result)
-}
-const endDateToMs=(date)=> {
-  let result = new Date(date).getTime();
-  changeEndVal(result)
-}
-console.log(startVal,endVal)
+  //btn的点击事件
+  let handleClick=e=>{
+    props.form.validateFields((err, values) => {
+        console.log(values);
+        props.EstablishExam({
+            subject_id:values.subject_id,
+            exam_id:values.exam_id,
+            title:values.title,
+            number:values.number,
+            start_time:startVal,
+            end_time:endVal
+        })
+        props.history.push('/exam/edit') 
+      })
+  }
   return (
-    <Form className={styles.main} onSubmit={handClick}>
+    <Form className={styles.main} onSubmit={handleSubmit} >
        <h2 className={styles.title}>添加考试</h2>
         <div className={styles.content}>
             <div className={styles.cont_Item}>
               <div className={styles.keyValue}>
                   <p><span>*</span>试卷名称</p>
                   <Form.Item className={styles.formThing}>
-                      {getFieldDecorator('titleText', {
+                      {getFieldDecorator('title', {
                           validateTrigger:"onBlur",
                           rules: [{ required: true, message: '标题不能为空' }],
                       })(
@@ -53,7 +66,7 @@ console.log(startVal,endVal)
               <div className={styles.keyValue}>
                   <p><span>*</span>选择考试类型</p>
                   <Form.Item className={styles.formThing}>
-                      {getFieldDecorator('examType', {
+                      {getFieldDecorator('exam_id', {
                           rules: [{ required: true, message: "考试类型不能为空" }]
                       })(
                       <Select style={{ width: 140,height:30 }} >
@@ -69,7 +82,7 @@ console.log(startVal,endVal)
               <div className={styles.keyValue}>
                   <p><span>*</span>选择课程</p>
                   <Form.Item className={styles.formThing}>
-                      {getFieldDecorator('select_courses', {
+                      {getFieldDecorator('subject_id', {
                           rules: [{ required: true, message: "课程不能为空" }]
                       })(
                       <Select style={{ width: 140,height:30 }}>
@@ -127,7 +140,7 @@ console.log(startVal,endVal)
                  </div>  
               </div>
               <div className={styles.bom}>
-                  <Button  type="primary" >创建试卷</Button>
+                  <Button  type="primary" onClick={handleClick}>创建试卷</Button>
               </div>
             </div> 
         </div>
@@ -146,7 +159,8 @@ UserIndex.defaultProps={
 }
  const mapStateToProps=state=>{
    return {
-    ...state.questions
+    ...state.questions,
+    ...state.exam
    }
  }
  const mapDispatchToProps=dispatch=>{
@@ -163,6 +177,13 @@ UserIndex.defaultProps={
         type:"questions/subject"
       })
     },
+    //创建考试
+    EstablishExam(payload){
+        dispatch({
+            type:"exam/establishExam",
+            payload
+          })
+    }
  }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Form.create()(UserIndex));

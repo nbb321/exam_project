@@ -8,16 +8,18 @@ import Add from "./Questions/Add"
 import Type from "./Questions/Type"
 import View from "./Questions/View"
 import Default from "./Questions/Default"
+import EditQuestions from "./Questions/EditQuestions"
 //用户管理
 import userAdd from "./User/Add"
 import userShow from "./User/Show"
 //考试管理
 import ExamAdd from "./Exam/Add"
 import ExamShow from "./Exam/List"
-import EditQuestions from "./Questions/EditQuestions"
-import {connect} from "dva";
+import Edit from "./Exam/Edit"
+
 //班级管理
 import Grade from "./Class/Grade";
+import {connect} from "dva";
 const { Header, Content,Sider} = Layout;
 
 function IndexPage(props){
@@ -46,6 +48,7 @@ function IndexPage(props){
             <Route path="/user/show" component={userShow}></Route>
             <Route path="/exam/add" component={ExamAdd}></Route>
             <Route path="/exam/list" component={ExamShow}></Route>
+            <Route path="/exam/edit" component={Edit}></Route>
             <Route path="/class/grade" component={Grade}></Route>
             {/* <Route path="/class/classroom" component={ExamAdd}></Route>
             <Route path="/class/student" component={ExamShow}></Route> */}
