@@ -25,7 +25,6 @@ function UserIndex(props){
     let result = new Date(date).getTime();
     changeEndVal(result)
   }
-  console.log(startVal,endVal)
   let handleSubmit=e=>{
     e.preventDefault();
     props.form.validateFields((err, values) => {
@@ -45,6 +44,7 @@ function UserIndex(props){
             end_time:endVal
         })
         props.history.push('/exam/edit') 
+        localStorage.setItem("list",JSON.stringify(values))
       })
   }
   return (

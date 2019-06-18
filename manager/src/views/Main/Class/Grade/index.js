@@ -2,14 +2,14 @@ import React,{useEffect} from 'react';
 import { connect } from 'dva';
 import "antd/dist/antd.css";
 import styles from './index.scss';
-import { Input, Form } from 'antd';
+import {  Form } from 'antd';
 
 function UserShow(props){
     useEffect(()=>{
     
     },[]);
 
-  const { getFieldDecorator } = props.form;
+  // const { getFieldDecorator } = props.form;
   return (
     <Form className={styles.main}>
         <h2 className={styles.title}>班级管理</h2>

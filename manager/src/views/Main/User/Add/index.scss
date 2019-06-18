@@ -30,7 +30,7 @@
     }
     .cont_Item{
         width:33%;
-        height: 340px;
+        height: 260px;
         border: 1px solid #ccc;
         display: flex;
         flex-direction: column;
@@ -62,4 +62,7 @@
         height: 30px;
         line-height: 30px;
     }
+}
+.main .content .cont_Item .upUser .formThing{
+    margin-bottom: 3px;
 }

@@ -34,7 +34,7 @@ function UserPages(props){
         props.Relation();
         props.Authoritys()  
     },[]);
-    let {identityidList,useridList,relationList,authoritysList,setIdentityViewList}=props;
+    let {identityidList,useridList,relationList,authoritysList}=props;
 
     //第一个
     //添加用户的change事件
@@ -201,7 +201,7 @@ let handleReset7=e=>{
                     </Button>
                 </div>
             {showVal?<div className={styles.upUser}>
-                        <Form.Item>
+                        <Form.Item className={styles.formThing}>
                             {getFieldDecorator('userid_top', {
                                 rules: [{ required: true, message: "身份id是必须得" }],
                                 initialValue: "请选择身份id"
@@ -215,21 +215,21 @@ let handleReset7=e=>{
                                 </Select>
                             )}
                         </Form.Item>
-                        <Form.Item>
+                        <Form.Item className={styles.formThing}>
                             {getFieldDecorator('user_Child')(
                                 <Input
                                 placeholder="请输入用户名"
                                 />,
                             )}
                         </Form.Item>
-                        <Form.Item>
+                        <Form.Item className={styles.formThing}>
                             {getFieldDecorator('pwd')(
                                 <Input
                                 placeholder="请输入密码"
                                 />,
                             )}
                         </Form.Item>
-                        <Form.Item>
+                        <Form.Item className={styles.formThing}>
                             {getFieldDecorator('userid_Child', {
                                 rules: [{ required: true, message: "身份id是必须得" }],
                                 initialValue: "请选择身份id"
@@ -251,21 +251,21 @@ let handleReset7=e=>{
                         </Button>
                     </div>:null}
             {userVal?<div className={styles.upUser}>
-                        <Form.Item>
+                        <Form.Item className={styles.formThing}>
                             {getFieldDecorator('user_Null',)(
                                 <Input
                                 placeholder="请输入用户名"
                                 />,
                             )}
                         </Form.Item>
-                        <Form.Item>
+                        <Form.Item className={styles.formThing}>
                             {getFieldDecorator('pwd',)(
                                 <Input
                                 placeholder="请输入密码"
                                 />,
                             )}
                         </Form.Item>
-                        <Form.Item>
+                        <Form.Item className={styles.formThing}>
                             {getFieldDecorator('userid_Null', {
                                  rules: [{ required: true, message: "身份id是必须得" }],
                                  initialValue: "请选择身份id"
@@ -293,7 +293,7 @@ let handleReset7=e=>{
                     <Button  className={styles.color}>添加身份</Button>
                 </div>
                 <div className={styles.upUser}>
-                    <Form.Item>
+                    <Form.Item className={styles.formThing}>
                         {getFieldDecorator('identity_Name', 
                         )(
                             <Input
@@ -315,7 +315,7 @@ let handleReset7=e=>{
                     <Button  className={styles.color}>添加api接口权限</Button>
                 </div>
                 <div className={styles.upUser}>
-                    <Form.Item>
+                    <Form.Item className={styles.formThing}>
                         {getFieldDecorator('Permission_Name', 
                             )(
                             <Input
@@ -323,7 +323,7 @@ let handleReset7=e=>{
                             />,
                         )}
                     </Form.Item>
-                    <Form.Item>
+                    <Form.Item className={styles.formThing}>
                         {getFieldDecorator('Permission_Url', 
                             )(
                             <Input
@@ -331,7 +331,7 @@ let handleReset7=e=>{
                             />,
                         )}
                     </Form.Item>
-                    <Form.Item>
+                    <Form.Item className={styles.formThing}>
                         {getFieldDecorator('Permission_method', 
                            )(
                             <Input
@@ -353,7 +353,7 @@ let handleReset7=e=>{
                     <Button  className={styles.color}>添加视图接口权限</Button>
                 </div>
                 <div className={styles.upUser}>
-                    <Form.Item>
+                    <Form.Item className={styles.formThing}>
                         {getFieldDecorator('view', {
                             rules: [{ required: true, message: "视图是必须得" }],
                             initialValue: "请选择已有视图"
@@ -381,7 +381,7 @@ let handleReset7=e=>{
                     <Button className={styles.color}>添加身份设置api接口权限</Button>
                 </div>
                 <div className={styles.upUser}>
-                    <Form.Item>
+                    <Form.Item className={styles.formThing}>
                         {getFieldDecorator('identity', {
                             rules: [{ required: true, message: "身份设置api是必须得" }],
                             initialValue: "请选择身份id"
@@ -395,7 +395,7 @@ let handleReset7=e=>{
                         </Select>
                         )}
                     </Form.Item>
-                    <Form.Item>
+                    <Form.Item className={styles.formThing}>
                         {getFieldDecorator('Api_port', {
                             rules: [{ required: true, message: "api是必须得" }],
                             initialValue: "请选api接口权限"
@@ -423,7 +423,7 @@ let handleReset7=e=>{
                         <Button  className={styles.color}>添加身份视图接口权限</Button>
                 </div>
                 <div className={styles.upUser}>
-                    <Form.Item>
+                    <Form.Item className={styles.formThing}>
                         {getFieldDecorator('View_dentity', {
                             rules: [{ required: true, message: "身份ID是必须得" }],
                             initialValue: "请选择身份id"
@@ -437,7 +437,7 @@ let handleReset7=e=>{
                         </Select>
                         )}
                     </Form.Item>
-                    <Form.Item>
+                    <Form.Item className={styles.formThing}>
                         {getFieldDecorator('id_dentity', {
                             rules: [{ required: true, message: "视图权限id是必须得" }],
                             initialValue: "请选视图权限id"
