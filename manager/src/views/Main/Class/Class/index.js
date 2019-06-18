@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import styles from './index.scss';
 import { Table,  Button , Modal , Input ,Form} from 'antd';
 
-function TypePage(props){
+function classIndex(props){
     
     
   useEffect(()=>{
@@ -17,7 +17,7 @@ function TypePage(props){
         <div className={styles.typesContent}>
         <div className={styles.btn}>
         <Button type="primary"  className={styles.btns}>
-            +添加类型
+            +添加班级
         </Button>
         </div>
         </div>
@@ -27,11 +27,11 @@ function TypePage(props){
   
 }
 //props的类型检查
-TypePage.propTypes={
+classIndex.propTypes={
 
 }
 //props的默认值
-TypePage.defaultProps={
+classIndex.defaultProps={
 
 }
  const mapStateToProps=state=>{
@@ -54,4 +54,4 @@ TypePage.defaultProps={
     }
    }
  }
-export default connect(mapStateToProps,mapDispatchToProps)( Form.create()(TypePage));
+export default connect(mapStateToProps,mapDispatchToProps)( Form.create()(classIndex));

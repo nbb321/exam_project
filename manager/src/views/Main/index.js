@@ -11,6 +11,7 @@ import userAdd from "./User/Add"
 import userShow from "./User/Show"
 import addExam from "./Exam/Add"
 import examList from "./Exam/List"
+import classManagement from "./Class/Class"
 import EditQuestions from "./Questions/EditQuestions"
 import {connect} from "dva";
 
@@ -42,6 +43,7 @@ function IndexPage(props){
             <Route path="/user/show" component={userShow}></Route>
             <Route path="/exam/add" component={addExam}></Route>
             <Route path="/exam/list" component={examList}></Route>
+            <Route path='/class/class' component={classManagement}></Route>
           </Switch>
           {props.loading?
           <div className={styles.loading}>
