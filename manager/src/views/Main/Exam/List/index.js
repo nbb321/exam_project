@@ -8,7 +8,6 @@ const { TabPane } = Tabs;
 const { Option } = Select;
 
 function ListIndex(props){
-     console.log(props.examList)
     useEffect(()=>{
        props.ExamList();
        props.ExamType();
@@ -29,28 +28,53 @@ function ListIndex(props){
     let columns=[
         {
            title: '试卷信息',
-           dataIndex: 'view_authority_text'
+           key: 'subject_text',
+           render: text => (
+            <>
+             <h5>{text.title}</h5>
+             <span>{'考试时间：2:0:0'}</span>
+             <span>{'3道题作弊0分'}</span>
+            </>
+           ),
         },
         {
             title: '班级',
-            dataIndex: 'view_id'
+            key:'grade_name',
+            render: text => (
+                <>
+                 <h5>{'考试班级'}</h5>
+                 <span>{text.grade_name}</span>
+                </>
+            ),
         },
         {
             title: '创建人',
-            dataIndex: 'view_id'
+            key:'user_name',
+            dataIndex: 'user_name'
         },
         {
             title: '开始时间',
-            dataIndex: 'view_id'
+            key:'start_time',
+            render: text => (
+                 <span>{new Date(Number(text.start_time)).toLocaleString()}</span>
+            ),
         },
         {
             title: '结束时间',
-            dataIndex: 'view_id'
-        },
+            key:'end_time',
+            render: text => (
+                <span>{new Date(Number(text.end_time)).toLocaleString()}</span>
+           ),
+
+            },
         {
             title:"操作",
-            dataIndex: 'view_id'
+            key:'status',
+            render:text =>(
+            <a href="javascript:;">{'详情'}</a> 
+            )
         }
+        
     ];
     
   return (
@@ -93,7 +117,7 @@ function ListIndex(props){
                 </Tabs>
             </div>
             <div className={styles.list}>
-              <Table columns={columns}  dataSource={examList&&examList} />
+              <Table columns={columns}  dataSource={examList&&examList}/>
             </div>
         </div>
       </div>

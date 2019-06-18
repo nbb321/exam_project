@@ -58,7 +58,6 @@ import Editor from 'for-editor';
                                 <Editor height='auto'/>
                             )}
                         </Form.Item>
-                         {/* <Editor value={value} height="auto" onChange={handleChange}  />  */}
                     </div>
                     <div>
                          <p>请选择考试类型：</p>
@@ -123,7 +122,6 @@ import Editor from 'for-editor';
                                 <Editor height='auto'/>
                             )}
                         </Form.Item>
-                         {/* <Editor value={valueowen} height="auto" onChange={handleChangeVal}  />  */}
                       </div>
                       <Button type="primary" htmlType="submit" >提交</Button>
                 </div>

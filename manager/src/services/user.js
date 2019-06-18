@@ -122,6 +122,93 @@ export function Condition(params){
         })
       }
 }
+
+//2.用户管理
+
+//添加身份
+export function Edit(params){
+    return request({
+            url:"/user/identity/edit?identity_text="+params.identity_text,
+            method:"GET"
+    })
+}
+//获取身份id
+export function Identityid(){
+    return request({
+        url:"/user/identity",
+        method:"GET"
+    })
+}
+//添加用户
+export function Adduser(params){
+    return request({
+            url:"/user",
+            method:"POST",
+            data:params
+    })
+}
+//更新用户
+export function UserUpdata(params){
+    return request({
+        url:"/user/user",
+        method:"PUT",
+        data:params
+    })
+}
+//用户id
+export function Userid(){
+    return request({
+        url:"/user/user",
+        method:"GET"
+    })
+}
+//添加api接口权限
+export function AddEdit(params){
+    return request({
+            url:"/user/authorityApi/edit?api_authority_text="+params.api_authority_text+"&api_authority_url="+params.api_authority_url+"&api_authority_method="+params.api_authority_method,
+            method:"GET"
+    })
+}
+//展示身份和视图权限关系
+export function Relations(){
+    return request({
+            url:"/user/identity_view_authority_relation",
+            method:"GET"
+    })
+}
+//添加视图权限
+export function AuthorityView(params){
+    console.log(params)
+    return request({
+        url:"/user/authorityView/edit?view_authority_text="+params.view_authority_text+"&view_id="+params.view_id,
+        method:"GET"
+    })
+}
+//展示api接口权限数据
+export function Authoritys(){
+    return request({
+            url:"/user/api_authority",
+            method:"GET"
+    })
+}
+
+//给身份设定视图权限
+export function SetIdentityView(params){
+    return request({
+            url:"/user/setIdentityView",
+            method:"POST",
+            data:params
+    })
+}
+//给身份设定api接口权限
+export function SetIdentityApi(params){
+    return request({
+            url:"user/setIdentityApi",
+            method:"POST",
+            data:params
+    })
+}
+
 //用户展示
 export function UserShow(){
     return request({

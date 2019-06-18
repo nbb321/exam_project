@@ -115,27 +115,27 @@ function UserIndex(props){
         <div className="card-container">
             <Tabs type="card">
             <TabPane tab="用户数据" key="1">
-               <h2>用户数据</h2>
+               <h2 className={styles.title}>用户数据</h2>
                <Table columns={columns}  dataSource={usershowList&&usershowList} />
             </TabPane>
             <TabPane tab="身份数据" key="2">
-              <h2>身份数据</h2>
+              <h2 className={styles.title}>身份数据</h2>
               <Table columns={columnsIdentity}  dataSource={useridentityList&&useridentityList} />
             </TabPane>
             <TabPane tab="api接口权限" key="3">
-              <h2>api接口权限</h2>
+              <h2 className={styles.title}>api接口权限</h2>
               <Table columns={columnsApiAuthority}  dataSource={apiAuthorityList&&apiAuthorityList} />
             </TabPane>
             <TabPane tab="身份和api接口关系" key="4">
-              <h2>身份和api接口关系</h2>
+              <h2 className={styles.title}>身份和api接口关系</h2>
               <Table columns={columnsRelation}  dataSource={relationList&&relationList} />
             </TabPane>
             <TabPane tab="试图接口权限" key="5">
-              <h2>试图接口权限</h2>
+              <h2 className={styles.title}>试图接口权限</h2>
               <Table columns={columnsViewauthority}  dataSource={viewauthorityList&&viewauthorityList} />
             </TabPane>
             <TabPane tab="身份和视图权限关系" key="6">
-              <h2>身份和视图权限关系</h2>
+              <h2 className={styles.title}>身份和视图权限关系</h2>
               <Table columns={columsIdentityview}  dataSource={identityviewList&&identityviewList} />
             </TabPane>
             </Tabs>

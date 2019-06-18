@@ -5,9 +5,7 @@ import styles from './index.scss';
 
 
 function UserIndex(props){
-    // console.log(props.identityviewList)
     useEffect(()=>{
-       
     },[]);
   return (
     <div className={styles.box}>111</div>
