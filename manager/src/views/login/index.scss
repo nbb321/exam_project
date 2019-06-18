@@ -1,29 +1,23 @@
-:global{
-    html, body, :global(#root) {
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-        background:navy;
-      }
-    .box{
-        height: 295px;
-        position: absolute;
-        right: 15%;
-        top: 25%;
-        box-sizing: border-box;
-        border-radius: 3px;
-        padding: 30px 50px;
-        background: rgb(255, 255, 255);
-        border-color: rgb(204, 204, 204);
-        
-    }
-    .login-form {
-        max-width: 300px;
-      }
-    .login-form-forgot {
-        float: right;
-      }
-    .login-form-button {
-        width: 100%;
-      }
+html,
+body,:global(#root) {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: navy;
+   .login_form {
+    width:400px;
+    height:250px;
+    position:fixed;
+    border-radius:5px;
+    right:200px;
+    bottom:250px;
+    background:#fff;
+    padding:10px 10px;
+  }
+   .login_form_forgot {
+    float: right;
+  }
+   .login_form_button {
+    width: 100%;
+  }
 }
