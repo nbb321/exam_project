@@ -259,3 +259,10 @@ export function Examlist(){
     })
 }
  
+//班级管理
+export function ClassManagement(){
+    return request({
+            url:"/manger/grade",
+            method:"GET"
+    })
+}

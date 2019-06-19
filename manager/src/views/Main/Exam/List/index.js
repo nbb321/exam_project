@@ -8,6 +8,7 @@ const { TabPane } = Tabs;
 const { Option } = Select;
 
 function ListIndex(props){
+    console.log(props.examList)
     useEffect(()=>{
        props.ExamList();
        props.ExamType();

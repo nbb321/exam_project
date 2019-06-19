@@ -1,7 +1,7 @@
 import React from 'react';
-import { Layout,Spin } from 'antd';
+import { Layout,Spin,Dropdown,Icon,Menu} from 'antd';
 import {Route, Switch,Redirect} from 'dva/router';
-import Menu from "@/components/Menu.js"
+import Menus from "@/components/Menus.js"
 import styles from "./index.scss"
 import Add from "./Questions/Add"
 import Type from "./Questions/Type"
@@ -18,9 +18,26 @@ import {connect} from "dva";
 const { Header, Content,Sider} = Layout;
 
 function IndexPage(props){
+    // console.log('props...', props);
   return <Layout className={styles.container}>
-    <Header className={styles.header}>
+      <Header className={styles.header}>
+    <div>
       <img  className={styles.img} src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1551624718911&amp;di=4a7004f8d71bd8da84d4eadf1b59e689&amp;imgtype=0&amp;src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg" alt="" />
+      <Dropdown overlay={
+          <Menu>
+          <Menu.Item  onClick={()=>props.changeLocal(props.locale==="zh"?"en":"zh")}>
+              中文
+          </Menu.Item>
+          <Menu.Item  onClick={()=>props.changeLocal(props.locale==="zh"?"en":"zh")}>
+              英文
+          </Menu.Item>
+        </Menu>
+        }>
+          <a className="ant-dropdown-link" href="#">
+            国际化 <Icon type="down" />
+          </a>
+      </Dropdown>
+    </div>
       <div  className={styles.usename}>
         <img className={styles.imgs} src="https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png" alt=""/>
         <span>chenmanjie</span>
@@ -29,7 +46,7 @@ function IndexPage(props){
 
     <Layout>
       <Sider>
-        <Menu />
+        <Menus />
       </Sider>
       <Content>
           <Switch>
@@ -58,12 +75,18 @@ function IndexPage(props){
 
 const mapStateToProps=state=>{
   return{
-    loading:state.loading.global
+    loading:state.loading.global,
+    locale:state.global.locale
   }
 }
 const mapDispatchToProps=dispatch=>{
   return{
-  
+    changeLocal:payload=>{
+        dispatch({
+          type:"global/changeLocale",
+          payload
+        })
+      }
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(IndexPage);
