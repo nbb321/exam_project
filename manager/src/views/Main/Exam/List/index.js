@@ -8,7 +8,7 @@ const { TabPane } = Tabs;
 const { Option } = Select;
 
 function ListIndex(props){
-    console.log(props.examList)
+    // console.log(props.examList)
     useEffect(()=>{
        props.ExamList();
        props.ExamType();
@@ -16,15 +16,15 @@ function ListIndex(props){
     },[]);
 
     let {examTypeList,subjectList,examList}=props;
-    let [upSubject] = useState('');
-    let [upExam_id] = useState(''); 
+    let [subject,upSubject] = useState('');
+    let [examValue,upExam_id] = useState(''); 
 
     //改变考试类型
     let handleChange=(value) => {
-        upExam_id(value);
+        upExam_id(examValue=value);
     } 
     let handleChangeId=(id)=>{
-        upSubject(id)
+        upSubject(subject=id)
     }
     let columns=[
         {

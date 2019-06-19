@@ -266,3 +266,36 @@ export function ClassManagement(){
             method:"GET"
     })
 }
+//弹框后的教室号
+export function MangerRoom(){
+    return request({
+            url:"/manger/room",
+            method:"GET"
+    })
+}
+
+//课程名
+export function MangerClassName(){
+    return request({
+        url:"/exam/subject",
+        method:"GET"
+    })
+}
+
+//添加班级
+export function AddGrade(params) {
+	return request({
+		url: '/manger/grade',
+		method: 'POST',
+		data: params
+	})
+}
+//删除班级
+export function DeleteGrade(params){
+    return request({
+        url:"/manger/grade/delete",
+        method:"DELETE",
+        data:params
+    }) 
+
+}
