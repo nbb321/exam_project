@@ -1,0 +1,23 @@
+export default{
+    //试题管理
+    "router.questions":"QuestionManage",
+    "router.questions.add":"AddQuestions",
+    "router.questions.type":"QuestionsType",
+    "router.questions.view":"ViewQuestions",
+    //用户管理
+    "router.user":"UserManage",
+    "router.user.add":"AddUser",
+    "router.user.show":"UserDisplay",
+    //考试管理
+    "router.exam":"ExamManage",
+    "router.exam.add":"AddExaminations",
+    "router.exam.list":"ListExamPapers",
+    //班级管理
+    "router.class":"ClassManage",
+    "router.class.grade":"ClassManage",
+    "router.class.classroom":"ClassroomManagement",
+    "router.class.student":"StudentManagement",
+    //阅卷管理
+    "router.marking":"MarkingManagement",
+    "router.marking.approved":"ApprovedMarking"
+}

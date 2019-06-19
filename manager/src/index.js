@@ -21,7 +21,10 @@ app.model(require('./models/questions').default);
 app.model(require('./models/management').default);
 //考试管理
 app.model(require('./models/exam').default);
-
+//国际化
+app.model(require('./models/global').default);
+//班级管理
+app.model(require('./models/class').default);
 // 4. Router
 app.router(require('./router').default);
 

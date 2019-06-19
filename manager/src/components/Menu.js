@@ -1,11 +1,12 @@
 import React from 'react';
 import { Menu,Icon } from 'antd';
 import { Link } from 'dva/router';
+import {injectIntl} from "react-intl"
 
 const { SubMenu } = Menu;
 
-function MenuComp(props){
 
+function MenuComp(props){
   return <Menu
     theme="dark"
     mode="inline"
@@ -18,18 +19,24 @@ function MenuComp(props){
             title={
               <span>
                 <Icon type="box-plot" />
-                试题管理
+                {props.intl.formatMessage({id:"router.questions"})}
               </span>
             }
           >
       <Menu.Item key="1">
-        <Link to="/questions/add">添加试题</Link>
+        <Link to="/questions/add">
+          {props.intl.formatMessage({id:"router.questions.add"})}
+        </Link>
       </Menu.Item>
       <Menu.Item key="2">
-        <Link to="/questions/type">试题分类</Link>
+        <Link to="/questions/type">          
+          {props.intl.formatMessage({id:"router.questions.type"})}
+        </Link>
       </Menu.Item>
       <Menu.Item key="3">
-        <Link to="/questions/view">查看试题</Link>
+        <Link to="/questions/view">
+          {props.intl.formatMessage({id:"router.questions.view"})}
+        </Link>
       </Menu.Item>
     </SubMenu>
     <SubMenu
@@ -37,15 +44,19 @@ function MenuComp(props){
             title={
               <span>
                 <Icon type="user" />
-                用户管理
+                {props.intl.formatMessage({id:"router.user"})}
               </span>
             }
           >
       <Menu.Item key="4">
-        <Link to="/user/add">添加用户</Link>
+        <Link to="/user/add">
+           {props.intl.formatMessage({id:"router.user.add"})}
+        </Link>
       </Menu.Item>
       <Menu.Item key="5">
-        <Link to="/user/show">用户展示</Link>
+        <Link to="/user/show">
+            {props.intl.formatMessage({id:"router.user.show"})}
+        </Link>
       </Menu.Item>
     </SubMenu>
     <SubMenu
@@ -53,15 +64,19 @@ function MenuComp(props){
             title={
               <span>
                 <Icon type="schedule" />
-                考试管理
+                {props.intl.formatMessage({id:"router.exam"})}
               </span>
             }
           >
       <Menu.Item key="6">
-        <Link to="/exam/add">添加考试</Link>
+        <Link to="/exam/add">
+          {props.intl.formatMessage({id:"router.exam.add"})}
+        </Link>
       </Menu.Item>
       <Menu.Item key="7">
-        <Link to="/exam/list">试卷列表</Link>
+        <Link to="/exam/list">
+        {props.intl.formatMessage({id:"router.exam.list"})}
+        </Link>
       </Menu.Item>
     </SubMenu>
     <SubMenu
@@ -69,34 +84,42 @@ function MenuComp(props){
             title={
               <span>
                 <Icon type="project" />
-                班级管理
+                {props.intl.formatMessage({id:"router.class"})}
               </span>
             }
           >
       <Menu.Item key="8">
-        <Link to="/class/grade">班级管理</Link>
+        <Link to="/class/grade"> 
+          {props.intl.formatMessage({id:"router.class.grade"})}
+        </Link>
       </Menu.Item>
       <Menu.Item key="9">
-        <Link to="/class/classroom">教室管理</Link>
+        <Link to="/class/classroom">
+          {props.intl.formatMessage({id:"router.class.classroom"})}
+        </Link>
       </Menu.Item>
       <Menu.Item key="10">
-        <Link to="/class/student">学生管理</Link>
+        <Link to="/class/student">
+          {props.intl.formatMessage({id:"router.class.student"})}
+        </Link>
       </Menu.Item>
     </SubMenu>
-    <SubMenu
+    <SubMenu 
             key="paper"
             title={
               <span>
                 <Icon type="profile" />
-                阅卷管理
+                {props.intl.formatMessage({id:"router.marking"})}
               </span>
             }
           >
       <Menu.Item key="11">
-        <Link to="/paper/approval">待批班级</Link>
+        <Link to="/marking/approved">
+          {props.intl.formatMessage({id:"router.marking.approved"})}
+        </Link>
       </Menu.Item>
     </SubMenu>
   </Menu>
 }
 
-export default MenuComp;
+export default injectIntl(MenuComp);

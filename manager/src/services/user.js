@@ -211,7 +211,30 @@ export function establishExam(params){
             data:params
     })
 }
+//`````````````````列表展示
+export function Examlist(){
+    return request({
+            url:"/exam/exam",
+            method:"GET"
+    })
+}
 
+//4.教室管理
+//获取全部教室
+export function getClassroom(){
+    return request({
+            url:"/manger/room",
+            method:"GET"
+    })
+}
+//删除教室接口
+export function Removeroom(payload){
+    return request({
+            url:"/manger/room",
+            method:"DELETE",    
+            data:payload
+    })
+}
 //查询
 export function Condition(params){
     console.log(params.subject_id,params.exam_id,params.questions_type_id);
