@@ -1,5 +1,11 @@
 
-import {getClassroom,Removeroom,Addroom} from "@/services"
+import {getClassroom,Removeroom,Addroom,Grade,
+  ClassManagement,
+  //弹框后的教室号
+  MangerRoom,
+  MangerClassName,
+  AddGrade,
+  DeleteGrade} from "@/services"
 export default {
     // 命名空间
     namespace: 'class',
@@ -8,7 +14,14 @@ export default {
     state: {
       getClassroomList:[],
       removeList:[],
-      AddroomList:[]
+      AddroomList:[],
+      gradeList:[],
+//````````````班级管理
+    classManagementList:[],
+    mangerRoomList:[],
+    mangerClassNameList:[],
+    addGradeUpdateList:[],
+    deleteClassList:[]
     },
   
     subscriptions: {
@@ -44,7 +57,54 @@ export default {
             payload:data.data
         })
       },
-      
+      //获取已经分配教室的班级的接口
+      *grade({ payload }, { call, put }) {
+        let data = yield call(Grade);
+        console.log(data.data)
+        yield put({
+            type:"gradeUpdata",
+            payload:data.data
+        })
+      },
+      //```````````班级管理
+       //渲染列表
+    *classManagement({payload},{call,put}){
+      let data = yield call(ClassManagement);
+      console.log('获取班级',data)
+      yield put({
+          type:"classManagementUpdata",
+          payload:data.data
+      })
+    },
+  //弹框后的教室号
+  *mangerRoom({payload},{call,put}){
+      let data = yield call(MangerRoom);
+      yield put({
+          type:"mangerRoomUpdata",
+          payload:data.data
+      })
+    },
+  //课程名
+  *mangerClassName({payload},{call,put}){
+      let data = yield call(MangerClassName);
+      yield put({
+          type:"mangerClassNameUpdata",
+          payload:data.data
+      })
+    },
+    //添加班级
+    *addGrade({ payload }, { call, put }) {
+      let data = yield call(AddGrade, payload)
+      console.log(data)
+    },
+    // *deleteClass({payload},{call,put}){
+    //   let data = yield call(DeleteGrade,payload);
+    //   console.log(data)
+    //   yield put({
+    //       type:"deleteClassUpdata",
+    //       payload:data
+    //   })
+    // }
     },
   
     // 同步操作
@@ -60,6 +120,28 @@ export default {
       addroomUpdata(state, {payload}) {
         return { ...state, AddroomList:payload };
       },
+      //获取已经分配教室的班级的接口
+      gradeUpdata(state, {payload}) {
+        return { ...state, gradeList:payload };
+      },
+      //``````````班级管理
+          //渲染列表
+          classManagementUpdata(state, {payload}) {
+            return { ...state, classManagementList:payload };
+        },
+        //弹框后的教室号
+        mangerRoomUpdata(state, {payload}) {
+            return { ...state, mangerRoomList:payload };
+        },
+        mangerClassNameUpdata(state, {payload}) {
+            return { ...state, mangerClassNameList:payload };
+        },
+        addGradeUpdate(state, {payload}) {
+            return { ...state, addGradeUpdateList:payload };
+        },
+        deleteClassUpdata(state,{payload}){
+            return { ...state, deleteClassList:payload };
+        }
     }
   };
   

@@ -18,9 +18,9 @@ function UserShow(props){
     let [showLoading,upLoading]=useState(false);
     let [obj,upObj]=useState({});
     let {establishList}=props;
+
     localStorage.setItem("establish",JSON.stringify(establishList))
     let listArr=JSON.parse(localStorage.getItem("establish"))
-    console.log(listArr)
     //侧边栏
     let {subjectList,examTypeList,TypeList,ViewList}=props;
     let [subject_id,upSubject] = useState('');
@@ -91,6 +91,8 @@ function UserShow(props){
     //删除试卷
     let removeItem=index=>{
       listArr.questions.splice(index,1);
+      localStorage.setItem("establish",JSON.stringify(listArr))
+      console.log(listArr)  
       console.log(listArr.questions)
     }
     // const { getFieldDecorator } = props.form;

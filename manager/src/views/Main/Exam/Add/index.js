@@ -8,7 +8,6 @@ const { Option } = Select;
 
 function UserIndex(props){
     let {examTypeList,subjectList}=props;
-
     useEffect(()=>{
       props.ExamType();
       props.Subject();
@@ -34,7 +33,6 @@ function UserIndex(props){
   //btn的点击事件
   let handleClick=e=>{
     props.form.validateFields((err, values) => {
-        console.log(values);
         props.EstablishExam({
             subject_id:values.subject_id,
             exam_id:values.exam_id,

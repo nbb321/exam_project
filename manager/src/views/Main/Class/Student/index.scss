@@ -16,8 +16,32 @@
         height: 100%;
         display: flex;
         flex-direction: column;
-        background: #fff;
         border-radius: 5px;
         margin:0 10px;
+        .student_Top{
+            width: 700px;
+            height: 50px;
+            display: flex;
+            padding: 0 5px;
+            justify-content: space-between;
+            Input{
+                width: 130px;
+            }
+            Button{
+                width: 100px;
+                height: 29px;
+                margin-top: 5px;
+            }
+        }
+        .student_Bom{
+            width: 100%;
+            flex:1;
+            padding: 0 5px;
+            background: #fff;
+            
+        }
     }
+}
+.main .content .formThing{
+    margin-bottom: 5px;
 }

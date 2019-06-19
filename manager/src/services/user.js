@@ -252,6 +252,53 @@ export function Addroom(payload){
             data:payload
     })
 }
+//获取已经分配教室的班级的接口
+export function Grade(){
+    return request({
+            url:"/manger/grade",
+            method:"GET"
+    })
+}
+//``````班级管理
+//班级管理
+export function ClassManagement(){
+    return request({
+            url:"/manger/grade",
+            method:"GET"
+    })
+}
+//弹框后的教室号
+export function MangerRoom(){
+    return request({
+            url:"/manger/room",
+            method:"GET"
+    })
+}
+
+//课程名
+export function MangerClassName(){
+    return request({
+        url:"/exam/subject",
+        method:"GET"
+    })
+}
+
+//添加班级
+export function AddGrade(params) {
+	return request({
+		url: '/manger/grade',
+		method: 'POST',
+		data: params
+	})
+}
+//删除班级
+// export function DeleteGrade(params){
+//     return request({
+//         url:"/manger/grade/delete",
+//         method:"DELETE",
+//         data:params
+//     }) 
+// }
 //查询
 export function Condition(params){
     console.log(params.subject_id,params.exam_id,params.questions_type_id);
