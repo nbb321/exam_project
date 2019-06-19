@@ -211,6 +211,15 @@ export function establishExam(params){
             data:params
     })
 }
+//删除试卷
+export function RemoveExam(params){
+    console.log(params)
+    return request({
+            url:"/exam/exam",
+            method:"DELETE",
+            data:params
+    })
+}
 //`````````````````列表展示
 export function Examlist(){
     return request({
@@ -230,8 +239,16 @@ export function getClassroom(){
 //删除教室接口
 export function Removeroom(payload){
     return request({
-            url:"/manger/room",
+            url:"/manger/room/delete",
             method:"DELETE",    
+            data:payload
+    })
+}
+//添加教室接口
+export function Addroom(payload){
+    return request({
+            url:"/manger/room",
+            method:"POST",    
             data:payload
     })
 }

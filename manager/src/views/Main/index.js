@@ -20,6 +20,7 @@ import Edit from "./Exam/Edit"
 //班级管理
 import Grade from "./Class/Class";
 import Classroom from "./Class/Classroom"
+import Student from "./Class/Student"
 
 import {connect} from "dva";
 const { Header, Content,Sider} = Layout;
@@ -69,7 +70,7 @@ function IndexPage(props){
             <Route path="/exam/edit" component={Edit}></Route>
             <Route path="/class/grade" component={Grade}></Route>
             <Route path="/class/classroom" component={Classroom}></Route>
-            {/* <Route path="/class/student" component={ExamShow}></Route> */}
+            <Route path="/class/student" component={Student}></Route>
           </Switch> 
           {props.loading?
           <div className={styles.loading}>

@@ -1,11 +1,12 @@
-import {establishExam,Examlist} from "@/services"
+import {establishExam,Examlist,RemoveExam} from "@/services"
 export default {
     // 命名空间
     namespace: 'exam',
   
     // 模块内部的状态
     state: {
-        establishList:[]
+        establishList:[],
+        RemoveList:[]
     },
   
     subscriptions: {
@@ -15,11 +16,21 @@ export default {
   
     // 异步操作
     effects: {
+        //创建试卷
         *establishExam({ payload }, { call, put }) {  // eslint-disable-line
             let data = yield call(establishExam,payload);
             console.log(data.data)
             yield put({
                 type:"establishUpdata",
+                payload:data.data
+            })
+        },
+        //删除试卷
+        *removeExam({ payload }, { call, put }) {  // eslint-disable-line
+            let data = yield call(RemoveExam,payload);
+            console.log(data)
+            yield put({
+                type:"RemoveListUpdata",
                 payload:data.data
             })
         },
@@ -44,7 +55,11 @@ export default {
         //列表展示
         examlistUpdata(state,{payload}){
             return {...state,examList:payload}
-        }
+        },
+        //删除
+        RemoveListUpdata(state,{payload}){
+            return {...state,RemoveList:payload}
+        },
     },
   
   };

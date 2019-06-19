@@ -1,5 +1,5 @@
 
-import {getClassroom,Removeroom} from "@/services"
+import {getClassroom,Removeroom,Addroom} from "@/services"
 export default {
     // 命名空间
     namespace: 'class',
@@ -7,7 +7,8 @@ export default {
     // 模块内部的状态
     state: {
       getClassroomList:[],
-      removeList:[]
+      removeList:[],
+      AddroomList:[]
     },
   
     subscriptions: {
@@ -25,6 +26,7 @@ export default {
             payload:data.data
         })
       },
+      //删除教室接口
       *removeroom({ payload }, { call, put }) {
         let data = yield call(Removeroom,payload);
         console.log(data)
@@ -33,6 +35,16 @@ export default {
             payload:data.data
         })
       },
+      //添加教室接口
+      *addroom({ payload }, { call, put }) {
+        let data = yield call(Addroom,payload);
+        console.log(data)
+        yield put({
+            type:"addroomUpdata",
+            payload:data.data
+        })
+      },
+      
     },
   
     // 同步操作
@@ -40,10 +52,14 @@ export default {
       getClassroomUpdata(state, {payload}) {
         return { ...state, getClassroomList:payload };
       },
+      //删除教室
       removeroomUpdata(state, {payload}) {
         return { ...state, removeList:payload };
+        },
+      //添加教室
+      addroomUpdata(state, {payload}) {
+        return { ...state, AddroomList:payload };
       },
-    },
-  
+    }
   };
   

@@ -43,8 +43,8 @@ function UserIndex(props){
             start_time:startVal,
             end_time:endVal
         })
-        props.history.push('/exam/edit') 
-        localStorage.setItem("list",JSON.stringify(values))
+        props.history.push('/exam/edit');
+        window.localStorage.setItem("list",JSON.stringify(values))
       })
   }
   return (
@@ -179,10 +179,10 @@ UserIndex.defaultProps={
     },
     //创建考试
     EstablishExam(payload){
-        dispatch({
-            type:"exam/establishExam",
-            payload
-          })
+      dispatch({
+        type:"exam/establishExam",
+        payload
+      })
     }
  }
 }

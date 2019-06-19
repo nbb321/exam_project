@@ -9,7 +9,6 @@ function UserShow(props){
       props.GetClassroom();
     },[]);
   let {getClassroomList}=props;
-  console.log(getClassroomList)
   let handleSubmit=e=>{
     
   }
@@ -50,10 +49,9 @@ function UserShow(props){
         <Modal visible={showLoading}
          onCancel={()=>upLoading(false)}
          onOk={()=>{
-            // props.insertQuestionsType({
-            //   text:iptValue,
-            //   sort:new Date().getTime()
-            // })
+            props.Addroom({
+              room_text:iptValue
+            })
             upLoading(false);
          }}
          >
@@ -111,6 +109,13 @@ UserShow.defaultProps={
           payload
       })
     },
- }
+    //添加教室
+    Addroom(payload){
+      dispatch({
+          type:"class/addroom",
+          payload
+      })
+    },
+  }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Form.create()(UserShow));
