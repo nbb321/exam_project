@@ -40,7 +40,7 @@ function IndexPage(props){
           </Menu.Item>
         </Menu>
         }>
-          <a className="ant-dropdown-link" href="#">
+          <a className="ant-dropdown-link">
             国际化 <Icon type="down" />
           </a>
       </Dropdown>

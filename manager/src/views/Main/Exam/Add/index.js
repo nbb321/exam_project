@@ -44,7 +44,8 @@ function UserIndex(props){
             end_time:endVal
         })
         props.history.push('/exam/edit');
-        window.localStorage.setItem("list",JSON.stringify(values))
+        localStorage.setItem("list",JSON.stringify(values))
+        localStorage.setItem("establish",JSON.stringify(props.establishList))
       })
   }
   return (

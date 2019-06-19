@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import { connect } from 'dva';
 import "antd/dist/antd.css";
 import styles from './index.scss';
-import {  Form,Button,Drawer,Select } from 'antd';
+import {  Form,Button,Drawer,Select,Modal } from 'antd';
 
 const { Option } = Select;
 function UserShow(props){
@@ -14,16 +14,22 @@ function UserShow(props){
     },[]);
     //侧边栏的默认值
     let [visibles,upvisible]=useState(false)
+    //控制添加弹出框
+    let [showLoading,upLoading]=useState(false);
+    let [obj,upObj]=useState({});
     let {establishList}=props;
-    console.log(establishList.questions)
+    localStorage.setItem("establish",JSON.stringify(establishList))
+    let listArr=JSON.parse(localStorage.getItem("establish"))
+    console.log(listArr)
     //侧边栏
     let {subjectList,examTypeList,TypeList,ViewList}=props;
     let [subject_id,upSubject] = useState('');
     let [exam_id,upExam_id] = useState('');
     let [questions_type_id,upQuestion] = useState('');
+  
+
      //改变课程类型
      let handleClickLi=(id)=>{
-      console.log(id);
       upSubject(subject_id=id)
     }
     //改变考试类型
@@ -43,17 +49,15 @@ function UserShow(props){
             questions_type_id
           })  
     }
-    //点击编辑
+    //点击详情
     let ClickCompile=(item)=>{
-      props.Compile(item);
-      //跳转添加试题页
-      // props.history.push('/questions/editQuestions?id='+item.questions_type_id) 
-    }
+      upObj(obj=item)
+      upLoading(showLoading=true)
+      }
     //点击跳转详情
     let handleClick=(item)=>{  
-        props.ClickItem(item)
-        // props.history.push('/questions/default?id='+item.questions_type_id) 
-    } 
+        props.ClickItem(item)  
+     } 
     //```````````````````
     let handleSubmit=e=>{
 
@@ -61,7 +65,6 @@ function UserShow(props){
     //点击提交按钮
     let handClickBtn=e=>{
      let items=JSON.parse(localStorage.getItem("list"));
-    //  console.log(items)
       props.EstablishExam({
         subject_id:items.subject_id,
         exam_id:items.exam_id,
@@ -80,9 +83,15 @@ function UserShow(props){
     let onClose=e=>{
       upvisible(visibles=false)
     }
+    //点击添加
+    let pushItme=item=>{
+      listArr.questions.push(item)
+      console.log(listArr.questions)
+    }
     //删除试卷
-    let removeItem=e=>{
-      // props.RemoveExam()
+    let removeItem=index=>{
+      listArr.questions.splice(index,1);
+      console.log(listArr.questions)
     }
     // const { getFieldDecorator } = props.form;
   return (
@@ -102,7 +111,6 @@ function UserShow(props){
           visible={visibles}
         >
         <div className={styles.boxs}>
-          {/* <div className={styles.topSlide}> */}
             <div className={styles.top_Top}>
             <div className={styles.active}>
               <span className={styles.top_Span}>Corers:</span>
@@ -136,7 +144,6 @@ function UserShow(props){
             </div>
               <Button className={styles.inquire} onClick={handleOnClick} style={{ width: 100,margin:15}} type="primary">查询</Button>
             </div>
-          {/* </div> */}
           <div className={styles.center}>
                   {
                     ViewList&&ViewList.map((item)=>{
@@ -152,14 +159,25 @@ function UserShow(props){
                                       </div>
                                     <div className={styles.Item_Name}>{item.user_name}</div>
                                 </div>
-                                <p className={styles.compile} onClick={()=>ClickCompile(item)}>
-                                  <span>添加</span>
-                                  <span>详情</span>
+                                <p className={styles.compile}>
+                                  <span onClick={()=>pushItme(item)}>添加</span>
+                                  <span onClick={()=>ClickCompile(item)}>详情</span>
                                 </p>
                             </div>
                          })
                   } 
           </div>
+          <Modal visible={showLoading}
+            onCancel={()=>upLoading(false)}
+            onOk={()=>{
+                upLoading(false);
+            }}
+            >
+            <div>
+                <div>{obj.title}</div>
+                <div>{obj.questions_stem}</div>
+            </div>
+        </Modal>
        </div> 
     </Drawer>
           <div className={styles.cont_Item}>
@@ -173,9 +191,9 @@ function UserShow(props){
           </div>
           <div className={styles.itemsArr}>
             {
-              establishList.questions&&establishList.questions.map(item=>{
+              listArr.questions&&listArr.questions.map((item,index)=>{
                 return <div key={item.json_path} className={styles.arr_item}>
-                  <p><span>{item.title}</span> <span onClick={()=>removeItem()}>删除</span></p>
+                  <p><span>{item.title}</span> <span onClick={()=>removeItem(index)}>删除</span></p>
                   <div className={styles.color}>
                     {item.questions_stem}
                   </div>
@@ -251,12 +269,6 @@ UserShow.defaultProps={
   ClickItem(payload){
     dispatch({
       type:"questions/clickItem",
-      payload
-    })
-  },
-  Compile(payload){
-    dispatch({
-      type:"questions/compile",
       payload
     })
   }

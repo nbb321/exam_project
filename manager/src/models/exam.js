@@ -24,6 +24,7 @@ export default {
                 type:"establishUpdata",
                 payload:data.data
             })
+
         },
         //删除试卷
         *removeExam({ payload }, { call, put }) {  // eslint-disable-line
@@ -33,6 +34,9 @@ export default {
                 type:"RemoveListUpdata",
                 payload:data.data
             })
+            console.log(this.state.establishList)
+
+            // establishList.splice(index,1);
         },
         //展示列表
         *examlist({payload},{call,put}){
@@ -50,7 +54,9 @@ export default {
     reducers: {
         //创建考试
         establishUpdata(state, {payload}) {
-            return { ...state, establishList:payload };
+            return { ...state, establishList:payload 
+
+            };
         },
         //列表展示
         examlistUpdata(state,{payload}){
