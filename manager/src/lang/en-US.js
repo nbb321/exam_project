@@ -1,23 +1,18 @@
-export default{
-    //试题管理
-    "router.questions":"QuestionManage",
-    "router.questions.add":"AddQuestions",
-    "router.questions.type":"QuestionsType",
-    "router.questions.view":"ViewQuestions",
-    //用户管理
-    "router.user":"UserManage",
-    "router.user.add":"AddUser",
-    "router.user.show":"UserDisplay",
-    //考试管理
-    "router.exam":"ExamManage",
-    "router.exam.add":"AddExaminations",
-    "router.exam.list":"ListExamPapers",
-    //班级管理
-    "router.class":"ClassManage",
-    "router.class.grade":"ClassManage",
-    "router.class.classroom":"ClassroomManagement",
-    "router.class.student":"StudentManagement",
-    //阅卷管理
-    "router.marking":"MarkingManagement",
-    "router.marking.approved":"ApprovedMarking"
+export default {
+    'router.questions':'QustionManage',
+    'questions.add':'AddQuestions',
+    'questions.type':'QuestionsType',
+    'questions.view':'ViewQuestions',
+    'router.user':'UserManage',
+    'user.addUser':'AddUser',
+    'user.show':'UserDisplay',
+    'router.exam':'ExamManage',
+    'exam.addExam':'AddExam',
+    'exam.examList':'TestPaper',
+    'router.class':'ClassManage',
+    'class.class':'ClassManage',
+    'class.classroom':'ClassroomManage',
+    'class.student':'StudentManage',
+    'router.marking':"MarkingManage",
+    'marking.approved':"Classes to be approved"
 }

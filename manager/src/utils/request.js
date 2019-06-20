@@ -1,28 +1,29 @@
-import axios from "axios";
-import {getToken} from "@/utils/user"
+import axios from 'axios'
+import { getToken } from '@/utils/user'
 
-const service=axios.create({
-  //baseURL:"http://169.254.12.208:7001",
-  baseURL:"http://127.0.0.1:7001",
-  timeout:5000
+const service = axios.create({
+  baseURL: 'http://169.254.12.208:7001',
+  timeout: 5000
 })
+
 service.interceptors.request.use(
-  config=>{
-    //  判断是否有登录
-    if(getToken()){
-      //让每个请求携带authorization
-      config.headers['authorization']=getToken();
+  config => {
+    if (getToken()) {
+      config.headers['addUser'] = getToken()
+      config.headers.Authorization = getToken()
     }
     return config
   },
-  error=>{
+  error => {
     return Promise.reject(error)
   }
 )
+
 service.interceptors.response.use(
-  response=>response.data,
-  error=>{
+  response => response.data,
+  error => {
     return Promise.reject(error)
   }
 )
-export default service;
+
+export default service

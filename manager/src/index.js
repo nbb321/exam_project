@@ -1,20 +1,21 @@
 import dva from 'dva';
 import './index.css';
-//引用polyfill补丁,解决路由警告
-import "@babel/polyfill"
-//ant的css样式
 import "antd/dist/antd.css";
 // 1. Initialize
-import createLoading from "dva-loading";
-
-const app = dva(createLoading());
+const app = dva();
 
 // 2. Plugins
 // app.use({});
 
 // 3. Model
 app.model(require('./models/user').default);
-app.model(require('./models/questions').default);
+app.model(require('./models/view').default);
+app.model(require('./models/add').default);
+app.model(require('./models/exhibition').default);
+app.model(require('./models/addExam').default);
+app.model(require('./models/addMark').default);
+app.model(require('./models/addUser').default);
+app.model(require('./models/exam').default);
 app.model(require('./models/global').default);
 app.model(require('./models/class').default);
 

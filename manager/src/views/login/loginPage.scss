@@ -1,0 +1,22 @@
+html,body,:global(#root){
+        height: 100%;
+        position: relative;
+        background: blue;
+    .login_form{
+        width: 400px;
+        // height: 300px;
+        padding:20px;
+        box-sizing: border-box;
+        position: absolute;
+        top:50%;
+        left:70%;
+        margin-left: -200px;
+        background:#fff;
+    }
+    .login_form_forgot{
+        float: right;
+    }
+    .login_form_button{
+        width: 100%;
+    }
+}
