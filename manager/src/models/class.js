@@ -1,11 +1,12 @@
 
-import {getClassroom,Removeroom,Addroom,Grade,
+import {getClassroom,Removeroom,Addroom,Grade,Students,Removestudent,
   ClassManagement,
   //弹框后的教室号
   MangerRoom,
   MangerClassName,
   AddGrade,
-  DeleteGrade} from "@/services"
+  // DeleteGrade
+} from "@/services"
 export default {
     // 命名空间
     namespace: 'class',
@@ -16,6 +17,8 @@ export default {
       removeList:[],
       AddroomList:[],
       gradeList:[],
+      studentsList:[],
+      removestudenList:[],
 //````````````班级管理
     classManagementList:[],
     mangerRoomList:[],
@@ -63,6 +66,24 @@ export default {
         console.log(data.data)
         yield put({
             type:"gradeUpdata",
+            payload:data.data
+        })
+      },
+       //获取所有已经分班的学生的接口
+       *students({ payload }, { call, put }) {
+        let data = yield call(Students,payload);
+        console.log(data.data)
+        yield put({
+            type:"studentsUpdata",
+            payload:data.data
+        })
+      },
+      //删除学生的接口
+      *removestudent({ payload }, { call, put }) {
+        let data = yield call(Removestudent,payload);
+        console.log(data.data)
+        yield put({
+            type:"removestudentUpdata",
             payload:data.data
         })
       },
@@ -123,6 +144,14 @@ export default {
       //获取已经分配教室的班级的接口
       gradeUpdata(state, {payload}) {
         return { ...state, gradeList:payload };
+      },
+       //获取所有已经分班的学生的接口
+       studentsUpdata(state, {payload}) {
+        return { ...state, studentsList:payload };
+      },
+      //删除学生的接口
+      removestudentUpdata(state, {payload}) {
+        return { ...state, removestudenList:payload };
       },
       //``````````班级管理
           //渲染列表

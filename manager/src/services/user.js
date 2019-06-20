@@ -259,6 +259,22 @@ export function Grade(){
             method:"GET"
     })
 }
+//获取所有已经分班的学生的接口
+export function Students(){
+    return request({
+            url:"/manger/student",
+            method:"GET"
+    })
+}
+//删除学生接口
+export function Removestudent(params){
+    console.log(params)
+    return request({
+            url:"/manger/student/?student_id="+params.student_id,
+            method:"DELETE"
+    })
+}
+
 //``````班级管理
 //班级管理
 export function ClassManagement(){
