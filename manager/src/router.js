@@ -10,6 +10,9 @@ import en from "react-intl/locale-data/en"
 import zh from "react-intl/locale-data/zh"
 import zhCN from "@/lang/zh_CN.js";
 import enUS from "@/lang/en_US.js"
+import NotPage from "@/views/Other/404.js"
+import Access from "@/views/Other/403.js"
+
 const localeMap={
   en:enUS,
   zh:zhCN
@@ -26,6 +29,8 @@ const RouterView=connect(mapStateToProps)(({locale,history})=>{
     <Router history={history}>
       <Switch>
         <Route path="/login" component={LoginPage} />
+        <Route path="/403" component={Access} />
+        <Route path="/404" component={NotPage} />
         <Route path="/" component={IndexPage} />
       </Switch>
     </Router>

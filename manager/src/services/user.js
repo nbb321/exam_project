@@ -17,10 +17,10 @@ export function getUserInfo(){
     })
 }
 //根据用户id，返回该用户的视图权限
-export function userNew(params){
-    console.log(params)
+export function userNew(user_id){
+    console.log(user_id)
     return request({
-            url:"/user/new?user_id="+params.user_id,
+            url:"/user/new?user_id="+user_id,
             method:"GET"
         })
     }
