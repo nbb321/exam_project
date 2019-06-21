@@ -1,4 +1,4 @@
-import {establishExam,Examlist,RemoveExam} from "@/services"
+import {establishExam,Examlist} from "@/services"
 export default {
     // 命名空间
     namespace: 'exam',

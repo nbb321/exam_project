@@ -19,6 +19,7 @@ export default {
       gradeList:[],
       studentsList:[],
       removestudenList:[],
+      search:[],
 //````````````班级管理
     classManagementList:[],
     mangerRoomList:[],
@@ -63,7 +64,6 @@ export default {
       //获取已经分配教室的班级的接口
       *grade({ payload }, { call, put }) {
         let data = yield call(Grade);
-        console.log(data.data)
         yield put({
             type:"gradeUpdata",
             payload:data.data
@@ -72,7 +72,6 @@ export default {
        //获取所有已经分班的学生的接口
        *students({ payload }, { call, put }) {
         let data = yield call(Students,payload);
-        console.log(data.data)
         yield put({
             type:"studentsUpdata",
             payload:data.data
@@ -81,11 +80,7 @@ export default {
       //删除学生的接口
       *removestudent({ payload }, { call, put }) {
         let data = yield call(Removestudent,payload);
-        console.log(data.data)
-        yield put({
-            type:"removestudentUpdata",
-            payload:data.data
-        })
+        console.log(data)
       },
       //```````````班级管理
        //渲染列表
@@ -118,14 +113,6 @@ export default {
       let data = yield call(AddGrade, payload)
       console.log(data)
     },
-    // *deleteClass({payload},{call,put}){
-    //   let data = yield call(DeleteGrade,payload);
-    //   console.log(data)
-    //   yield put({
-    //       type:"deleteClassUpdata",
-    //       payload:data
-    //   })
-    // }
     },
   
     // 同步操作
@@ -149,9 +136,14 @@ export default {
        studentsUpdata(state, {payload}) {
         return { ...state, studentsList:payload };
       },
-      //删除学生的接口
-      removestudentUpdata(state, {payload}) {
-        return { ...state, removestudenList:payload };
+      //查询
+      search(state, {payload}) {
+        let data= state.studentsList.filter(item=>{
+          if(item.student_name.indexOf(payload.student_name)!==-1||item.room_text.indexOf(payload.room_text)!==-1||item.grade_name.indexOf(payload.grade_name)!==-1){
+            return item
+          }
+        })
+        return { ...state, studentsList:data };
       },
       //``````````班级管理
           //渲染列表

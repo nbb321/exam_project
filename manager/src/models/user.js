@@ -1,4 +1,4 @@
-import {login} from '@/services'
+import {login,getUserInfo,userNew} from '@/services'
 import {setToken, getToken} from '@/utils/user'
 import { routerRedux } from 'dva/router';
 
@@ -8,7 +8,9 @@ export default {
 
   // 模块内部的状态
   state: {
-    isLogin: 0
+    isLogin: 0,
+    userInfo:{},
+    viewAuthority:[]
   },
 
   // 订阅路由跳转
@@ -41,23 +43,36 @@ export default {
   // 异步操作
   effects: {
     *login({payload}, {call, put}){
+      //1.调用登录接口
       let data = yield call(login, payload);
-      console.log('data...', data);
-      // 设置登陆态到cookie里
+      //2. 设置登陆态到cookie里
       if (data.code === 1){
         setToken(data.token);
       }
+      //3.更新redux重置登录态
       yield put({
         type: 'updateLogin',
         payload: data.code === 1?1:-1
       })
+      //4.获取用户信息
+      let userInfo=yield call(getUserInfo);
+      console.log(userInfo);
+      //5.根据id获取视图权限
+      let viewAuthority=yield call(userNew,userInfo.data.user_id)
+      console.log("viewAuthority",viewAuthority)
     }
-  },
+  }, 
 
   // 同步操作
   reducers: {
     updateLogin(state, {payload}){
       return {...state, isLogin: payload}
+    },
+    updataUserInfo(state,{payload}){
+      return {...state, userInfo: payload}
+    },
+    updataViewAuhoisty(state,{payload}){
+      return {...state, viewAuthority: payload}
     }
   }
 };

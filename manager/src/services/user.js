@@ -9,6 +9,22 @@ return request({
     })
 }
 
+//获取用户信息
+export function getUserInfo(){
+    return request({
+        url:"/user/userInfo",
+        method:"GET"
+    })
+}
+//根据用户id，返回该用户的视图权限
+export function userNew(params){
+    console.log(params)
+    return request({
+            url:"/user/new?user_id="+params.user_id,
+            method:"GET"
+        })
+    }
+
 //获取所有的试题类型
 export function Type(){
     return request({
@@ -270,7 +286,7 @@ export function Students(){
 export function Removestudent(params){
     console.log(params)
     return request({
-            url:"/manger/student?student_id="+params.student_id,
+            url:"/manger/student/"+params.student_id,
             method:"DELETE"
     })
 }
@@ -307,58 +323,13 @@ export function AddGrade(params) {
 		data: params
 	})
 }
-//删除班级
-// export function DeleteGrade(params){
-//     return request({
-//         url:"/manger/grade/delete",
-//         method:"DELETE",
-//         data:params
-//     }) 
-// }
 //查询
 export function Condition(params){
-    console.log(params.subject_id,params.exam_id,params.questions_type_id);
     if(params.subject_id!==""&&params.exam_id!==""&&params.questions_type_id!==""){
     return request({
         url:"/exam/questions/condition?subject_id="+params.subject_id+"&exam_id="+params.exam_id+"&questions_type_id="+params.questions_type_id,
         method:"GET",
         data:params
         })
-    } else if(params.subject_id!==""&&params.exam_id===""&&params.questions_type_id===""){
-        return request({
-            url:"/exam/questions/condition?subject_id="+params.subject_id,
-            method:"GET",
-            data:params
-        })
-      }else if(params.subject_id!==""&&params.exam_id!==""&&params.questions_type_id===""){
-        return request({
-            url:"/exam/questions/condition?subject_id="+params.subject_id+"&exam_id="+params.exam_id,
-            method:"GET",
-            data:params
-        })
-      }else if(params.subject_id===""&&params.exam_id!==""&&params.questions_type_id!==""){
-        return request({
-            url:"/exam/questions/condition?exam_id="+params.exam_id+"&questions_type_id="+params.questions_type_id,
-            method:"GET",
-            data:params
-        })
-      }else if(params.subject_id===""&&params.exam_id===""&&params.questions_type_id!==""){
-        return request({
-            url:"/exam/questions/condition?questions_type_id="+params.questions_type_id,
-            method:"GET",
-            data:params
-        })
-      }else if(params.subject_id!==""&&params.exam_id===""&&params.questions_type_id!==""){
-        return request({
-            url:"/exam/questions/condition?subject_id="+params.subject_id+"&questions_type_id="+params.questions_type_id,
-            method:"GET",
-            data:params
-        })
-      }else if(params.subject_id===""&&params.exam_id!==""&&params.questions_type_id===""){
-        return request({
-            url:"/exam/questions/condition?exam_id="+params.exam_id,
-            method:"GET",
-            data:params
-        })
-      }
+       } 
     }    

@@ -43,20 +43,34 @@ function UserShow(props){
           <span onClick={()=>handClickItem(text.student_id)}>{'删除'}</span>
         ),
     }]
+    //删除学生
     let handClickItem=id=>{
       props.Removestudent({
         student_id:id
       })
     }
+    //查询学生
+    let handSearch=e=>{
+      e.preventDefault();
+      props.form.validateFields((err, values) => {
+          props.search({
+            student_name:values.student_name,
+            room_text:values.room_text,
+            grade_name:values.grade_name
+          })
+      });
+    }
+    //点击重置
+    let handleReset=e=>{
+      props.form.resetFields()
+  }
   const { getFieldDecorator } = props.form;
   return (
     <Form className={styles.main} onSubmit={handSubmit}>
         <h2 className={styles.title}>学生管理</h2>
-        <div className={styles.content}>
-          <div className={styles.student_Top}>
+        <div className={styles.student_Top}>
               <Form.Item className={styles.formThing}>
-                {getFieldDecorator('name', {
-                  rules: [{ required: true, message: 'Please input your username!' }],
+                {getFieldDecorator('student_name', {
                 })(
                   <Input
                     placeholder="请输入学生姓名"
@@ -64,38 +78,37 @@ function UserShow(props){
                 )}
               </Form.Item>
               <Form.Item className={styles.formThing}>
-                        {getFieldDecorator('exam_id', {
-                            rules: [{ required: true, message: "考试类型不能为空" }]
+                        {getFieldDecorator('room_text', {
                         })(
                         <Select style={{ width: 140,height:30 }} >
                             {
                                 getClassroomList&&getClassroomList.map((item,index)=>{
-                                return <Option key={item.room_id} value={item.room_id}>{item.room_text}</Option>
+                                return <Option key={item.room_id} value={item.room_text}>{item.room_text}</Option>
                                 })
                             }
                       </Select>
                       )}
               </Form.Item>
               <Form.Item className={styles.formThing}>
-                        {getFieldDecorator('exam_id', {
-                            rules: [{ required: true, message: "考试类型不能为空" }]
+                        {getFieldDecorator('grade_name', {
                         })(
                         <Select style={{ width: 140,height:30 }} >
                             {
                                 gradeList&&gradeList.map((item,index)=>{
-                                return <Option key={item.grade_id} value={item.grade_id}>{item.grade_name}</Option>
+                                return <Option key={item.grade_id} value={item.grade_name}>{item.grade_name}</Option>
                                 })
                             }
                       </Select>
                       )}
               </Form.Item>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" onClick={handSearch}>
                     搜索
                 </Button>
-                <Button style={{marginLeft:10 }} >
+                <Button style={{marginLeft:10 }} onClick={handleReset}>
                     重置
                 </Button>
           </div>
+        <div className={styles.content}>
           <div className={styles.student_Bom}>
           <Table columns={columns} dataSource={studentsList}/>
           </div>
@@ -143,6 +156,13 @@ UserShow.defaultProps={
     Removestudent(payload){
       dispatch({
           type:"class/removestudent",
+          payload
+      })
+    },
+    //查询
+    search(payload){
+      dispatch({
+          type:"class/search",
           payload
       })
     },
