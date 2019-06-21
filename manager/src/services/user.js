@@ -270,7 +270,7 @@ export function Students(){
 export function Removestudent(params){
     console.log(params)
     return request({
-            url:"/manger/student/?student_id="+params.student_id,
+            url:"/manger/student?student_id="+params.student_id,
             method:"DELETE"
     })
 }

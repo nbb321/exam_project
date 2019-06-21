@@ -6,7 +6,7 @@ export default {
     // 模块内部的状态
     state: {
         establishList:[],
-        RemoveList:[]
+        list:""
     },
   
     subscriptions: {
@@ -22,21 +22,9 @@ export default {
             console.log(data.data)
             yield put({
                 type:"establishUpdata",
-                payload:data.data
+                payload:data.data.questions
             })
 
-        },
-        //删除试卷
-        *removeExam({ payload }, { call, put }) {  // eslint-disable-line
-            let data = yield call(RemoveExam,payload);
-            console.log(data)
-            yield put({
-                type:"RemoveListUpdata",
-                payload:data.data
-            })
-            console.log(this.state.establishList)
-
-            // establishList.splice(index,1);
         },
         //展示列表
         *examlist({payload},{call,put}){
@@ -47,7 +35,6 @@ export default {
                 payload:data.exam
             })
         }
-
     },
   
     // 同步操作
@@ -62,10 +49,17 @@ export default {
         examlistUpdata(state,{payload}){
             return {...state,examList:payload}
         },
-        //删除
-        RemoveListUpdata(state,{payload}){
-            return {...state,RemoveList:payload}
-        },
+       // id 删除
+       Remove_id(state,{payload}){
+        state.establishList.splice(payload,1);
+        return {...state,establishList:state.establishList}
+       },
+       //点击添加每一项
+       AddItem(state,{payload}){
+        state.establishList.push(payload);
+        console.log(state.establishList)
+        return {...state,establishList:state.establishList}
+       }
     },
   
   };

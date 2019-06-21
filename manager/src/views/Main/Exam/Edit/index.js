@@ -19,8 +19,9 @@ function UserShow(props){
     let [obj,upObj]=useState({});
     let {establishList}=props;
 
-    localStorage.setItem("establish",JSON.stringify(establishList))
-    let listArr=JSON.parse(localStorage.getItem("establish"))
+    // localStorage.setItem("establish",JSON.stringify(establishList.questions))
+    // let listArr=JSON.parse(localStorage.getItem("establish"))
+    
     //侧边栏
     let {subjectList,examTypeList,TypeList,ViewList}=props;
     let [subject_id,upSubject] = useState('');
@@ -85,17 +86,16 @@ function UserShow(props){
     }
     //点击添加
     let pushItme=item=>{
-      listArr.questions.push(item)
-      console.log(listArr.questions)
+      props.AddItem(
+        item
+      )
     }
     //删除试卷
     let removeItem=index=>{
-      listArr.questions.splice(index,1);
-      localStorage.setItem("establish",JSON.stringify(listArr))
-      console.log(listArr)  
-      console.log(listArr.questions)
+      props.Remove_id(
+        index
+      )
     }
-    // const { getFieldDecorator } = props.form;
   return (
     <Form onSubmit={handleSubmit} className={styles.main}>
       <h2 className={styles.title}>创建事件</h2>
@@ -193,7 +193,7 @@ function UserShow(props){
           </div>
           <div className={styles.itemsArr}>
             {
-              listArr.questions&&listArr.questions.map((item,index)=>{
+              establishList&&establishList.map((item,index)=>{
                 return <div key={item.json_path} className={styles.arr_item}>
                   <p><span>{item.title}</span> <span onClick={()=>removeItem(index)}>删除</span></p>
                   <div className={styles.color}>
@@ -202,16 +202,15 @@ function UserShow(props){
                 </div>
               })
             }
+           
           </div>
             <div className={styles.Btnbig}>
             <Button type="primary" className={styles.btns} onClick={handClickBtn}>创建考试</Button>
             </div>
         </div>  
      </Form>
-
-  )
-  
-}
+    )
+  }
 //props的类型检查
 UserShow.propTypes={
 
@@ -220,24 +219,36 @@ UserShow.propTypes={
 UserShow.defaultProps={
 
 }
+
+
  const mapStateToProps=state=>{
    return {
     ...state.exam,
     ...state.questions
    }
  }
+
+
+
  const mapDispatchToProps=dispatch=>{
    return {
-    //删除试卷
-    RemoveExam(){
-      dispatch({
-          type:"exam/removeExam"
-      })
-    },
   //创建考试
   EstablishExam(payload){
     dispatch({
       type:"exam/establishExam",
+      payload
+    })
+  },
+  Remove_id(payload){   // 删除
+    dispatch({
+      type:"exam/Remove_id",
+      payload
+    })
+  },
+  //添加
+  AddItem(payload){   // 删除
+    dispatch({
+      type:"exam/AddItem",
       payload
     })
   },
