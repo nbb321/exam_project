@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react';
+import React,{ useEffect } from 'react';
 import { connect  } from 'dva';
 import { Form, Button, Select, Input, Table  } from 'antd'
 import styles from './student.scss';

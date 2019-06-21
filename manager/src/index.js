@@ -18,6 +18,7 @@ app.model(require('./models/addUser').default);
 app.model(require('./models/exam').default);
 app.model(require('./models/global').default);
 app.model(require('./models/class').default);
+app.model(require('./models/paper').default);
 
 // 4. Router
 app.router(require('./router').default);

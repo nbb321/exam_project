@@ -44,6 +44,7 @@ function Class(props){
             render:operation=>(
                 <>
                     <span value={operation} onClick={change}>修改</span>
+                    
                     <Divider type="vertical" />
                     <span value={operation} onClick={change}>删除</span>
                 </>

@@ -6,5 +6,5 @@ export function getToken(){
 }
 
 export function setToken(value){
-    cookie.set(key,value,{expires:7})
+    cookie.set(key,value,{expires:20})
 }
