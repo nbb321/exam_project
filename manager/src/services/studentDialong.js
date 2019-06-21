@@ -1,9 +1,9 @@
 import request from '../utils/request';
 
 // 登陆接口
-export function paper(){
+export function studentDialong(){
   return request({
-    url: '/manger/grade',
+    url: '/exam/student',
     method: 'GET'
   })
 }

@@ -30,7 +30,6 @@ function View( props ) {
 
     let chooseLess = (e) =>{
         upSubject(subject_id = e.target.getAttribute('value')) 
-        // console.log(e.target.getAttribute('value'))
         let arr = Array.from(e.target.parentNode.childNodes);
         arr.map(item=>{
             item.className = '';
@@ -52,7 +51,6 @@ function View( props ) {
 
     let search = function(){
         if(subject_id!==''){
-            console.log(subject_id)
             if(exam_id !== ''){
                 condition({
                     subject_id,

@@ -73,7 +73,7 @@ function Class(props){
         }else if(e.target.innerHTML==='修改'){
             upShowData(showData = true)
             grade()
-            gradeArr && gradeArr.map(item=>{
+            gradeArr && gradeArr.map((item,index)=>{
                 if(item.grade_id === e.target.getAttribute('value')){
                     upGetGrade(getGrade = item)
                 }

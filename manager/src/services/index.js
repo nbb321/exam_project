@@ -7,3 +7,4 @@ export * from "./addMark.js";
 export * from './addUser.js';
 export * from './exam.js';
 export * from './class.js';
+export * from "./paper.js"

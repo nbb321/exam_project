@@ -15,7 +15,8 @@ import Adduser from './User/addUser/addUser';
 import ExamList from './Exam/examList/examList';
 import Class from './Class/class/class';
 import Student from './Class/student/student';
-import Paper from './Paper/Paper/paper';
+import Paper from './Paper/paper/paper';
+import Classmate from "./Paper/classmate/classmate"
 import styles from './MainPage.scss';
 
 const { Header, Content, Sider } = Layout;
@@ -55,7 +56,8 @@ function MainPage(props) {
                         <Route path="/class/class" component={Class}></Route>
                         <Route path="/class/student" component={Student}></Route>
                         <Route path="/questions/add" component={Add}></Route>
-                        <Route path="/marking/approved" component={Paper}></Route>
+                        <Route path="/paper/classlist" component={Paper}></Route>
+                        <Route path="/paper/classmate" component={Classmate}></Route>
                     </Switch>
                 </Content>
             </Layout>
