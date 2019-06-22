@@ -29,14 +29,20 @@ function MainPage(props) {
         })
     }
     return (
-        <Layout style={{height:"100%"}}>
-            <Header className={styles.header} style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-                <div><img src="../../images/logo.png" alt=""/></div>
-                <Select onChange={change}>
+    <Layout style={{height:"100%"}}>
+        <Header className={styles.header}>
+        <div>
+          <img  className={styles.img} src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1551624718911&amp;di=4a7004f8d71bd8da84d4eadf1b59e689&amp;imgtype=0&amp;src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg" alt="" />
+          <Select onChange={change} value={'中文'} className={styles.down}>
                     <Option key="zh">中文</Option>
                     <Option key="en">英文</Option>
-                </Select>
-            </Header>
+          </Select>
+        </div>
+        <div  className={styles.usename}>
+          <img className={styles.imgs} src="https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png" alt=""/>
+          <span>chenmanjie</span>
+        </div>
+        </Header>
             <Layout className={styles.ant_layout}>
                 <Sider >
                 <Menus />
@@ -56,7 +62,7 @@ function MainPage(props) {
                         <Route path="/class/class" component={Class}></Route>
                         <Route path="/class/student" component={Student}></Route>
                         <Route path="/questions/add" component={Add}></Route>
-                        <Route path="/paper/classlist" component={Paper}></Route>
+                        <Route path="/marking/approved" component={Paper}></Route>
                         <Route path="/paper/classmate" component={Classmate}></Route>
                     </Switch>
                 </Content>

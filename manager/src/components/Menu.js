@@ -36,7 +36,7 @@ function Menus(props) {
             key="person"
             title={
                 <span>
-                    <Icon type="sliders" />
+                    <Icon type="user" />
                     {props.intl.formatMessage({id:'router.user'})}
         </span>
             }
@@ -52,7 +52,7 @@ function Menus(props) {
             key="exam"
             title={
                 <span>
-                    <Icon type="sliders" />
+                    <Icon type="bar-chart" />
                     {props.intl.formatMessage({id:'router.exam'})}
         </span>
             }
@@ -68,7 +68,7 @@ function Menus(props) {
             key="class"
             title={
                 <span>
-                    <Icon type="sliders" />
+                    <Icon type="sliders" /> 
                     {props.intl.formatMessage({id:'router.class'})}
         </span>
             }

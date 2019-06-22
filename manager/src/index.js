@@ -19,7 +19,7 @@ app.model(require('./models/exam').default);
 app.model(require('./models/global').default);
 app.model(require('./models/class').default);
 app.model(require('./models/paper').default);
-app.model(require('./models/studentDialong').default);
+app.model(require('./models/classmate').default);
 
 // 4. Router
 app.router(require('./router').default);
