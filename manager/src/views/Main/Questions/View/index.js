@@ -123,7 +123,7 @@ import styles from  './index.scss';
       // console.log("state",state)
       return{
         ...state.questions
-      }
+      } 
   }
   const mapDispatchToProps=dispatch=>{
     return{
@@ -135,7 +135,7 @@ import styles from  './index.scss';
       Subject(){
         dispatch({
           type:"questions/subject"
-        })
+        })  
       },
       ExamType(){
         dispatch({

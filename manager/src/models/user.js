@@ -9,7 +9,7 @@ export default {
   // 命名空间
   namespace: 'user',
 
-  // 模块内部的状态
+  // 模块内部的状态 
   state: {
     isLogin: 0,
     userInfo:{},
@@ -49,7 +49,7 @@ export default {
       });
     },
   }, 
-
+                             
   // 异步操作
   effects: {
     *login({payload}, {call, put}){
@@ -82,7 +82,7 @@ export default {
       let viewAuthority=yield call(userNew,userInfo.data.user_id)
       console.log("viewAuthority",viewAuthority)
       yield put({
-        type:"updataViewAuhoisty",
+        type:"updateViewAuthority",
         payload:viewAuthority.data
       })
     }
@@ -111,6 +111,7 @@ export default {
         })
       })
       console.log('myView...', myView);
+      console.log('forbiddenView...', forbiddenView);
       return {...state, viewAuthority: payload, myView, forbiddenView}
     }
   }

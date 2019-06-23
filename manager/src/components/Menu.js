@@ -8,7 +8,7 @@ const { SubMenu } = Menu;
 
 
 function MenuComp(props){
-  return<Menu
+  return <Menu
   theme="dark"
   mode="inline"
   defaultSelectedKeys={['0']}
@@ -19,18 +19,29 @@ function MenuComp(props){
     return <SubMenu key={item.name} title={
       <span>
          <Icon type="user" />
-          {props.intl.formatMessage({id: item.name})}
+          {props.intl.formatMessage({id: item.name?item.name:null})}
       </span>
     }>{
       item.children.map((value, key)=>{
-        return <Menu.Item key={key}>
-          <Link to={value.path}>{props.intl.formatMessage({id: value.name})}</Link>
-        </Menu.Item>
+        return value.name?<Menu.Item key={value.id}>
+          <Link to={value.path}>
+            {props.intl.formatMessage({id: value.name})}
+          </Link>
+        </Menu.Item>:<Link to={value.path} />
       })
     }
     </SubMenu>
   })}
-    <SubMenu
+  </Menu>
+}
+const mapStateToprops=state=>{
+  return {
+    myView:state.user.myView
+  }
+}
+export default injectIntl(connect(mapStateToprops)(MenuComp));
+
+  {/* <SubMenu
             key="questions"
             title={
               <span>
@@ -48,13 +59,14 @@ function MenuComp(props){
         <Link to="/questions/type">          
           {props.intl.formatMessage({id:"router.questions.type"})}
         </Link>
-      </Menu.Item>
+      </Menu.Item> 
       <Menu.Item key="3">
         <Link to="/questions/view">
           {props.intl.formatMessage({id:"router.questions.view"})}
         </Link>
       </Menu.Item>
-    </SubMenu>
+    </SubMenu> */}
+{/*     
     <SubMenu
             key="user"
             title={
@@ -134,12 +146,4 @@ function MenuComp(props){
           {props.intl.formatMessage({id:"router.marking.approved"})}
         </Link>
       </Menu.Item>
-    </SubMenu>
-  </Menu>
-}
-const mapStateToprops=state=>{
-  return {
-    myView:state.user.myView
-  }
-}
-export default injectIntl(connect(mapStateToprops)(MenuComp));
+    </SubMenu> */}

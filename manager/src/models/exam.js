@@ -1,4 +1,4 @@
-import {establishExam,Examlist} from "@/services"
+import {establishExam,examList} from "@/services"
 export default {
     // 命名空间
     namespace: 'exam',
@@ -6,7 +6,8 @@ export default {
     // 模块内部的状态
     state: {
         establishList:[],
-        list:""
+        list:"",
+        examArr:[]
     },
   
     subscriptions: {
@@ -26,12 +27,12 @@ export default {
             })
 
         },
-        //展示列表
-        *examlist({payload},{call,put}){
-            let data=yield call(Examlist,payload);
-            console.log(data.data)
+          //获取试卷列表
+        *examList({ payload }, { call, put }){
+            let data = yield call(examList,payload);
+            console.log('获取试卷列表',data)
             yield put({
-                type:"examlistUpdata",
+                type:"getexamList",
                 payload:data.exam
             })
         }
@@ -46,8 +47,9 @@ export default {
             };
         },
         //列表展示
-        examlistUpdata(state,{payload}){
-            return {...state,examList:payload}
+        getexamList(state,{ payload }){
+            // state.datas = 
+            return { ...state, examArr:payload,datas:[] }
         },
        // id 删除
        Remove_id(state,{payload}){

@@ -1,140 +1,185 @@
-import React,{useEffect,useState} from 'react';
+import React, { useState, useEffect } from "react";
 import { connect } from 'dva';
-import "antd/dist/antd.css";
-import { Select, Button, Tabs , Table} from 'antd';
+import { Form, Select, Button, Table, Icon } from 'antd';
 import styles from './index.scss';
 
-const { TabPane } = Tabs;
-const { Option } = Select;
+// const { Option } = Select;
+// const columns = [
+//     {
+//         title: '试卷信息',
+//         dataIndex: 'information',
+//         key: 'information'
+//     },
+//     {
+//         title: '班级',
+//         dataIndex: 'class',
+//         key: 'class',
+//         render: room =>(
+//             <>
+//                 <p>考试班级</p>
+//                 {
+//                     room.map((item,index)=>{
+//                         return <span key={index} style={{fontSize:"12px",marginRight:"8px"}}>{item}</span>
+//                     })
+//                 }
+//             </>
+//         ),
+//     },
+//     {
+//         title: '创建人',
+//         dataIndex: 'founder',
+//         key: 'founder'
+//     },
+//     {
+//         title: '开始时间',
+//         dataIndex: 'start',
+//         key: 'start',
+//         render:start=>(
+//             <>
+//                 <p>{new Date(parseInt(start)).toLocaleString().replace(/\//g, "-").replace(/上午/g, " ")}</p>
+//             </>
+//         ),
+//     },
+//     {
+//         title: '结束时间',
+//         dataIndex: 'end',
+//         key: 'end',
+//         render:end=>(
+//             <>
+//                 <p>{new Date(parseInt(end)).toLocaleString().replace(/\//g, "-").replace(/上午/g, " ")}</p>
+//             </>
+//         ),
+//     },
+//     {
+//         title: '操作',
+//         dataIndex: 'operation',
+//         key: 'operation'
+//     }
+// ]
 
-function ListIndex(props){
-     console.log(props.examList)
-    useEffect(()=>{
-       props.ExamList();
-       props.ExamType();
-       props.Subject();
-    },[]);
+function ExamList(props) {
+    // let [ datas ]=useState([]);
 
-    let {examTypeList,subjectList,examList}=props;
-    let [upSubject] = useState('');
-    let [upExam_id] = useState(''); 
+    // let { subject, examType, examList } = props;
+    // let { examArr, datas } = props.exam;
+    // let { data, questionArr } = props.view;
 
-    //改变考试类型
-    let handleChange=(value) => {
-        upExam_id(value);
-    } 
-    let handleChangeId=(id)=>{
-        upSubject(id)
-    }
-    let columns=[
-        {
-           title: '试卷信息',
-           dataIndex: 'view_authority_text'
-        },
-        {
-            title: '班级',
-            dataIndex: 'view_id'
-        },
-        {
-            title: '创建人',
-            dataIndex: 'view_id'
-        },
-        {
-            title: '开始时间',
-            dataIndex: 'view_id'
-        },
-        {
-            title: '结束时间',
-            dataIndex: 'view_id'
-        },
-        {
-            title:"操作",
-            dataIndex: 'view_id'
-        }
-    ];
-    
-  return (
-    <div className={styles.main}>
-      <h2 className={styles.titType}>试卷列表</h2>
-      <div className={styles.typesContent}>
-        <div className={styles.top_Bom}>
-           <div className={styles.Bom_item}>
-                <p>考试类型</p>
-                <Select onChange={handleChange}  style={{ width: 150,margin:15,height:35 }}>
-                  {
-                    examTypeList&&examTypeList.map((item)=>{
-                      return <Option key={item.exam_id}  value={item.exam_id}>{item.exam_name}</Option>
-                    })
-                  }
-                </Select>
-          </div>
-          <div className={styles.Bom_item}>
-                <p>课程</p>
-                <Select  style={{ width: 150,margin:15,height:35 }} onChange={handleChangeId}>
-                {
-                  subjectList&&subjectList.map((item)=>{
-                    return <Option key={item.subject_id} value={item.subject_id}>{item.subject_text}</Option>
-                  })
-                }              
-                </Select>
+    // useEffect(()=>{
+    //     subject(), 
+    //     examType(),
+    //     examList() 
+    // },[])
+    // examArr && examArr.map(item=>{
+    //     let room = [];
+    //     item.grade_name.map(val=>{
+    //         room.push(val)
+    //     })
+    //     let flag = datas.some(val => val.information === item.title);
+    //     if(!flag){
+    //         datas.push({
+    //             key:item.exam_exam_id,
+    //             information:item.title,
+    //             class:room,
+    //             founder:item.user_name,
+    //             start:item.start_time,
+    //             end:item.end_time,
+    //             operation:"详情"
+    //         })    
+    //     }  
+    // })
+
+    // let search = e =>{
+    //     props.form.validateFields((error,value)=>{
+    //         examList({
+    //             subject_id:value.subjectId
+    //         })
+    //     })
+    // }
+
+    // let tabs = e =>{
+    //     let arr = Array.from(e.target.parentNode.childNodes);
+    //     arr.map(item=>{
+    //         item.className = '';
+    //     })
+    //     e.target.className = styles.active;
+    // }
+
+    // let { getFieldDecorator } = props.form;
+    return <div className={styles.wrapper}>
+    sss
+        {/* <p className={styles.title}>试卷列表</p>
+        <Form className={styles.wrap}>
+            <Form-Item class={styles.wrap_item}>
+                考试类型：{
+                    getFieldDecorator('questionsTypeId', {
+                        rules: [{ required: true, message: '考试类型' }],
+                    })(
+                    <Select className={styles.select} placeholder="考试类型">
+                        {
+                            questionArr && questionArr.map(item=>{
+                                return <Option key={ item.questions_type_id } value={ item.questions_type_id }>{ item.questions_type_text }</Option>
+                            })
+                        }
+                    </Select>,
+                    )
+                }
+                课程：{
+                    getFieldDecorator('subjectId', {
+                        rules: [{ required: true, message: '请选择身份id' }],
+                    })(
+                    <Select className={styles.select} placeholder="请选择身份id">
+                        {
+                            data && data.map(item=>{
+                                return <Option key={ item.subject_id } value={ item.subject_id }>{ item.subject_text }</Option>
+                            })
+                        }
+                    </Select>,
+                    )
+                }
+                <Button className={styles.btn} onClick={search} icon="search">查询</Button>
+            </Form-Item>
+        </Form>
+        <div className={styles.main}>
+            <div className={styles.main_top}>
+                <h4>试卷列表</h4>
+                <div className={styles.top_right} onClick={tabs}> 
+                    <p className={styles.active}>全部</p>
+                    <p>进行中</p>
+                    <p>已结束</p>
+                </div>
             </div>
-            <Button className={styles.Btn}  style={{ width: 150,margin:15}} type="primary">查询</Button>
-        </div>
-        <div className={styles.center}>
-            <div className={styles.center_title}>
-                <h3>试卷列表</h3>
-                <Tabs defaultActiveKey="1">
-                    <TabPane tab="全部" key="1">
-                    </TabPane>
-                    <TabPane tab="进行中" key="2">
-                    </TabPane>
-                    <TabPane tab="已结束" key="3">
-                    </TabPane>
-                </Tabs>
-            </div>
-            <div className={styles.list}>
-              <Table columns={columns}  dataSource={examList&&examList} />
-            </div>
-        </div>
-      </div>
+            <Table columns={columns} dataSource={datas} />
+        </div> */}
     </div>
+}
 
-  )
+const mapStateToProps = state=>{
+    return {
+        ...state.exam,
+        ...state.questions
+    }
+  }
   
-}
-//props的类型检查
-ListIndex.propTypes={
-
-}
-//props的默认值
-ListIndex.defaultProps={
-
-}
- const mapStateToProps=state=>{
-   return {
-    ...state.questions,
-    ...state.exam
-   }
- }
- const mapDispatchToProps=dispatch=>{
-   return {
-    Subject(){
-        dispatch({
-          type:"questions/subject"
-        })
-      },
-    ExamType(){
+const mapDisaptchToProps = dispatch=>{
+    return {
+         //考试类型
+        examType(){
         dispatch({
           type:"questions/examType"
         })
       },
-    ExamList(){
+      //课程类型
+      subject(){
         dispatch({
-            type:"questions/examlist"
+          type:"questions/subject"
         })
       },
-   }
-  
-
+    // examList(payload){
+    //         dispatch({
+    //             type:"exam/examList",
+    //             payload
+    //         })
+    //     }
+    }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(ListIndex);
+export default connect(mapStateToProps, mapDisaptchToProps)(Form.create()(ExamList));
