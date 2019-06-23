@@ -9,7 +9,7 @@ import {Link} from "dva/router";
 const { Option } = Select;
 
 function classmateIndex(props){
-    console.log(props.classRoomList)
+    // console.log(props.classRoomList)
     let pathname=props.location.search.slice(4);
     let {studentDialongList,classRoomList}=props;
     //根据pathname去请求接口
@@ -20,6 +20,37 @@ function classmateIndex(props){
     let handleChangeClassmate=()=>{
 
     };
+    let columns=[
+        {
+            title:'班级',
+            dataIndex:'grade_id',
+        },
+        {
+            title:'姓名',
+            dataIndex:'student_name',
+        },
+        {
+            title:'阅卷状态',
+            dataIndex:'status',
+        },
+        {
+            title:'开始时间',
+            dataIndex:'start_time',
+        },
+        {
+            title:'结束时间',
+            dataIndex:'end_time',
+        },
+        {
+            title:'成材率'
+        },
+        {
+            title:'操作',
+            render:text=>(
+                <Link to={{pathname:`/paper/detail?paper_id=${text.grade_id}`}}>批卷</Link>
+            )
+        }
+    ]
     useEffect(()=>{
         props.studentDialong();
         props.classRoom();
@@ -57,11 +88,9 @@ function classmateIndex(props){
                </div>
             </div>
             <div className={styles.list}>
-                
+              <Table columns={columns} dataSource={studentDialongList&&studentDialongList} className={styles.opt}/>   
             </div>
-            {/* {studentDialongList&&studentDialongList.map((item,index)=>{
-
-            })} */}
+            
         </div>
 
   )

@@ -62,7 +62,6 @@ function LoginPage(props){
                 忘记密码
             </a>
             <Button type="primary" htmlType="submit" className={styles.login_form_button}>
-                {/* <Link to="/main">登陆</Link> */}
                 登陆
             </Button>
         </Form.Item>
