@@ -130,7 +130,7 @@ function UserShow(props){
                 <Select onChange={handleChange}  style={{ width: 130,margin:15,height:35 }}>
                   {
                     examTypeList&&examTypeList.map((item,index)=>{
-                      return <Option key={index}  value={item.exam_id}>{item.exam_name}</Option>
+                      return <Option key={item.exam_id}  value={item.exam_id}>{item.exam_name}</Option>
                     })
                   }
                 </Select>
@@ -140,7 +140,7 @@ function UserShow(props){
                 <Select className={styles.select}  onChange={handleChangeId} style={{ width: 130,margin:15,height:35 }}>
                   {
                     TypeList&&TypeList.map((item,index)=>{
-                      return <Option key={index} value={item.questions_type_id}>{item.questions_type_text}</Option>
+                      return <Option  key={item.questions_type_id}  value={item.questions_type_id}>{item.questions_type_text}</Option>
                     })
                   }                
                 </Select>
@@ -150,7 +150,7 @@ function UserShow(props){
           <div className={styles.center}>
                   {
                     ViewList&&ViewList.map((item,index)=>{
-                      return <div key={index} className={styles.center_Item}>
+                      return <div key={item.questions_id} className={styles.center_Item}>
                                 <div className={styles.left} onClick={()=>handleClick(item)}>
                                     <div className={styles.Title}>{item.title}</div>
                                       <div className={styles.Item_Box}>
@@ -247,7 +247,7 @@ UserShow.defaultProps={
     })
   },
   //添加
-  AddItem(payload){   // 删除
+  AddItem(payload){  
     dispatch({
       type:"exam/AddItem",
       payload

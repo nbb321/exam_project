@@ -21,7 +21,6 @@ import styles from  './index.scss';
 
     //改变课程类型
     let handleClickLi=(id)=>{
-      console.log(id);
       upSubject(subject_id=id)
     }
     //改变考试类型

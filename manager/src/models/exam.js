@@ -60,12 +60,13 @@ export default {
         },
 
        Remove_id(state,{payload}){
-        return {...state,establishList:[...state.establishList,state.establishList.splice(payload,1)]};
+
+        return {...state,establishList:state.establishList.filter((item,index)=>index!==payload)};
        },
        //点击添加每一项
        AddItem(state,{payload}){
-        console.log(state.establishList)
-        return {...state,establishList:[...state.establishList,state.establishList.push(payload)]}
+        console.log(payload)
+        return {...state,establishList:[...state.establishList,payload]}
        }
     },
   

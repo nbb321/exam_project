@@ -41,16 +41,6 @@ function UserIndex(props){
             start_time:startVal,
             end_time:endVal
         }))
-        // props.EstablishExam({
-        //     subject_id:values.subject_id,
-        //     exam_id:values.exam_id,
-        //     title:values.title,
-        //     number:values.number,
-        //     start_time:startVal,
-        //     end_time:endVal
-        // })
-        // localStorage.setItem("list",JSON.stringify(values))
-        // localStorage.setItem("establish",JSON.stringify(props.establishList))
         props.history.push('/exam/edit');
         
       })
