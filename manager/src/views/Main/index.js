@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from 'react';
-import { Layout,Spin,Select,Dropdown,Menu,Icon} from 'antd';
+import React from 'react';
+import { Layout,Spin,Dropdown,Menu,Icon} from 'antd';
 import {Route, Switch,Redirect} from 'dva/router';
 import Menus from "@/components/Menu.js"
 import styles from "./index.scss"
@@ -45,7 +45,7 @@ function IndexPage(props){
   }
   return <Layout className={styles.container}>
     <Header className={styles.header}>
-    <div>
+    <div> 
       <img  className={styles.img} src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1551624718911&amp;di=4a7004f8d71bd8da84d4eadf1b59e689&amp;imgtype=0&amp;src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg" alt="" />
       <Dropdown overlay={
           <Menu>
@@ -57,7 +57,7 @@ function IndexPage(props){
           </Menu.Item>
         </Menu>
         }>
-          <a className="ant-dropdown-link" href="#">
+          <a className="ant-dropdown-link">
             国际化 <Icon type="down" />
           </a>
       </Dropdown>
@@ -67,7 +67,6 @@ function IndexPage(props){
         <span>chenmanjie</span>
       </div>
     </Header>
-
     <Layout>
       <Sider>
         <Menus />

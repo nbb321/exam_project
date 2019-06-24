@@ -10,22 +10,26 @@ function listManage(props){
         props.Subject();
      },[])
      const { paperlistArr,examTypeList,subjectList}=props;
-     console.log(paperlistArr)
      const [defInd,changeInd]=useState(0)
      const listArr=['全部','进行中','已结束'];
-     const [defData]= useState([])
-     paperlistArr && paperlistArr.map((item,i)=>{
-         item.key=item.exam_exam_id;
-        defData.push({
-            key:new Date().getTime(),
-            title:[item.title,item.start_time,item.number,item.end_time],
-            room:item.grade_name,
-            founder:item.user_name,
-            start:item.start_time,
-            end:item.end_time,
-            operation:['详情',item.exam_exam_id]
-        })
-     })
+     const [defData,changeData]= useState([]);
+    useEffect(()=>{
+         if(!paperlistArr){
+            return;
+         }
+         changeData(paperlistArr.map(item=>{
+            return {
+                    key:item.exam_exam_id,
+                    title:[item.title,item.start_time,item.number,item.end_time],
+                    room:item.grade_name,
+                    founder:item.user_name,
+                    start:item.start_time,
+                    end:item.end_time,
+                    operation:['详情',item.exam_exam_id]
+                }
+            })
+        )
+     },[paperlistArr])
     const columns = [
         {
           title: '试卷信息',

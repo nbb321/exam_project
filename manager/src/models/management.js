@@ -23,6 +23,7 @@ export default {
     effects: {
         *edit({ payload }, { call, put }) {  // eslint-disable-line
             let data = yield call(Edit,payload);
+            console.log(data)
         },
         *identityid({ payload }, { call, put }) {  // eslint-disable-line
             let data = yield call(Identityid,payload);

@@ -99,6 +99,7 @@ export default {
     },
     updateViewAuthority(state, {payload}){
       // 筛选出我所有的前端路由权限
+      console.log(payload)
       let myView = allView.routes,
           forbiddenView = [];
       myView.forEach(item=>{

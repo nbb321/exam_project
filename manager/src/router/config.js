@@ -58,6 +58,7 @@ export default {
   //试题管理
   routes: [{
     name: 'router.questions',
+    id:"router.questions",
     children: [{
       name: 'router.questions.add',
       id: 'main-addQuestions',
@@ -74,16 +75,19 @@ export default {
       path: '/questions/type',
       component: SortQuestions
     },{
-    id: "main-editQuestions",
-    path: "/questions/editQuestions",
-    component: EditQuestions
+      name:"",
+      id: "main-editQuestions",
+      path: "/questions/editQuestions",
+      component: EditQuestions
     },{
+        name:"",
         id: "main-questionsDetail",
         path: '/questions/default',
         component: Default
         }]
   },{ //用户管理
     name: 'router.user',
+    id:"router.user",
     children: [{
       name: 'router.user.add',
       id: "main-addUser",
@@ -97,6 +101,7 @@ export default {
     }]
   },{//考试管理
     name: 'router.exam',
+    id:"router.exam",
     children: [{
       name: 'router.exam.add',
       id: "main-addExam",
@@ -108,26 +113,29 @@ export default {
       path: '/exam/list',
       component: ExamShow
     },{
+        name:"",
         id:"main-examEdit",
         path: '/exam/edit',
         component: Edit
       },{
+        name:"",
         id:"main-examDetail",
         path: '/exam/ExamDetail',
         component: ExamDetail
       }]
   },{//班级管理
     name: 'router.class',
+    id:"router.class",
     children: [{
       name: 'router.class.grade',
       id: "main-grade",
       path: '/class/grade ',
       component: Grade
     },{
-    name: 'router.class.classroom',
-    id: "main-room",
-    path: "/class/classroom",
-    component: Classroom
+      name: 'router.class.classroom',
+      id: "main-room",
+      path: "/class/classroom",
+      component: Classroom
   },{
         name: 'router.class.student',
         id:"main-student",
@@ -136,6 +144,7 @@ export default {
       }]
   },{//批卷管理
     name: 'router.marking',
+    id:"router.marking",
     children: [{
       name: 'router.marking.approved',
       id: "main-examPaperClassList",

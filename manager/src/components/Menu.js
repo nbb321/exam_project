@@ -15,19 +15,21 @@ function MenuComp(props){
   defaultOpenKeys={['router.questions']}
   style={{ height: '100%', borderRight: 0 }}
 >
-  {props.myView.map((item, index)=>{
-    return <SubMenu key={item.name} title={
+  
+  {props.myView.map((item,index)=>{
+  
+    return <SubMenu key={index} title={
       <span>
          <Icon type="user" />
-          {props.intl.formatMessage({id: item.name?item.name:null})}
+          {props.intl.formatMessage({id:item.name})}
       </span>
     }>{
-      item.children.map((value, key)=>{
+      item.children.map((value)=>{
         return value.name?<Menu.Item key={value.id}>
           <Link to={value.path}>
             {props.intl.formatMessage({id: value.name})}
           </Link>
-        </Menu.Item>:<Link to={value.path} />
+        </Menu.Item>:null
       })
     }
     </SubMenu>

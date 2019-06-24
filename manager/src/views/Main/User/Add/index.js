@@ -50,7 +50,6 @@ function UserPages(props){
                 user_pwd:values.pwd,
                 identity_id
              })
-            
         });
     }
 
