@@ -11,19 +11,19 @@ function UserShow(props){
       props.Subject();
       props.ExamType();
       props.Type();
+      props.EstablishExam(JSON.parse(localStorage.getItem('EstablishExams')))
     },[]);
     //侧边栏的默认值
     let [visibles,upvisible]=useState(false)
     //控制添加弹出框
     let [showLoading,upLoading]=useState(false);
     let [obj,upObj]=useState({});
-    let {establishList}=props;
 
     // localStorage.setItem("establish",JSON.stringify(establishList.questions))
     // let listArr=JSON.parse(localStorage.getItem("establish"))
     
     //侧边栏
-    let {subjectList,examTypeList,TypeList,ViewList}=props;
+    let {subjectList,examTypeList,TypeList,ViewList,establishList}=props;
     let [subject_id,upSubject] = useState('');
     let [exam_id,upExam_id] = useState('');
     let [questions_type_id,upQuestion] = useState('');
@@ -92,8 +92,9 @@ function UserShow(props){
     }
     //删除试卷
     let removeItem=index=>{
-      props.Remove_id(
-        index
+      console.log(index)
+        props.Remove_id(
+           index
       )
     }
   return (
@@ -117,8 +118,8 @@ function UserShow(props){
             <div className={styles.active}>
               <span className={styles.top_Span}>Corers:</span>
                 {
-                  subjectList&&subjectList.map((item)=>{
-                    return <li onClick={()=>handleClickLi(item.subject_id)} className={styles.li} key={item.subject_id}>{item.subject_text}</li>
+                  subjectList&&subjectList.map((item,index)=>{
+                    return <li onClick={()=>handleClickLi(item.subject_id)} className={styles.li} key={index}>{item.subject_text}</li>
                   })
                 }
             </div>
@@ -128,8 +129,8 @@ function UserShow(props){
                 <p>考试类型</p>
                 <Select onChange={handleChange}  style={{ width: 130,margin:15,height:35 }}>
                   {
-                    examTypeList&&examTypeList.map((item)=>{
-                      return <Option key={item.exam_id}  value={item.exam_id}>{item.exam_name}</Option>
+                    examTypeList&&examTypeList.map((item,index)=>{
+                      return <Option key={index}  value={item.exam_id}>{item.exam_name}</Option>
                     })
                   }
                 </Select>
@@ -138,8 +139,8 @@ function UserShow(props){
                 <p>题目类型</p>
                 <Select className={styles.select}  onChange={handleChangeId} style={{ width: 130,margin:15,height:35 }}>
                   {
-                    TypeList&&TypeList.map((item)=>{
-                      return <Option key={item.questions_type_id} value={item.questions_type_id}>{item.questions_type_text}</Option>
+                    TypeList&&TypeList.map((item,index)=>{
+                      return <Option key={index} value={item.questions_type_id}>{item.questions_type_text}</Option>
                     })
                   }                
                 </Select>
@@ -148,8 +149,8 @@ function UserShow(props){
             </div>
           <div className={styles.center}>
                   {
-                    ViewList&&ViewList.map((item)=>{
-                      return <div key={item.questions_id} className={styles.center_Item}>
+                    ViewList&&ViewList.map((item,index)=>{
+                      return <div key={index} className={styles.center_Item}>
                                 <div className={styles.left} onClick={()=>handleClick(item)}>
                                     <div className={styles.Title}>{item.title}</div>
                                       <div className={styles.Item_Box}>
@@ -183,11 +184,11 @@ function UserShow(props){
        </div> 
     </Drawer>
           <div className={styles.cont_Item}>
-            <h3>{establishList.titleSlid}</h3>
+            <h3>{establishList&&establishList.titleSlid}</h3>
               <div className={styles.examTime}>
                 <span>考试时间:1个半小时</span>
                 <span>监考人：刘于</span>
-                <span>开始考试时间：{new Date(Number(establishList.start_time)).toLocaleString()} </span>
+                <span>开始考试时间：{establishList&&new Date(Number(establishList.start_time)).toLocaleString()} </span>
                 <span>阅卷人：刘于</span>
               </div>          
           </div>

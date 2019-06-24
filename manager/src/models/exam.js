@@ -1,4 +1,4 @@
-import {establishExam,examList} from "@/services"
+import {establishExam,examList,upPaper} from "@/services"
 export default {
     // 命名空间
     namespace: 'exam',
@@ -35,6 +35,15 @@ export default {
                 type:"getexamList",
                 payload:data.exam
             })
+        },
+        //更新试卷
+        *upPaper({ payload }, { call, put }){
+            let data = yield call(upPaper,payload);
+            console.log(data);
+            // yield put({
+            //     type:"getexamList",
+            //     payload:data.exam
+            // })
         }
     },
   
@@ -42,25 +51,21 @@ export default {
     reducers: {
         //创建考试
         establishUpdata(state, {payload}) {
-            return { ...state, establishList:payload 
-
-            };
+            return { ...state, establishList:payload};
         },
         //列表展示
         getexamList(state,{ payload }){
             // state.datas = 
             return { ...state, examArr:payload,datas:[] }
         },
-       // id 删除
+
        Remove_id(state,{payload}){
-        state.establishList.splice(payload,1);
-        return {...state,establishList:state.establishList}
+        return {...state,establishList:[...state.establishList,state.establishList.splice(payload,1)]};
        },
        //点击添加每一项
        AddItem(state,{payload}){
-        state.establishList.push(payload);
         console.log(state.establishList)
-        return {...state,establishList:state.establishList}
+        return {...state,establishList:[...state.establishList,state.establishList.push(payload)]}
        }
     },
   

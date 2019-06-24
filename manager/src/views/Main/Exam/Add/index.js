@@ -33,17 +33,26 @@ function UserIndex(props){
   //btn的点击事件
   let handleClick=e=>{
     props.form.validateFields((err, values) => {
-        props.EstablishExam({
+        localStorage.setItem('EstablishExams',JSON.stringify({
             subject_id:values.subject_id,
             exam_id:values.exam_id,
             title:values.title,
             number:values.number,
             start_time:startVal,
             end_time:endVal
-        })
+        }))
+        // props.EstablishExam({
+        //     subject_id:values.subject_id,
+        //     exam_id:values.exam_id,
+        //     title:values.title,
+        //     number:values.number,
+        //     start_time:startVal,
+        //     end_time:endVal
+        // })
+        // localStorage.setItem("list",JSON.stringify(values))
+        // localStorage.setItem("establish",JSON.stringify(props.establishList))
         props.history.push('/exam/edit');
-        localStorage.setItem("list",JSON.stringify(values))
-        localStorage.setItem("establish",JSON.stringify(props.establishList))
+        
       })
   }
   return (
@@ -177,12 +186,12 @@ UserIndex.defaultProps={
       })
     },
     //创建考试
-    EstablishExam(payload){
-      dispatch({
-        type:"exam/establishExam",
-        payload
-      })
-    }
+    // EstablishExam(payload){
+    //   dispatch({
+    //     type:"exam/establishExam",
+    //     payload
+    //   })
+    // }
  }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Form.create()(UserIndex));

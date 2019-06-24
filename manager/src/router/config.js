@@ -39,7 +39,7 @@ const Grade =  dynamic({
     component: () => import('@/views/Main/Class/Class'),
   });
 const Classroom =  dynamic({
-    Student: () => import('@/views/Main/Class/Classroom'),
+    component: () => import('@/views/Main/Class/Classroom'),
   });
 const Student =  dynamic({
 component: () => import('@/views/Main/Class/Student'),

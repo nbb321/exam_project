@@ -229,14 +229,21 @@ export function establishExam(params){
 }
 //删除试卷
 export function RemoveExam(params){
-    console.log(params)
     return request({
             url:"/exam/exam",
             method:"DELETE",
             data:params
     })
+} 
+//更新试卷
+export function upPaper(params){
+    console.log(params)
+    return request({
+            url:"/exam/exam/w5tcy-g2dts",
+            method:"PUT",
+            data:params
+    })
 }
-
 //····················获取试卷列表
 export function examList(parmas){
     if(parmas){

@@ -61,7 +61,7 @@ function ExamList(props) {
     // let [ datas ]=useState([]);
 
     // let { subject, examType, examList } = props;
-    // let { examArr, datas } = props.exam;
+    // let { examArr,datas } = props.exam;
     // let { data, questionArr } = props.view;
 
     // useEffect(()=>{
@@ -105,52 +105,51 @@ function ExamList(props) {
     // }
 
     // let { getFieldDecorator } = props.form;
-    return <div className={styles.wrapper}>
-    sss
-        {/* <p className={styles.title}>试卷列表</p>
-        <Form className={styles.wrap}>
-            <Form-Item class={styles.wrap_item}>
-                考试类型：{
-                    getFieldDecorator('questionsTypeId', {
-                        rules: [{ required: true, message: '考试类型' }],
-                    })(
-                    <Select className={styles.select} placeholder="考试类型">
-                        {
-                            questionArr && questionArr.map(item=>{
-                                return <Option key={ item.questions_type_id } value={ item.questions_type_id }>{ item.questions_type_text }</Option>
-                            })
-                        }
-                    </Select>,
-                    )
-                }
-                课程：{
-                    getFieldDecorator('subjectId', {
-                        rules: [{ required: true, message: '请选择身份id' }],
-                    })(
-                    <Select className={styles.select} placeholder="请选择身份id">
-                        {
-                            data && data.map(item=>{
-                                return <Option key={ item.subject_id } value={ item.subject_id }>{ item.subject_text }</Option>
-                            })
-                        }
-                    </Select>,
-                    )
-                }
-                <Button className={styles.btn} onClick={search} icon="search">查询</Button>
-            </Form-Item>
-        </Form>
-        <div className={styles.main}>
-            <div className={styles.main_top}>
-                <h4>试卷列表</h4>
-                <div className={styles.top_right} onClick={tabs}> 
-                    <p className={styles.active}>全部</p>
-                    <p>进行中</p>
-                    <p>已结束</p>
-                </div>
-            </div>
-            <Table columns={columns} dataSource={datas} />
-        </div> */}
-    </div>
+    // return <div className={styles.wrapper}>
+    //     <p className={styles.title}>试卷列表</p>
+    //     <Form className={styles.wrap}>
+    //         <Form-Item class={styles.wrap_item}>
+    //             考试类型：{
+    //                 getFieldDecorator('questionsTypeId', {
+    //                     rules: [{ required: true, message: '考试类型' }],
+    //                 })(
+    //                 <Select className={styles.select} placeholder="考试类型">
+    //                     {
+    //                         questionArr && questionArr.map(item=>{
+    //                             return <Option key={ item.questions_type_id } value={ item.questions_type_id }>{ item.questions_type_text }</Option>
+    //                         })
+    //                     }
+    //                 </Select>,
+    //                 )
+    //             }
+    //             课程：{
+    //                 getFieldDecorator('subjectId', {
+    //                     rules: [{ required: true, message: '请选择身份id' }],
+    //                 })(
+    //                 <Select className={styles.select} placeholder="请选择身份id">
+    //                     {
+    //                         data && data.map(item=>{
+    //                             return <Option key={ item.subject_id } value={ item.subject_id }>{ item.subject_text }</Option>
+    //                         })
+    //                     }
+    //                 </Select>,
+    //                 )
+    //             }
+    //             <Button className={styles.btn} onClick={search} icon="search">查询</Button>
+    //         </Form-Item>
+    //     </Form>
+    //     <div className={styles.main}>
+    //         <div className={styles.main_top}>
+    //             <h4>试卷列表</h4>
+    //             <div className={styles.top_right} onClick={tabs}> 
+    //                 <p className={styles.active}>全部</p>
+    //                 <p>进行中</p>
+    //                 <p>已结束</p>
+    //             </div>
+    //         </div>
+    //         <Table columns={columns} dataSource={datas} />
+    //     </div>
+    // </div>
 }
 
 const mapStateToProps = state=>{
@@ -174,12 +173,12 @@ const mapDisaptchToProps = dispatch=>{
           type:"questions/subject"
         })
       },
-    // examList(payload){
-    //         dispatch({
-    //             type:"exam/examList",
-    //             payload
-    //         })
-    //     }
+    examList(payload){
+            dispatch({
+                type:"exam/examList",
+                payload
+            })
+        }
     }
 }
 export default connect(mapStateToProps, mapDisaptchToProps)(Form.create()(ExamList));
