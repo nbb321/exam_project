@@ -1,5 +1,5 @@
 import {login,getUserInfo,userNew} from '@/services'
-import {setToken, getToken} from '@/utils/user'
+import {setToken, getToken,removeToken} from '@/utils/user'
 import { routerRedux } from 'dva/router';
 
 // 引入路由表
@@ -13,8 +13,9 @@ export default {
   state: {
     isLogin: 0,
     userInfo:{},
-    viewAuthority:[], //用户所用哟的视图权限
-    myView:[] //对应的前端路由
+    viewAuthority:[], //用户所拥有的视图权限
+    myView:[], //拥有权限的前端路由
+    forbiddenView: [] //没有权限访问的路由
   },
 
   // 订阅路由跳转
@@ -113,6 +114,13 @@ export default {
       console.log('myView...', myView);
       console.log('forbiddenView...', forbiddenView);
       return {...state, viewAuthority: payload, myView, forbiddenView}
+    },
+    //1.退出登录
+    logout(state){
+      //1清除登录态
+      removeToken();
+      //2.清除权限
+      return {...state,userInfo:{},myView:[],forbiddenView:[],viewAuthority:[]}
     }
   }
 };

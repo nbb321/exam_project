@@ -244,20 +244,34 @@ export function upPaper(params){
             data:params
     })
 }
+//试题详情
+export function examDetail(params){
+    return request({
+      url:'/exam/exam/'+params.exam_exam_id,
+      method:"GET"
+    })
+  }
 //····················获取试卷列表
-export function examList(parmas){
-    if(parmas){
-        return request({
-            url:"/exam/exam?subject_id="+parmas.subject_id,
-            method:"GET"
-        })    
-    }else{
-        return request({
-            url:"/exam/exam",
-            method:"GET"
-        })
-    }
+//试卷列表接口
+export function PaperList(){
+  return request({
+    url:'/exam/exam',
+    method:"GET"
+  })
 }
+// export function examList(parmas){
+//     if(parmas){
+//         return request({
+//             url:"/exam/exam?subject_id="+parmas.subject_id,
+//             method:"GET"
+//         })    
+//     }else{
+//         return request({
+//             url:"/exam/exam",
+//             method:"GET"
+//         })
+//     }
+// }
 
 //4.教室管理
 //获取全部教室

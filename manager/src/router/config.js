@@ -31,9 +31,14 @@ const ExamAdd =  dynamic({
 const ExamShow =  dynamic({
     component: () => import('@/views/Main/Exam/List'),
   });
+  //添加考试的详情
 const Edit =  dynamic({
 component: () => import('@/views/Main/Exam/Edit'),
 });
+//试卷列表的详情
+const ExamDetail =  dynamic({
+  component: () => import('@/views/Main/Exam/ExamDetail'),
+  });
 //班级管理
 const Grade =  dynamic({
     component: () => import('@/views/Main/Class/Class'),
@@ -50,6 +55,7 @@ const Approved =  dynamic({
     component: () => import('@/views/Main/Marking/Approved'),
 });
 export default { 
+  //试题管理
   routes: [{
     name: 'router.questions',
     children: [{
@@ -68,17 +74,15 @@ export default {
       path: '/questions/type',
       component: SortQuestions
     },{
-    // name: 'router.questions.type',
     id: "main-editQuestions",
     path: "/questions/editQuestions",
     component: EditQuestions
     },{
-        // name: 'router.questions.type',
         id: "main-questionsDetail",
         path: '/questions/default',
         component: Default
         }]
-  },{
+  },{ //用户管理
     name: 'router.user',
     children: [{
       name: 'router.user.add',
@@ -91,7 +95,7 @@ export default {
       path: '/user/show',
       component: userShow
     }]
-  },{
+  },{//考试管理
     name: 'router.exam',
     children: [{
       name: 'router.exam.add',
@@ -104,12 +108,15 @@ export default {
       path: '/exam/list',
       component: ExamShow
     },{
-        // name: 'router.exam.add',
         id:"main-examEdit",
         path: '/exam/edit',
         component: Edit
+      },{
+        id:"main-examDetail",
+        path: '/exam/ExamDetail',
+        component: ExamDetail
       }]
-  },{
+  },{//班级管理
     name: 'router.class',
     children: [{
       name: 'router.class.grade',
@@ -127,7 +134,7 @@ export default {
         path: '/class/student',
         component: Student
       }]
-  },{
+  },{//批卷管理
     name: 'router.marking',
     children: [{
       name: 'router.marking.approved',

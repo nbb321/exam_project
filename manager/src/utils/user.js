@@ -10,3 +10,7 @@ export function getToken(){
 export function setToken(value){
   Cookie.set(key, value, {expires: 7})
 }
+// 删除token
+export function removeToken(){
+  Cookie.remove(key)
+}
