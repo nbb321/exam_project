@@ -65,15 +65,15 @@ function UserShow(props){
     }
     //点击提交按钮
     let handClickBtn=e=>{
-     let items=JSON.parse(localStorage.getItem("list"));
-      props.EstablishExam({
-        subject_id:items.subject_id,
-        exam_id:items.exam_id,
-        title:items.title,
-        number:items.number,
-        start_time:items.startTime,
-        end_time:items.endTime,
-      })
+    //  let items=JSON.parse(localStorage.getItem("list"));
+    //   props.EstablishExam({
+    //     subject_id:items.subject_id,
+    //     exam_id:items.exam_id,
+    //     title:items.title,
+    //     number:items.number,
+    //     start_time:items.startTime,
+    //     end_time:items.endTime,
+    //   })
       props.history.push('/exam/list') 
     }
     //点击添加按钮
@@ -176,7 +176,7 @@ function UserShow(props){
                 upLoading(false);
             }}
             >
-            <div>
+            <div> 
                 <div>{obj.title}</div>
                 <div>{obj.questions_stem}</div>
             </div>

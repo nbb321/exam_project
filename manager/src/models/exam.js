@@ -7,7 +7,6 @@ export default {
     state: {
         establishList:[],
         list:"",
-        // examArr:[],
         paperlistArr:[],//试题列表
         examDelArr:[]//试卷详情
 
