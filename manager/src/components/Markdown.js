@@ -9,8 +9,7 @@ class Markdown extends Component {
         this.setState({ value })
     }
     render() {
-        const { value } = this.state
-        // console.log(this.props.fn)
+        const { value } = this.state;
         return (<Editor height="auto" value={value} onChange={this.handleChange.bind(this)} />)
     }
 }
