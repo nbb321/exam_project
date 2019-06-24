@@ -250,7 +250,15 @@ export function examDetail(params){
       url:'/exam/exam/'+params.exam_exam_id,
       method:"GET"
     })
-  }
+}
+//试题列表查询
+export function examinquire(params){
+    console.log(params)
+    return request({
+      url:'/exam/exam?subject_id='+params.subject_id,
+      method:"GET"
+    })
+}
 //····················获取试卷列表
 //试卷列表接口
 export function PaperList(){

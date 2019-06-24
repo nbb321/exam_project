@@ -86,7 +86,7 @@ function UserIndex(props){
                       <Select style={{ width: 140,height:30 }}>
                           {
                               subjectList&&subjectList.map((item,index)=>{
-                                  return <Option className={styles.li}  key={index} value={item.subject_id}>{item.subject_text}</Option>
+                                  return <Option className={styles.li}  key={item.subject_id} value={item.subject_id}>{item.subject_text}</Option>
                               })
                           }
                     </Select>

@@ -30,6 +30,17 @@ function listManage(props){
             })
         )
      },[paperlistArr])
+    const { getFieldDecorator } = props.form;
+     //点击查询
+     let handClick=e=>{
+        e.preventDefault();
+        props.form.validateFields((err, values) => {
+          console.log(values);
+          props.examinquire({
+            subject_id:values.subject_id
+          })
+        })
+     }
     const columns = [
         {
           title: '试卷信息',
@@ -101,33 +112,45 @@ function listManage(props){
             )
         }
     ]
-    return <div className={styles.paperMain}>
+    return <Form className={styles.paperMain}>
         <h2>试卷列表</h2>
         <div className={styles.paperCont}>
             <div className={styles.paperTop}>
                 <div className={styles.paperTypes}>
-                    <div>
+                    <div className={styles.inline}>
                         <span>考试类型:</span>
-                        <Select style={{ width: 120 }} >
-                            {
-                                examTypeList&&examTypeList.map((item,index)=>{
-                                    return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
-                                })
-                            }
-                        </Select>
+                        <Form.Item className={styles.formThing}>
+                            {getFieldDecorator('exam_id', {
+                                rules: [{ required: true, message: "考试类型不能为空" }]
+                            })(
+                            <Select style={{ width: 120 }} >
+                                {
+                                    examTypeList&&examTypeList.map((item,index)=>{
+                                        return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
+                                    })
+                                }
+                            </Select>
+                            )}
+                        </Form.Item>
+                    </div>
+                    <div className={styles.inline}>
+                        <span>类型:</span>
+                        <Form.Item className={styles.formThing}>
+                            {getFieldDecorator('subject_id', {
+                                rules: [{ required: true, message: "课程不能为空" }]
+                            })(
+                            <Select  style={{ width: 120 }} >
+                                {
+                                    subjectList&&subjectList.map((item,index)=>{
+                                        return <Option className={styles.li}  key={item.subject_id} value={item.subject_id}>{item.subject_text}</Option>
+                                    })
+                                }
+                            </Select>
+                            )}
+                        </Form.Item>
                     </div>
                     <div>
-                        <span>题目类型:</span>
-                        <Select defaultValue="" style={{ width: 120 }} >
-                            {
-                                subjectList&&subjectList.map((item,index)=>{
-                                    return <Option className={styles.li}  key={index} value={item.subject_id}>{item.subject_text}</Option>
-                                })
-                            }
-                        </Select>
-                    </div>
-                    <div>
-                        <Button type="primary" icon="search" className={styles.searchBtn}>查询</Button> 
+                        <Button type="primary" icon="search" className={styles.searchBtn} onClick={handClick}>查询</Button> 
                     </div>                  
                 </div>
             </div>
@@ -149,7 +172,7 @@ function listManage(props){
                 </div>
             </div>
         </div>
-    </div>
+    </Form>
 }
 const mapStateToProps=state=>{
     return {
@@ -174,12 +197,18 @@ const mapStateToProps=state=>{
               type:"questions/examType"
             })
           },
-        getDelList(payload){
+        getDelList(payload){//详情
             dispatch({
               type:'exam/examDePaper',
               payload
             })
-        }
+        },
+        examinquire(payload){//查询
+            dispatch({
+              type:'exam/examinquire',
+              payload
+            })
+        },
     }
  }
 export default connect(mapStateToProps,mapDispatchToProps)(Form.create()(listManage));

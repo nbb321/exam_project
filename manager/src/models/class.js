@@ -86,7 +86,6 @@ export default {
        //渲染列表
     *classManagement({payload},{call,put}){
       let data = yield call(ClassManagement);
-      console.log('获取班级',data)
       yield put({
           type:"classManagementUpdata",
           payload:data.data

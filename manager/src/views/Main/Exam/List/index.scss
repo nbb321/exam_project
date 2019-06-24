@@ -9,6 +9,12 @@
         font-size: 16px;
         // margin-top: 10px;
     }
+   .inline{
+       display: flex;
+       span{
+           line-height: 40px;
+       }
+   }
     .paperCont{
         width: 100%;
         height: 100%;

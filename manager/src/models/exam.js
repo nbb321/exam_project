@@ -1,4 +1,4 @@
-import {establishExam,PaperList,upPaper,examDetail} from "@/services"
+import {establishExam,PaperList,upPaper,examDetail,examinquire} from "@/services"
 export default {
     // 命名空间
     namespace: 'exam',
@@ -8,7 +8,8 @@ export default {
         establishList:[],
         list:"",
         paperlistArr:[],//试题列表
-        examDelArr:[]//试卷详情
+        examDelArr:[],//试卷详情
+        inquireArr:[],//试题查询
 
     },
   
@@ -48,7 +49,14 @@ export default {
               payload:data.data.questions
             })
           },
-
+          //试卷的查询
+          *examinquire({payload},{call,put}){ 
+            let data= yield call(examinquire,payload);
+            yield put({
+              type:'inquireUpdata',
+              payload:data.exam
+            })
+          }
     },
   
     // 同步操作
@@ -65,12 +73,16 @@ export default {
         examDel(state,{payload}){
             return {...state, examDelArr:payload}
           },
+        //试卷查询
+        inquireUpdata(state,{payload}){
+            console.log(payload)
+            return {...state, paperlistArr:payload}
+          },
        Remove_id(state,{payload}){
         return {...state,establishList:state.establishList.filter((item,index)=>index!==payload)};
        },
        //点击添加每一项
        AddItem(state,{payload}){
-        console.log(payload)
         return {...state,establishList:[...state.establishList,payload]}
        }
     },
