@@ -10,7 +10,6 @@ import Dialog from "./Questions/dialog/dialog";
 import Edit from "./Questions/edit/edit";
 import Exhibition from "./User/exhibition/exhibition";
 import AddExam from "./Exam/addExam/addExam";
-import AddMark from "./Exam/addMark/addMark"
 import Adduser from './User/addUser/addUser';
 import ExamList from './Exam/examList/examList';
 import Class from './Class/class/class';
@@ -60,7 +59,6 @@ function MainPage(props) {
                         <Route path="/exam/examList" component={ExamList}></Route>
                         <Route path="/user/show" component={Exhibition}></Route>
                         <Route path="/exam/addExam" component={AddExam}></Route>
-                        <Route path="/exam/addMark" component={AddMark}></Route>
                         <Route path="/class/class" component={Class}></Route>
                         <Route path="/class/student" component={Student}></Route>
                         <Route path="/questions/add" component={Add}></Route>

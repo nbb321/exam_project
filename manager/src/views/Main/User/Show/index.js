@@ -5,7 +5,6 @@ import styles from './index.scss';
 import { Form,Tabs,Table} from 'antd';
 
 function UserIndex(props){
-    // console.log(props.identityviewList)
     let {usershowList,useridentityList,apiAuthorityList,relationList,viewauthorityList,identityviewList}=props;
     usershowList.forEach( item => {
        item.key=item.user_id;
@@ -110,7 +109,7 @@ function UserIndex(props){
         }];
   return (
     <Form onSubmit={handleSubmit} className={styles.main}>
-       <h2 className={styles.title}>用户展示</h2>
+        <h4 style={{fontSize:'14px'}}>用户展示</h4>
         <div className={styles.content}>
         <div className="card-container">
             <Tabs type="card">

@@ -4,25 +4,30 @@
     padding:25px;
     box-sizing: border-box;
     overflow-y: scroll;
+    background:#eee;
     color:#333;
+    .conetnt{
+        padding:20px;
+        background:#eee;
+    }
 }
 .title{
     font-size: 22px;
     line-height: 40px;
 }
 .con{
+    margin-top:20px;
     width:100%;
-    overflow-y: scroll;
-    background:#fff;
     display: flex;
     border-radius:10px;
-    justify-content: space-around;
     .left{
-       flex:4;
-       height:500px;
+       width:70%;
+       background:#fff;
        .listItem{
+           border-bottom:1px solid #ccc;
            .listTitle{
                font-size:14px;
+               margin-top:20px;
                .span{
                width:80px;
                display: inline-block;
@@ -41,12 +46,40 @@
                width:100%;
                padding:15px 0px;
            }
+           .student{
+               width:100%;
+               display: flex;
+               justify-content: space-around;
+               .studentLeft{
+                   >h3{
+                       text-align:center;
+                   }
+                   flex:1;
+               }
+               .studentRight{
+                   flex:1;
+                   >h3{
+                    text-align:center;
+                }
+               }
+           }
         }
     }
     .right{
-        flex:2;
+        width:20%;
         height:300px;
+        background:#fff;
+        position: fixed;
+        top:200px;
+        right:100px;
+        border-radius:10px;
+        .dia{
+            padding:20px;
+        }
     }
+}
+pre{
+    background:#eee;
 }
 
 

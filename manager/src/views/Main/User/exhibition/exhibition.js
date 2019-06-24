@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import { Tabs, Table } from 'antd';
 const { TabPane } = Tabs;
@@ -80,11 +80,11 @@ const viewColumns = [
 ];
 function Exhibition(props) {
     useEffect(() => {
-        props.showtest(),
-        props.showidentity(),
-        props.showapiqx(),
-        props.showrelation(),
-        props.showrelations(),
+        props.showtest()
+        props.showidentity()
+        props.showapiqx()
+        props.showrelation()
+        props.showrelations()
         props.showview()
     }, [])
     console.log(props)

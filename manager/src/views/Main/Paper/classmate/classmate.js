@@ -10,7 +10,7 @@ const { Option } = Select;
 
 function classmateIndex(props){
     // console.log(props.classRoomList)
-    let pathname=props.location.search.slice(4);
+    // let pathname=props.location.search.slice(4);
     let {studentDialongList,classRoomList}=props;
     //根据pathname去请求接口
     

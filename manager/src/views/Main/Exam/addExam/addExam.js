@@ -12,8 +12,8 @@ function AddExam(props) {
     let [getStartTime, setStartTime] = useState("");
     let [getEndTime, setEndTime] = useState("");
     useEffect(() => {
-        props.getallclass(),
-            props.getalltype()
+        props.getallclass()
+        props.getalltype()
     }, [])
     console.log(props)
     console.log(getName, getSelVal1, getSelVal3, getNum, getStartTime, getEndTime)
