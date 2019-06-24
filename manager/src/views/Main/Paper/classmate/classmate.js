@@ -47,7 +47,7 @@ function classmateIndex(props){
         {
             title:'操作',
             render:text=>(
-                <Link to={{pathname:`/paper/detail?paper_id=${text.grade_id}`}}>批卷</Link>
+                <Link to={{pathname:`/paper/detail?paper_id=${text.exam_student_id}`}}>批卷</Link>
             )
         }
     ]

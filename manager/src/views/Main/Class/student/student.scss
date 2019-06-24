@@ -3,6 +3,7 @@
     height: 100%;
     padding:25px;
     box-sizing: border-box;
+    overflow-y: scroll;
 }
 .title{
     font-size: 18px;
@@ -34,7 +35,6 @@
     color:#fff;
     margin-right:10px;
 }
-
 :global(.ant-select-selection--single){
     height:32px;
     width: 180px;

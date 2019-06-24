@@ -17,6 +17,8 @@ import Class from './Class/class/class';
 import Student from './Class/student/student';
 import Paper from './Paper/paper/paper';
 import Classmate from "./Paper/classmate/classmate"
+import ReadPaper from "./Paper/readPaper/readPaper"
+import imgUpload from "./Img/img/img";
 import styles from './MainPage.scss';
 
 const { Header, Content, Sider } = Layout;
@@ -64,6 +66,8 @@ function MainPage(props) {
                         <Route path="/questions/add" component={Add}></Route>
                         <Route path="/marking/approved" component={Paper}></Route>
                         <Route path="/paper/classmate" component={Classmate}></Route>
+                        <Route path="/paper/detail" component={ReadPaper}></Route>
+                        <Route path="/img/img" component={imgUpload}></Route>
                     </Switch>
                 </Content>
             </Layout>

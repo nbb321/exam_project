@@ -137,7 +137,7 @@ function Student(props){
                 }}>重置</Button>
             </Form-Item>
         </Form>
-        <Table columns={columns} dataSource={types} pagination={true} />
+        <Table columns={columns} dataSource={types} pagination={true} class={styles.list}/>
     </div>
 }
 

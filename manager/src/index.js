@@ -20,6 +20,7 @@ app.model(require('./models/global').default);
 app.model(require('./models/class').default);
 app.model(require('./models/paper').default);
 app.model(require('./models/classmate').default);
+app.model(require('./models/readPaper').default);
 
 // 4. Router
 app.router(require('./router').default);
