@@ -3,15 +3,21 @@ import { connect } from 'dva';
 import "antd/dist/antd.css";
 import ReactMarkdown from 'react-markdown';
 import styles from "./readPaper.scss"
-import {Progress} from "antd"
+import {Slider} from "antd"
 
 function readPaperIndex(props){
     let pathname=props.location.search.slice(10);
-    let {readPaperlist}=props;
-    console.log(readPaperlist)
+    let {readPaperlist,chanValue}=props;
+    // console.log(readPaperlist)
     useEffect(()=>{
        props.readPaper(pathname);
-    },[])
+    },[]);
+    let changeValue = e =>{
+        // e就代表的是value值  将e的值传给后台
+        chanValue({
+            e
+        })
+    }
     return (
         <div className={styles.wrapper}>
             <div className={styles.conetnt}>
@@ -46,6 +52,8 @@ function readPaperIndex(props){
                    <div className={styles.dia}>
                      <h3 style={{fontSize:'20px',fontWeight:'bold'}}>{readPaperlist.student_name}</h3>
                      <div className={styles.source}>得分：<span style={{fontSize:'25px',fontWeight:'bold',color:"blue"}}>{readPaperlist.score}</span></div>
+                     <Slider defaultValue={0} disabled={false} onChange={changeValue}/>
+                     <div className={styles.sure}>确定</div>
                    </div>
                 </div>
                 </div>
@@ -75,6 +83,12 @@ readPaperIndex.defaultProps={
             payload:pathname
         })
       },
+      chanValue(payload){
+        dispatch({
+            type:"readPaper/chanValue",
+            payload
+        })
+      }
    }
  }
 export default connect(mapStateToProps,mapDispatchToProps)(readPaperIndex);

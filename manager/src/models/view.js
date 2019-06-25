@@ -23,9 +23,7 @@ export default {
     effects: {
         //获取所有的课程
         *watch({payload},{call, put}){
-            // let login = getToken();
             let data = yield call(watch);
-            console.log('获取所有的课程',data)
             yield put({
                 type:'getLess',
                 payload:data.data
@@ -41,7 +39,6 @@ export default {
         //获取所有的试题类型
         *questionType({payload},{call,put}){
             let data = yield call(questionType);
-            console.log('获取所有的试题类型',data)
             yield put({
                 type:'getquestionType',
                 payload:data.data

@@ -58,18 +58,17 @@ const columns = [
 ]
 
 function ExamList(props) {
-    // let [ datas ]=useState([]);
 
     let { subject, examType, examList } = props;
     let { examArr, datas } = props.exam;
     let { data, questionArr } = props.view;
 
     useEffect(()=>{
-        subject(), 
-        examType(),
+        subject()
+        examType()
         examList() 
     },[])
-    examArr && examArr.map(item=>{
+    examArr && examArr.map((item,index)=>{
         let room = [];
         item.grade_name.map(val=>{
             room.push(val)
@@ -102,6 +101,12 @@ function ExamList(props) {
             item.className = '';
         })
         e.target.className = styles.active;
+        // let newArr=[];
+        // newArr=datas.filter((item,index)=>{
+        //      // end<+new Data()
+        //    return item.end>new Date().getTime();
+        // });
+        // console.log(newArr)
     }
 
     let { getFieldDecorator } = props.form;
