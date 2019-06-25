@@ -3,12 +3,14 @@ import { connect } from 'dva';
 import "antd/dist/antd.css";
 import ReactMarkdown from 'react-markdown';
 import styles from "./readPaper.scss"
-import {Slider} from "antd"
+import {Slider,Modal, Button} from "antd"
 
 function readPaperIndex(props){
     let pathname=props.location.search.slice(10);
     let {readPaperlist,chanValue}=props;
-    // console.log(readPaperlist)
+
+    const { confirm } = Modal;
+
     useEffect(()=>{
        props.readPaper(pathname);
     },[]);
@@ -18,6 +20,22 @@ function readPaperIndex(props){
             e
         })
     }
+    let showConfirm=(score,name)=> {
+        confirm({
+          title: '确定提交阅卷结果?',
+          content: '分数值是'+score,
+          okText:'确定',
+          cancelText:'取消',
+          onOk() {
+           //点击ok的时候改变里面的内容
+            Modal.success({
+                title: '阅卷结果',
+                content: '批改试卷成功 ' + name + '得分' + score,
+                okText:'知道了'
+              });
+          },
+        });
+      }
     return (
         <div className={styles.wrapper}>
             <div className={styles.conetnt}>
@@ -53,7 +71,7 @@ function readPaperIndex(props){
                      <h3 style={{fontSize:'20px',fontWeight:'bold'}}>{readPaperlist.student_name}</h3>
                      <div className={styles.source}>得分：<span style={{fontSize:'25px',fontWeight:'bold',color:"blue"}}>{readPaperlist.score}</span></div>
                      <Slider defaultValue={0} disabled={false} onChange={changeValue}/>
-                     <div className={styles.sure}>确定</div>
+                     <Button onClick={()=>showConfirm(readPaperlist.score,readPaperlist.student_name)} className={styles.sure}>确定</Button>
                    </div>
                 </div>
                 </div>
