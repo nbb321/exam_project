@@ -8,9 +8,9 @@ function Menus(props) {
     return <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={['1']}
+        
         defaultOpenKeys={['questions']}
-        style={{ height: '100%', borderRight: 0 ,position:'fixed',left:0,width:"200px"}}
+        style={{ height: '100%', borderRight: 0 ,position:'fixed',left:0,width:"200px",overflowY:'scroll'}}
     >
         <SubMenu
             key="questions"

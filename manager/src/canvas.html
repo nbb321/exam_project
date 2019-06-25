@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas></canvas>
+    <img id="img" src="" alt="">
+    <script>
+        function drawImg(bgimg, img, txt) {//背景图片，上面图片，文字
+            var canvas = document.createElement("canvas");
+            canvas.width = 300;
+            canvas.height = 300;
+            var context = canvas.getContext("2d");
+
+            context.rect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = "#fff";
+            context.fill();
+
+            var myImage = new Image();
+            myImage.src = bgimg;
+            myImage.crossOrigin = 'Anonymous';
+
+            myImage.onload = function () {
+                context.drawImage(myImage, 0, 0, 300, 300);
+                context.font = "10px Courier New";
+                context.fillText(txt, 150, 150)
+                var myImage2 = new Image();
+                myImage2.src = img;
+                myImage2.crossOrigin = 'Anonymous';
+
+                myImage2.onload = function () {
+                    context.drawImage(myImage2, 110, 60, 80, 80);
+                    var base64 = canvas.toDataURL("image/jpg");
+                    var img = document.getElementById('img');
+                    img.setAttribute('src', base64);
+                }
+            }
+        }
+        drawImg("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3300305952,1328708913&fm=27&gp=0.jpg",'./images/2.jpg',"xia");
+    </script>
+</body>
+
+</html>

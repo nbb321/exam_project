@@ -3,12 +3,16 @@
     background:#eee;
     height: 100%;
     padding: 20px;
+    overflow-y: scroll;
     h1{
-        font-size:40px;
+        font-size:20px;
         height: 100px;
         line-height: 100px;
     }
     .container{
+        width:100%;
+        background:#fff;
+        border-radius:10px;
         .item{
             height:100px;
         }

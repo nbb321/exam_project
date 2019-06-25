@@ -16,8 +16,8 @@ function Class(props){
     let [classId,upClassId] = useState('')
 
     useEffect(()=>{
-        grade(),
-        watch(),
+        grade()
+        watch()
         roomAll()
     },[])
     
@@ -43,8 +43,7 @@ function Class(props){
             key: 'operation',
             render:operation=>(
                 <>
-                    <span value={operation} onClick={change}>修改</span>
-                    
+                    <span value={operation} onClick={change}>修改</span> 
                     <Divider type="vertical" />
                     <span value={operation} onClick={change}>删除</span>
                 </>
@@ -83,7 +82,7 @@ function Class(props){
         grade()
     }
 
-    gradeArr && gradeArr.map(item=>{
+    gradeArr && gradeArr.map( (item,index)=>{
         let flag = datas.some(val => val.class === item.grade_name);
         if(!flag){
             datas.push({

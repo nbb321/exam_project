@@ -65,7 +65,7 @@ function AddExam(props) {
                 <div>
                     <h2>*试卷名称</h2>
                     <div className={styles.item}>
-                        <Input style={{ width: 500, height: 50 }} onChange={iptName} />
+                        <Input style={{ width: 500, height: 40 }} onChange={iptName} />
                     </div>
                     <h2>*选择考试类型</h2>
                     <div className={styles.item}>
