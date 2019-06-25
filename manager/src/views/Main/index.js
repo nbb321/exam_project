@@ -7,21 +7,11 @@ import {connect} from "dva";
 import Canvas from "@/views/Canvas"
 const { Header, Content,Sider} = Layout;
 
-const menu = (
-  <Menu>
-    <Menu.Item key="0">
-      <a href="http://www.alipay.com/">1st menu item</a>
-    </Menu.Item>
-    <Menu.Item key="1">
-      <Link to='/canvas'>个人中心</Link>
-    </Menu.Item>
-    <Menu.Divider />
-    <Menu.Item key="3">3rd menu item</Menu.Item>
-  </Menu>
-);
+// const menu = (
+
+// );
 
 function IndexPage(props){
-
   if (!props.myView.length){
     return null;
   } 
@@ -56,7 +46,20 @@ function IndexPage(props){
       </Dropdown>
     </div>
     <div  className={styles.usename}>
-      <Dropdown overlay={menu} trigger={['click']}>
+      <Dropdown overlay={
+          <Menu>
+          <Menu.Item key="0">
+            <a href="http://www.alipay.com/">1st menu item</a>
+          </Menu.Item>
+          <Menu.Item key="1">
+            <Link to='/canvas'>个人中心</Link>
+          </Menu.Item>
+          <Menu.Divider />
+          <Menu.Item key="3" onClick={()=>{
+            props.loginOuts()
+          }}>退出登录</Menu.Item>
+        </Menu>
+      } trigger={['click']}>
         <a className="ant-dropdown-link" href="#">
           <img className={styles.imgs} src="https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png" alt=""/>
           <span>chenmanjie</span>
@@ -108,6 +111,7 @@ const mapStateToProps=state=>{
     locale:state.global.locale,
     myView: state.user.myView,
     forbiddenView: state.user.forbiddenView
+
   }
 }
 const mapDispatchToProps=dispatch=>{
@@ -117,6 +121,11 @@ const mapDispatchToProps=dispatch=>{
         type: 'global/changeLocale',
         payload
       })
+    },
+    loginOuts(){
+       dispatch({
+          type:"user/loginOuts"
+       })
     }
   }
 }

@@ -66,6 +66,18 @@ export default {
         payload: data.code === 1?1:-1
       })
     },
+    //退出登录
+    *loginOuts({payload}, {call, put}){
+        removeToken();
+        yield put({
+          type:"logout"
+        })
+        yield put(
+          routerRedux.push({
+            pathname:`/login`
+          })
+        )
+    },
     *getUserInfo({payload}, {call, put, select}){
        // 1.判断是否有权限信息
        let myView = yield select(state=>state.user.myView);
@@ -119,9 +131,9 @@ export default {
     //1.退出登录
     logout(state){
       //1清除登录态
-      removeToken();
+      removeToken("");
       //2.清除权限
-      return {...state,userInfo:{},myView:[],forbiddenView:[],viewAuthority:[]}
+      return {...state,userInfo:{},myView:[],forbiddenView:[],viewAuthority:[], isLogin: 0}
     }
   }
 };

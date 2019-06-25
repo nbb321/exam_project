@@ -156,6 +156,5 @@ export default {
       path: '/marking.approved',
       component: Approved
     }]
-  }
-]
+  }]
 }
