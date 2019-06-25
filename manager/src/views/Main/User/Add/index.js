@@ -2,11 +2,13 @@ import React,{useState,useEffect} from 'react';
 import { connect } from 'dva';
 import "antd/dist/antd.css";
 import styles from './index.scss';
-import { Button ,Form,Input,Select} from 'antd';
+import { Button ,Form,Input,Select,message} from 'antd';
 
 const { Option } = Select;
 
 function UserPages(props){
+    //动态样式
+    let [active,upcolor]=useState("")
     //第一个添加
     //添加用户的change事件的初始值
     let [identity_id,UpChangeid]=useState("")
@@ -45,11 +47,17 @@ function UserPages(props){
     let HandAdduser=e=>{
         e.preventDefault();
         props.form.validateFields((err, values) => {
-             props.Adduser({
-                user_name:values.user_Null,
-                user_pwd:values.pwd,
-                identity_id
-             })
+            let reg= /^[0-9a-zA-z-_{4,16}]+$/;
+            let regx=/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[;:=*@])[0-9A-Za-z;:=*@)]{6,}$/;
+            if(reg.test(values.user_Null)&&regx.test(values.pwd)){
+                props.Adduser({
+                    user_name:values.user_Null,
+                    user_pwd:values.pwd,
+                    identity_id
+                 })
+            }else{
+                message.error('添加失败');
+            }      
         });
     }
 
@@ -66,25 +74,34 @@ function UserPages(props){
     let handUpdate=e=>{
         e.preventDefault();
         props.form.validateFields((err, values) => {
-            props.UserUpdata({
-                user_id,
-                user_name:values.user_Child,
-                user_pwd:values.pwd,
-                identity_id:identity_ids,
-                avatar:""
-            })
+            if(values.user_Child&&values.user_Child){
+                props.UserUpdata({
+                    user_id,
+                    user_name:values.user_Child,
+                    user_pwd:values.pwd,
+                    identity_id:identity_ids,
+                    avatar:""
+                })
+                message.success('更新成功');
+            }else{
+                message.error('更新失败');
+            } 
         })
     }
-
+    // ^[0-9a-zA-z-_]+$
     //第二个
     //添加身份
     let addiDentity=(e)=>{
         e.preventDefault();
         props.form.validateFields((err, values) => {
-            console.log('Received values of form: ', values.identity_Name);
-            props.Edit({
-                identity_text:values.identity_Name
-            });
+            if(values.identity_Name){
+                props.Edit({
+                    identity_text:values.identity_Name
+                });
+                message.success('添加身份成功');
+            }else{
+                message.error('添加身份失败');
+            } 
         });
     }
 
@@ -93,11 +110,16 @@ function UserPages(props){
     let handPermissions=(e)=>{
         e.preventDefault();
         props.form.validateFields((err, values) => {
-            props.AddEdit({
-                api_authority_text:values.Permission_Name,
-                api_authority_url:values.Permission_Url,
-                api_authority_method:values.Permission_method
-            })
+            if(values.Permission_Name&&values.Permission_Url&&values.Permission_method){
+                props.AddEdit({
+                    api_authority_text:values.Permission_Name,
+                    api_authority_url:values.Permission_Url,
+                    api_authority_method:values.Permission_method
+                })
+                message.success('添加api接口权限成功');
+            }else{
+                message.error('添加api接口权限失败');
+            } 
         })
     }
 
@@ -108,10 +130,12 @@ function UserPages(props){
         e.preventDefault();
         props.form.validateFields((err, values) => {
             let data=JSON.parse(values.view);
-             props.AuthorityView({
-                view_authority_text:data.view_authority_text,
-                view_id:data.view_id
-             })
+            if(data.view_authority_text&&data.view_id){
+                props.AuthorityView({
+                    view_authority_text:data.view_authority_text,
+                    view_id:data.view_id
+                })
+            }
         })
     }
 
@@ -128,10 +152,15 @@ function UserPages(props){
     let handPort=e=>{
         e.preventDefault();
         props.form.validateFields((err, values) => {
-            props.SetIdentityApi({
-                identity_id:identityId,
-                api_authority_id:portValue
-            })
+            if(identityId&&portValue){
+                props.SetIdentityApi({
+                    identity_id:identityId,
+                    api_authority_id:portValue
+                })
+                message.success('添加身份设置api成功');
+            }else{
+                message.error('添加身份设置api失败');
+            } 
         })
     }
 
@@ -148,10 +177,15 @@ function UserPages(props){
     let handClicView=e=>{
         e.preventDefault();
         props.form.validateFields((err, values) => {
-            props.SetIdentityView({
-                identity_id:Viewidentity_id,
-                view_authority_id:authority_id
-            })
+            if(Viewidentity_id&&authority_id){
+                props.SetIdentityView({
+                    identity_id:Viewidentity_id,
+                    view_authority_id:authority_id
+                })
+                message.success('添加身份视图接口成功');
+            }else{
+                message.error('添加身份视图接口失败');
+            } 
         })
     }
     //重置按钮
@@ -186,15 +220,17 @@ let handleReset7=e=>{
             {/* 第一个 */}
             <div className={styles.cont_Item}>
                 <div className={styles.top}>
-                    <Button className={styles.color} onClick={()=>{
+                    <Button className={active==0?styles.color:null} onClick={()=>{
                         upShowVal(false);
                         upShowuser(true)
+                        upcolor(active=0)
                     }} >
                         添加用户
                     </Button>
-                    <Button onClick={()=>{
+                    <Button className={active==1?styles.color:null} onClick={(e)=>{
                     upShowVal(true);
                     upShowuser(false);
+                    upcolor(active=1)
                     }} >
                     更新用户
                     </Button>

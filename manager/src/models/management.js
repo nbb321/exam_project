@@ -1,5 +1,5 @@
 import {Edit,Identityid,Userid,Adduser,UserUpdata,AddEdit,Relations,Authoritys,SetIdentityView,SetIdentityApi,AuthorityView} from '@/services';
-
+import {message} from 'antd';
 export default {
     // 命名空间
     namespace: 'management',
@@ -42,6 +42,11 @@ export default {
         *adduser({ payload }, { call, put }) {  // eslint-disable-line
             let data = yield call(Adduser,payload);
             console.log(data)
+            if(data.code===0){
+                message.error(data.msg);
+            }else if(data.code===1){
+                message.success('添加成功');
+            }
         },
         *userUpdata({ payload }, { call, put }) {  // eslint-disable-line
             let data = yield call(UserUpdata,payload);
@@ -89,7 +94,9 @@ export default {
         //添加视图权限
         *authorityView({ payload }, { call, put }) {  // eslint-disable-line
             let data = yield call(AuthorityView,payload);
-            console.log(data)
+            if(data.code===0){
+                message.error(data.msg);
+            }
         },
     },
   

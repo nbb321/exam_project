@@ -152,16 +152,16 @@ export default {
         })
         return { ...state, studentsList:data };
       },
-      //``````````班级管理
-    grades(state,{payload}){
-      return {...state,gradeArr:payload,datas:[]}
-    },
-    roomAlls(state,{payload}){
-        return {...state,rooms:payload}
-    },
-    getStudents(state,{payload}){
-        return {...state,students:payload,types:[]}
-    }
+        //``````````班级管理
+      grades(state,{payload}){
+        return {...state,gradeArr:payload,datas:[]}
+      },
+      roomAlls(state,{payload}){
+          return {...state,rooms:payload}
+      },
+      getStudents(state,{payload}){
+          return {...state,students:payload,types:[]}
+      }
     }
   };
   
