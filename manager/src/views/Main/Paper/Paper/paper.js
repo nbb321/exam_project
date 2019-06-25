@@ -40,7 +40,7 @@ function paperIndex(props){
             title: '操作',
             dataIndex: 'grade_id',
             key: 'grade_id',    
-            render:text=><Link to={{pathname:`/paper/classmate?id=${text}`}}>批卷</Link>//重点
+            render:text=><Link to={{pathname:`/paper/classmate`,params:{id:text}}}>批卷</Link>//重点
         }
     ]
     // console.log(paperlist)

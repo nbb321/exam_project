@@ -11,6 +11,7 @@ const { Option } = Select;
 function classmateIndex(props){
     // console.log(props.classRoomList)
     // let pathname=props.location.search.slice(4);
+    // console.log(props.location.params.id)
     let {studentDialongList,classRoomList}=props;
     //根据pathname去请求接口
     
@@ -47,14 +48,14 @@ function classmateIndex(props){
         {
             title:'操作',
             render:text=>(
-                <Link to={{pathname:`/paper/detail?paper_id=${text.exam_student_id}`}}>批卷</Link>
+                <Link to={{pathname:`/paper/detail`,params:{id:props.location.params.id}}}>批卷</Link>
             )
         }
     ]
     useEffect(()=>{
         props.studentDialong();
         props.classRoom();
-    },[])
+    },[]);
     return (
         <div className={styles.wrapper}>
             <div className={styles.top}>

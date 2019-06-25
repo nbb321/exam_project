@@ -81,7 +81,6 @@ export default {
             return { ...state, allTest: action.payload }
         },
         getUsers(state,action){
-            console.log(action.payload)
             return {...state, userData:action.payload }
         }
     },

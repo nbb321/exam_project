@@ -7,6 +7,7 @@ export default {
     effects:{
         *readPaper({ payload },{ call, put }){
             let data = yield call(readPaper,payload);
+            console.log(data)
             yield put({
                 type:"readPaperUpdate",
                 payload:data.data

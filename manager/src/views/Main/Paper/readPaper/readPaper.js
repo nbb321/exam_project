@@ -6,9 +6,8 @@ import styles from "./readPaper.scss"
 import {Slider,Modal, Button} from "antd"
 
 function readPaperIndex(props){
-    let pathname=props.location.search.slice(10);
+    let pathname=props.location.params.id;
     let {readPaperlist,chanValue}=props;
-
     const { confirm } = Modal;
 
     useEffect(()=>{
@@ -43,7 +42,7 @@ function readPaperIndex(props){
                 <div className={styles.con}>
                 <div className={styles.left}>
                     {
-                        readPaperlist.questions&&readPaperlist.questions.map((item,index)=>{
+                        readPaperlist&&readPaperlist.questions&&readPaperlist.questions.map((item,index)=>{
                         return (
                             <div className={styles.listItem} key={index}>
                                 <h3 className={styles.listTitle}>{index+1}.{item.title}<span className={styles.span}>{item.questions_type_text}</span></h3>
@@ -68,10 +67,10 @@ function readPaperIndex(props){
                 </div>
                 <div className={styles.right}>
                    <div className={styles.dia}>
-                     <h3 style={{fontSize:'20px',fontWeight:'bold'}}>{readPaperlist.student_name}</h3>
-                     <div className={styles.source}>得分：<span style={{fontSize:'25px',fontWeight:'bold',color:"blue"}}>{readPaperlist.score}</span></div>
+                     <h3 style={{fontSize:'20px',fontWeight:'bold'}}>{readPaperlist&&readPaperlist.student_name}</h3>
+                     <div className={styles.source}>得分：<span style={{fontSize:'25px',fontWeight:'bold',color:"blue"}}>{readPaperlist&&readPaperlist.score}</span></div>
                      <Slider defaultValue={0} disabled={false} onChange={changeValue}/>
-                     <Button onClick={()=>showConfirm(readPaperlist.score,readPaperlist.student_name)} className={styles.sure}>确定</Button>
+                     <Button onClick={()=>showConfirm(readPaperlist&&readPaperlist.score,readPaperlist&&readPaperlist.student_name)} className={styles.sure}>确定</Button>
                    </div>
                 </div>
                 </div>
@@ -95,10 +94,10 @@ readPaperIndex.defaultProps={
  }
  const mapDispatchToProps=dispatch=>{
    return {
-      readPaper(pathname){
+      readPaper(payload){
         dispatch({
             type:"readPaper/readPaper",
-            payload:pathname
+            payload
         })
       },
       chanValue(payload){

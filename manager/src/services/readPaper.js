@@ -6,9 +6,3 @@ export function readPaper(payload){
     method: 'GET'
   })
 }
-export function changeValue(payload){
-    return request({
-      url: '/exam/student/'+payload,
-      method: 'GET'
-    })
-  }
