@@ -1,11 +1,11 @@
 
 import {getClassroom,Removeroom,Addroom,Grade,Students,Removestudent,
-  ClassManagement,
-  //弹框后的教室号
-  MangerRoom,
-  MangerClassName,
-  AddGrade,
-  // DeleteGrade
+  Graded,
+  gradeDelete,
+  gradeUpdata,
+  roomAll,
+  addGrade,
+  getStudent
 } from "@/services"
 export default {
     // 命名空间
@@ -21,11 +21,11 @@ export default {
       removestudenList:[],
       search:[],
 //````````````班级管理
-    classManagementList:[],
-    mangerRoomList:[],
-    mangerClassNameList:[],
-    addGradeUpdateList:[],
-    deleteClassList:[]
+      gradeArr:[],
+      datas:[],
+      rooms:[],
+      students:[],
+      types:[]
     },
   
     subscriptions: {
@@ -65,7 +65,7 @@ export default {
       *grade({ payload }, { call, put }) {
         let data = yield call(Grade);
         yield put({
-            type:"gradeUpdata",
+            type:"gradeUpdataAll",
             payload:data.data
         })
       },
@@ -83,35 +83,43 @@ export default {
         console.log(data)
       },
       //```````````班级管理
-       //渲染列表
-    *classManagement({payload},{call,put}){
-      let data = yield call(ClassManagement);
-      yield put({
-          type:"classManagementUpdata",
-          payload:data.data
-      })
+      *Graded({ payload },{ call, put }){
+        let data = yield call(Graded);
+        console.log("获取已经分配教室的班级",data)
+        yield put({
+            type:"grades",
+            payload:data.data
+        })
     },
-  //弹框后的教室号
-  *mangerRoom({payload},{call,put}){
-      let data = yield call(MangerRoom);
-      yield put({
-          type:"mangerRoomUpdata",
-          payload:data.data
-      })
+    *gradeDelete({ payload },{ call, put }){
+        let data = yield call(gradeDelete,payload);
+        console.log("删除班级",data)
     },
-  //课程名
-  *mangerClassName({payload},{call,put}){
-      let data = yield call(MangerClassName);
-      yield put({
-          type:"mangerClassNameUpdata",
-          payload:data.data
-      })
+    *All({ payload },{ call, put }){
+        let data = yield call(gradeUpdata,payload);
+        console.log("更新班级",data)
     },
-    //添加班级
-    *addGrade({ payload }, { call, put }) {
-      let data = yield call(AddGrade, payload)
-      console.log(data)
+    *roomAll({ payload },{ call, put }){
+        let data = yield call(roomAll);
+        console.log("获取全部教室",data)
+        yield put({
+            type:"roomAlls",
+            payload:data.data
+        })
     },
+    *addGrade({ payload },{ call, put }){
+        let data = yield call(addGrade,payload);
+        console.log("添加班级",data)
+    },
+    *getStudent({ payload },{ call, put }){
+        let data = yield call(getStudent);
+        console.log("获取学生",data)
+        yield put({
+            type:"getStudents",
+            payload:data.data
+        })
+      }
+
     },
   
     // 同步操作
@@ -128,7 +136,7 @@ export default {
         return { ...state, AddroomList:payload };
       },
       //获取已经分配教室的班级的接口
-      gradeUpdata(state, {payload}) {
+      gradeUpdataAll(state, {payload}) {
         return { ...state, gradeList:payload };
       },
        //获取所有已经分班的学生的接口
@@ -145,23 +153,15 @@ export default {
         return { ...state, studentsList:data };
       },
       //``````````班级管理
-          //渲染列表
-          classManagementUpdata(state, {payload}) {
-            return { ...state, classManagementList:payload };
-        },
-        //弹框后的教室号
-        mangerRoomUpdata(state, {payload}) {
-            return { ...state, mangerRoomList:payload };
-        },
-        mangerClassNameUpdata(state, {payload}) {
-            return { ...state, mangerClassNameList:payload };
-        },
-        addGradeUpdate(state, {payload}) {
-            return { ...state, addGradeUpdateList:payload };
-        },
-        deleteClassUpdata(state,{payload}){
-            return { ...state, deleteClassList:payload };
-        }
+    grades(state,{payload}){
+      return {...state,gradeArr:payload,datas:[]}
+    },
+    roomAlls(state,{payload}){
+        return {...state,rooms:payload}
+    },
+    getStudents(state,{payload}){
+        return {...state,students:payload,types:[]}
+    }
     }
   };
   

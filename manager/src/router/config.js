@@ -125,7 +125,7 @@ export default {
       }]
   },{//班级管理
     name: 'router.class',
-    id:"router.class",
+    id:"router.class", 
     children: [{
       name: 'router.class.grade',
       id: "main-grade",

@@ -3,29 +3,21 @@ import { Layout,Spin,Dropdown,Menu,Icon} from 'antd';
 import {Route, Switch,Redirect} from 'dva/router';
 import Menus from "@/components/Menu.js"
 import styles from "./index.scss"
-// //试题管理
-// import Add from "./Questions/Add"
-// import Type from "./Questions/Type"
-// import View from "./Questions/View"
-// import Default from "./Questions/Default"
-// import EditQuestions from "./Questions/EditQuestions"
-// //用户管理
-// import userAdd from "./User/Add"
-// import userShow from "./User/Show"
-// //考试管理
-// import ExamAdd from "./Exam/Add"
-// import ExamShow from "./Exam/List"
-// import Edit from "./Exam/Edit"
-
-// //班级管理
-// import Grade from "./Class/Class";
-// import Classroom from "./Class/Classroom"
-// import Student from "./Class/Student"
-// //阅卷管理
-// import Approved from "./Marking/Approved"
 import {connect} from "dva";
 const { Header, Content,Sider} = Layout;
-// const { Option } = Select;
+
+const menu = (
+  <Menu>
+    <Menu.Item key="0">
+      <a href="http://www.alipay.com/">1st menu item</a>
+    </Menu.Item>
+    <Menu.Item key="1">
+      <a href="http://www.taobao.com/">2nd menu item</a>
+    </Menu.Item>
+    <Menu.Divider />
+    <Menu.Item key="3">退出登录</Menu.Item>
+  </Menu>
+);
 
 function IndexPage(props){
 
@@ -62,10 +54,14 @@ function IndexPage(props){
           </a>
       </Dropdown>
     </div>
-      <div  className={styles.usename}>
-        <img className={styles.imgs} src="https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png" alt=""/>
-        <span>chenmanjie</span>
-      </div>
+    <div  className={styles.usename}>
+      <Dropdown overlay={menu} trigger={['click']}>
+        <a className="ant-dropdown-link" href="#">
+          <img className={styles.imgs} src="https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png" alt=""/>
+          <span>chenmanjie</span>
+        </a>
+      </Dropdown>
+    </div>
     </Header>
     <Layout>
       <Sider>
@@ -122,22 +118,4 @@ const mapDispatchToProps=dispatch=>{
     }
   }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(IndexPage);
-
- {/* <Route path="/questions/add" component={Add}></Route>
-            <Route path="/questions/type" component={Type}></Route>
-            <Route path="/questions/view" component={View}></Route>
-            <Route path="/questions/default" component={Default}></Route>
-            <Route path="/questions/editQuestions" component={EditQuestions}></Route>
-           
-            <Route path="/user/add" component={userAdd}></Route>
-            <Route path="/user/show" component={userShow}></Route>
-            
-            <Route path="/exam/add" component={ExamAdd}></Route>
-            <Route path="/exam/list" component={ExamShow}></Route>
-            <Route path="/exam/edit" component={Edit}></Route>
-            
-            <Route path="/class/grade" component={Grade}></Route>
-            <Route path="/class/classroom" component={Classroom}></Route>
-            <Route path="/class/student" component={Student}></Route>
-            <Route path="/marking.approved" component={Approved}></Route> */}
+export default connect(mapStateToProps,mapDispatchToProps)(IndexPage)

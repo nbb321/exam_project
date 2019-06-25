@@ -6,6 +6,8 @@ import {  Form,Input,Select,Button,Table } from 'antd';
 
 const { Option } = Select;
 function UserShow(props){
+
+  console.log()
     useEffect(()=>{
       props.GetClassroom();
       props.Grade();
