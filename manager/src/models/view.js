@@ -58,7 +58,6 @@ export default {
         },
         *condition({payload},{call,put}){
             let data = yield call(condition,payload)
-            console.log(data)
             yield put({
                 type:'getCondition',
                 payload:data.data

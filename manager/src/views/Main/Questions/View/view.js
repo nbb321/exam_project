@@ -91,7 +91,6 @@ function View( props ) {
         }
     }
 
-
     return <div className={styles.wrapper}>
         <Title level={4}>查看试题</Title>
         <div className={styles.wrapTop}>

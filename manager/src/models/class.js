@@ -21,7 +21,7 @@ export default {
     effects: {
         *grade({ payload },{ call, put }){
             let data = yield call(grade);
-            console.log("获取已经分配教室的班级",data)
+            // console.log("获取已经分配教室的班级",data)
             yield put({
                 type:"grades",
                 payload:data.data
@@ -29,15 +29,15 @@ export default {
         },
         *gradeDelete({ payload },{ call, put }){
             let data = yield call(gradeDelete,payload);
-            console.log("删除班级",data)
+            // console.log("删除班级",data)
         },
         *gradeUpdata({ payload },{ call, put }){
             let data = yield call(gradeUpdata,payload);
-            console.log("更新班级",data)
+            // console.log("更新班级",data)
         },
         *roomAll({ payload },{ call, put }){
             let data = yield call(roomAll);
-            console.log("获取全部教室",data)
+            // console.log("获取全部教室",data)
             yield put({
                 type:"roomAlls",
                 payload:data.data
@@ -45,11 +45,11 @@ export default {
         },
         *addGrade({ payload },{ call, put }){
             let data = yield call(addGrade,payload);
-            console.log("添加班级",data)
+            // console.log("添加班级",data)
         },
         *getStudent({ payload },{ call, put }){
             let data = yield call(getStudent);
-            console.log("获取学生",data)
+            // console.log("获取学生",data)
             yield put({
                 type:"getStudents",
                 payload:data.data

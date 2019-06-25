@@ -89,8 +89,8 @@ function Exhibition(props) {
     }, [])
     console.log(props)
     return (
-        <div className="container">
-            <h1 style={{ color: "black", fontSize: "50px" }}>用户展示</h1>
+        <div className="container" style={{scrollY:'scroll'}}>
+            <h1 style={{ color: "black", fontSize: "22px" }}>用户展示</h1>
             <div className="card-container">
                 <Tabs type="card">
                     <TabPane tab="用户数据" key="1">
