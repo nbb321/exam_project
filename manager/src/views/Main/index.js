@@ -4,21 +4,11 @@ import {Route, Switch,Redirect} from 'dva/router';
 import Menus from "@/components/Menu.js"
 import styles from "./index.scss"
 import {connect} from "dva";
+
 const { Header, Content,Sider} = Layout;
-
-const menu = (
-  <Menu>
-    <Menu.Item key="0">
-      <a href="http://www.alipay.com/">1st menu item</a>
-    </Menu.Item>
-    <Menu.Item key="1">
-      <a href="http://www.taobao.com/">2nd menu item</a>
-    </Menu.Item>
-    <Menu.Divider />
-    <Menu.Item key="3">退出登录</Menu.Item>
-  </Menu>
-);
-
+let handClick=props=>{
+  props.history.push('canvas');
+}
 function IndexPage(props){
 
   if (!props.myView.length){
@@ -55,7 +45,18 @@ function IndexPage(props){
       </Dropdown>
     </div>
     <div  className={styles.usename}>
-      <Dropdown overlay={menu} trigger={['click']}>
+      <Dropdown overlay={
+          <Menu>
+          <Menu.Item key="0">
+            <a href="http://www.alipay.com/">1st menu item</a>
+          </Menu.Item>
+          <Menu.Item key="1">
+            <span onClick={()=>handClick(props)}>个人中心</span>
+          </Menu.Item>
+          <Menu.Divider />
+          <Menu.Item key="3">退出登录</Menu.Item>
+        </Menu>
+      } trigger={['click']}>
         <a className="ant-dropdown-link" href="#">
           <img className={styles.imgs} src="https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png" alt=""/>
           <span>chenmanjie</span>
