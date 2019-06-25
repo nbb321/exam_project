@@ -220,14 +220,14 @@ let handleReset7=e=>{
             {/* 第一个 */}
             <div className={styles.cont_Item}>
                 <div className={styles.top}>
-                    <Button className={active==0?styles.color:null} onClick={()=>{
+                    <Button className={active===0?styles.color:null} onClick={()=>{
                         upShowVal(false);
                         upShowuser(true)
                         upcolor(active=0)
                     }} >
                         添加用户
                     </Button>
-                    <Button className={active==1?styles.color:null} onClick={(e)=>{
+                    <Button className={active===1?styles.color:null} onClick={(e)=>{
                     upShowVal(true);
                     upShowuser(false);
                     upcolor(active=1)

@@ -54,9 +54,13 @@ component: () => import('@/views/Main/Class/Student'),
 const Approved =  dynamic({
     component: () => import('@/views/Main/Marking/Approved'),
 });
+const Canvas =  dynamic({
+  component: () => import('@/views/Canvas'),
+});
 export default { 
   //试题管理
-  routes: [{
+  routes: [
+    {
     name: 'router.questions',
     id:"router.questions",
     children: [{
@@ -85,7 +89,8 @@ export default {
         path: '/questions/default',
         component: Default
         }]
-  },{ //用户管理
+  },
+  { //用户管理
     name: 'router.user',
     id:"router.user",
     children: [{
@@ -151,5 +156,6 @@ export default {
       path: '/marking.approved',
       component: Approved
     }]
-  }]
+  }
+]
 }

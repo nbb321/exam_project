@@ -1,14 +1,25 @@
 import React from 'react';
 import { Layout,Spin,Dropdown,Menu,Icon} from 'antd';
-import {Route, Switch,Redirect} from 'dva/router';
+import {Route, Switch,Redirect,Link} from 'dva/router';
 import Menus from "@/components/Menu.js"
 import styles from "./index.scss"
 import {connect} from "dva";
-
+import Canvas from "@/views/Canvas"
 const { Header, Content,Sider} = Layout;
-let handClick=props=>{
-  props.history.push('canvas');
-}
+
+const menu = (
+  <Menu>
+    <Menu.Item key="0">
+      <a href="http://www.alipay.com/">1st menu item</a>
+    </Menu.Item>
+    <Menu.Item key="1">
+      <Link to='/canvas'>个人中心</Link>
+    </Menu.Item>
+    <Menu.Divider />
+    <Menu.Item key="3">3rd menu item</Menu.Item>
+  </Menu>
+);
+
 function IndexPage(props){
 
   if (!props.myView.length){
@@ -45,18 +56,7 @@ function IndexPage(props){
       </Dropdown>
     </div>
     <div  className={styles.usename}>
-      <Dropdown overlay={
-          <Menu>
-          <Menu.Item key="0">
-            <a href="http://www.alipay.com/">1st menu item</a>
-          </Menu.Item>
-          <Menu.Item key="1">
-            <span onClick={()=>handClick(props)}>个人中心</span>
-          </Menu.Item>
-          <Menu.Divider />
-          <Menu.Item key="3">退出登录</Menu.Item>
-        </Menu>
-      } trigger={['click']}>
+      <Dropdown overlay={menu} trigger={['click']}>
         <a className="ant-dropdown-link" href="#">
           <img className={styles.imgs} src="https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png" alt=""/>
           <span>chenmanjie</span>
@@ -70,7 +70,8 @@ function IndexPage(props){
       </Sider>
       <Content>
           <Switch>
-            <Redirect from="/" exact to="/questions/add" ></Redirect>
+            <Route path="/canvas" component={Canvas} />
+            {/* <Redirect from="/" exact to="/questions/add" ></Redirect> */}
              {/* 渲染该用户拥有的路由 */}
                 {
                   props.myView.map((item)=>{
