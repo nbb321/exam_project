@@ -25,6 +25,8 @@ app.model(require('./models/exam').default);
 app.model(require('./models/global').default);
 //班级管理
 app.model(require('./models/class').default);
+//头像
+app.model(require('./models/portrait').default);
 // 4. Router
 app.router(require('./router').default);
 //批卷管理

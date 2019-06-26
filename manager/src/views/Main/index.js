@@ -5,12 +5,8 @@ import Menus from "@/components/Menu.js"
 import styles from "./index.scss"
 import {connect} from "dva";
 import Canvas from "@/views/Canvas"
+// import Portrait from "@/components/Portrait.js"
 const { Header, Content,Sider} = Layout;
-
-// const menu = (
-
-// );
-
 function IndexPage(props){
   console.log(props)
   if (!props.myView.length){
@@ -64,6 +60,7 @@ function IndexPage(props){
         <a className="ant-dropdown-link" href="#">
           <img className={styles.imgs} src="https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png" alt=""/>
           <span>chenmanjie</span>
+          {/* <Portrait /> */}
         </a>
       </Dropdown>
     </div>
