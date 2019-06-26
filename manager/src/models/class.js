@@ -60,7 +60,7 @@ export default {
       //添加教室接口
       *addroom({ payload }, { call, put }) {
         let data = yield call(Addroom,payload);
-        console.log(data)
+
         yield put({
             type:"addroomUpdata",
             payload:data.data
@@ -73,6 +73,7 @@ export default {
             type:"gradeUpdataAll",
             payload:data.data
         })
+      
       },
        //获取所有已经分班的学生的接口
        *students({ payload }, { call, put }) {
@@ -100,9 +101,15 @@ export default {
     },
     *gradeDelete({ payload },{ call, put }){
         let data = yield call(gradeDelete,payload);
+        if(data.code===1){
+          message.success(data.msg);
+        }
     },
     *All({ payload },{ call, put }){
         let data = yield call(gradeUpdata,payload);
+        if(data.code===1){
+          message.success(data.msg);
+        }
     },
     *roomAll({ payload },{ call, put }){
         let data = yield call(roomAll);
@@ -113,6 +120,9 @@ export default {
     },
     *addGrade({ payload },{ call, put }){
         let data = yield call(addGrade,payload);
+        if(data.code===1){
+          message.success(data.msg);
+        }
     },
     *getStudent({ payload },{ call, put }){
         let data = yield call(getStudent);

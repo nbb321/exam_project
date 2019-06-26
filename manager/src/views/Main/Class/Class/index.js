@@ -52,8 +52,6 @@ function Class(props){
     let handleRight = e =>{
         upShowData(showData = false)
         props.form.validateFields((err,value)=>{
-            console.log(value)
-            console.log(classId)
             gradeUpdata({
                 grade_id:classId,
                 subject_id:value.subject,

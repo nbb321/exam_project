@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout,Spin,Dropdown,Menu,Icon} from 'antd';
 import {Route, Switch,Redirect,Link} from 'dva/router';
 import Menus from "@/components/Menu.js"
@@ -8,7 +8,6 @@ import Canvas from "@/views/Canvas"
 // import Portrait from "@/components/Portrait.js"
 const { Header, Content,Sider} = Layout;
 function IndexPage(props){
-  console.log(props)
   if (!props.myView.length){
     return null;
   } 
@@ -58,9 +57,8 @@ function IndexPage(props){
         </Menu>
       } trigger={['click']}>
         <a className="ant-dropdown-link" href="#">
-          <img className={styles.imgs} src="https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png" alt=""/>
+          <img className={styles.imgs} src={props.vals} alt=""/>
           <span>chenmanjie</span>
-          {/* <Portrait /> */}
         </a>
       </Dropdown>
     </div>
@@ -108,8 +106,8 @@ const mapStateToProps=state=>{
     loading:state.loading.global,
     locale:state.global.locale,
     myView: state.user.myView,
-    forbiddenView: state.user.forbiddenView
-
+    forbiddenView: state.user.forbiddenView,
+    vals:state.portrait.vals
   }
 }
 const mapDispatchToProps=dispatch=>{
