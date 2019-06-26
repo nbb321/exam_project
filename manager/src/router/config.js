@@ -52,10 +52,13 @@ component: () => import('@/views/Main/Class/Student'),
 
 //阅卷管理
 const Approved =  dynamic({
-    component: () => import('@/views/Main/Marking/Approved'),
+    component: () => import('@/views/Main/Paper/paper/paper'),
 });
-const Canvas =  dynamic({
-  component: () => import('@/views/Canvas'),
+const classmate =  dynamic({
+  component: () => import('@/views/Main/Paper/classmate/classmate'),
+});
+const readPaper =  dynamic({
+  component: () => import('@/views/Main/Paper/readPaper/readPaper'),
 });
 export default { 
   //试题管理
@@ -152,9 +155,19 @@ export default {
     id:"router.marking",
     children: [{
       name: 'router.marking.approved',
-      id: "main-examPaperClassList",
-      path: '/marking.approved',
+      id:"main-examPaperClassList",
+      path: '/marking/approved',
       component: Approved
+    },{
+      name: '',
+      id: "main-examPaperClassmate",
+      path: '/paper/classmate',
+      component: classmate
+    },{
+      name: '',
+      id: "main-examinationPapers",
+      path: '/paper/detail',
+      component: readPaper
     }]
   }]
 }

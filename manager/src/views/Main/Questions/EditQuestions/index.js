@@ -123,7 +123,7 @@ import Editor from 'for-editor';
                                 </Form.Item>
                                 {/* <Editor value={valueowen} height="auto" onChange={handleChangeVal}  />  */}
                             </div>
-                            <Button type="primary" htmlType="submit" >提交</Button>
+                            <Button type="primary" className={styles.btn} htmlType="submit" >提交</Button>
                         </div>
                 </div> 
         </Form>

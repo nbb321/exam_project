@@ -27,6 +27,9 @@ app.model(require('./models/global').default);
 app.model(require('./models/class').default);
 // 4. Router
 app.router(require('./router').default);
-
+//批卷管理
+app.model(require('./models/paper').default);
+app.model(require('./models/readPaper').default);
+app.model(require('./models/classmate').default);
 // 5. Start
 app.start('#root');

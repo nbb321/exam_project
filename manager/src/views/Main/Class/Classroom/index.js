@@ -91,7 +91,7 @@ UserShow.defaultProps={
 }
  const mapStateToProps=state=>{
    return {
-    ...state.class
+    ...state.class 
    }
  }
  const mapDispatchToProps=dispatch=>{

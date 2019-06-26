@@ -12,6 +12,7 @@ const { Header, Content,Sider} = Layout;
 // );
 
 function IndexPage(props){
+  console.log(props)
   if (!props.myView.length){
     return null;
   } 
@@ -74,7 +75,7 @@ function IndexPage(props){
       <Content>
           <Switch>
             <Route path="/canvas" component={Canvas} />
-            {/* <Redirect from="/" exact to="/questions/add" ></Redirect> */}
+            <Redirect from="/" exact to="/questions/add" ></Redirect>
              {/* 渲染该用户拥有的路由 */}
                 {
                   props.myView.map((item)=>{

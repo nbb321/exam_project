@@ -1,0 +1,40 @@
+.wrapper{
+    width: 100%;
+    height: 100%;
+    padding:25px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    .top{
+        width:100%;
+        height:100px;
+        background:#fff;
+        border-radius:20px;
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+        .done{
+            width:260px;
+            display:flex;
+            align-items: center;
+
+        }
+        .search{
+            width:150px;
+            height:30px;
+            line-height:30px;
+            border-radius:10px;
+            text-align:center;
+            color:#fff;
+            background: -webkit-linear-gradient(0,skyblue,blue);
+        }
+    }
+    .list{
+        width:100%;
+        background:#fff;
+        margin-top:20px;
+        border-radius:20px;
+        // overflow-y: scroll;
+    }
+}
+
+

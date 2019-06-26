@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { connect } from 'dva';
-import { Input ,Select, Button,Form} from 'antd';
+import { Input ,Select, Button,Form,message} from 'antd';
 import  styles from './index.scss';
 import Editor from 'for-editor';
 
@@ -19,7 +19,7 @@ import Editor from 'for-editor';
     let handleSubmit = e => {
       props.form.validateFields((err, values) => {
         let {Addquest}=props;
-        if (values.titleText!==""&&values.questions_type_id!==""&&values.value!==""&&values.subject_id!==""&&values.exam_id!==""&&values.questions_answer!=="") {
+        // if (values.titleText&&values.questions_type_id&&values.value&&values.subject_id&&values.exam_id&&values.questions_answer) {
           Addquest({
             questions_type_id:values.questions_type_id,
             questions_stem:values.value,
@@ -29,7 +29,9 @@ import Editor from 'for-editor';
             questions_answer:values.valueowen,
             title:values.titleText
           })
-        }
+        // }else{
+        //   message.error('添加失败');
+        // }
       });
     };
 
@@ -38,7 +40,7 @@ import Editor from 'for-editor';
               <div className={styles.main}>
                     <div className={styles.markcont}>
                         <p>题目信息</p>
-                          <Form.Item>
+                          <Form.Item className={styles.formStyle}>
                               {getFieldDecorator('titleText', {
                                   validateTrigger:"onBlur",
                                   rules: [{ required: true, message: '标题不能为空' }],
@@ -49,7 +51,7 @@ import Editor from 'for-editor';
                               )}
                           </Form.Item>
                           <p>题目管理</p>
-                          <Form.Item>
+                          <Form.Item className={styles.formStyle}>
                             {getFieldDecorator('value', {
                                 rules: [{ required: true, message: "答案信息必填" }],
                                 initialValue: '',
@@ -61,7 +63,7 @@ import Editor from 'for-editor';
                     </div>
                     <div>
                          <p>请选择考试类型：</p>
-                         <Form.Item>
+                         <Form.Item className={styles.formStyle}>
                             {getFieldDecorator('exam_id', {
                                 rules: [{ required: true, message: "题目类型必选" }],
                                 initialValue: "请选择题目类型"
@@ -79,7 +81,7 @@ import Editor from 'for-editor';
                       </div>
                       <div>
                          <p>请选择课程类型：</p>
-                         <Form.Item>
+                         <Form.Item className={styles.formStyle}>
                             {getFieldDecorator('subject_id', {
                                 rules: [{ required: true, message: "题目类型必选" }],
                                 initialValue: "请选择题目类型"
@@ -96,7 +98,7 @@ import Editor from 'for-editor';
                       </div>
                       <div>
                          <p>请选择题目类型：</p>
-                         <Form.Item>
+                         <Form.Item className={styles.formStyle}>
                             {getFieldDecorator('questions_type_id', {
                                 rules: [{ required: true, message: "题目类型必选" }],
                                 initialValue: "请选择题目类型"
@@ -114,7 +116,7 @@ import Editor from 'for-editor';
                       </div>
                       <div className={styles.markcont}>
                         <p>答案信息</p>
-                        <Form.Item>
+                        <Form.Item className={styles.formStyle}>
                             {getFieldDecorator('valueowen', {
                                 rules: [{ required: true, message: "答案信息必填" }],
                                 initialValue: '',
@@ -124,7 +126,7 @@ import Editor from 'for-editor';
                         </Form.Item>
                          {/* <Editor value={valueowen} height="auto" onChange={handleChangeVal}  />  */}
                       </div>
-                      <Button type="primary" htmlType="submit" >提交</Button>
+                      <Button type="primary" className={styles.btn} htmlType="submit" >提交</Button>
                 </div>
         </Form>
     

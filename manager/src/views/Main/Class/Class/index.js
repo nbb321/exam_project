@@ -40,10 +40,10 @@ function Class(props){
             key: 'operation',
             render:operation=>(
                 <>
-                    <span value={operation} onClick={change}>修改</span>
+                    <span value={operation} className={styles.color} onClick={change}>修改</span>
                     
                     <Divider type="vertical" />
-                    <span value={operation} onClick={change}>删除</span>
+                    <span value={operation} className={styles.color} onClick={change}>删除</span>
                 </>
             ),
         }

@@ -13,6 +13,9 @@ import {Type,View,
     Relation,
     ViewAuthority,
     IdentityView} from '@/services';
+
+import {message} from 'antd';
+
 export default {
     // 命名空间
     namespace: 'questions',
@@ -84,7 +87,9 @@ export default {
         //添加试题
         *addquest({payload}, {call, put}){
             let data = yield call(Addquest,payload);
-            console.log(data)
+            if(data.code===1){
+                message.success("添加成功")
+            }
         },
         // 用户名
         *userInfo({payload}, {call, put}){
@@ -112,11 +117,20 @@ export default {
         *update({payload}, {call, put}){
             let data = yield call(Update,payload);
             console.log(data)
+            if(data.code===1){
+                message.success(data.msg)
+            }else{
+                message.success(data.msg)
+            }
         },
         //添加类型
         *insertQuestionsType({payload}, {call, put}){
             let data = yield call(insertQuestionsType,payload);
             console.log(data);
+            if(data.code===1){
+                message.success(data.msg)
+            }
+
         },
         //``````````````用户管理````````
         //用户展示

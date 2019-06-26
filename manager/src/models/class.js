@@ -7,6 +7,8 @@ import {getClassroom,Removeroom,Addroom,Grade,Students,Removestudent,
   addGrade,
   getStudent
 } from "@/services"
+import {message} from 'antd';
+
 export default {
     // 命名空间
     namespace: 'class',
@@ -51,6 +53,9 @@ export default {
             type:"removeroomUpdata",
             payload:data.data
         })
+        if(data.code===1){
+          message.success('删除成功');
+        }
       },
       //添加教室接口
       *addroom({ payload }, { call, put }) {
@@ -81,11 +86,13 @@ export default {
       *removestudent({ payload }, { call, put }) {
         let data = yield call(Removestudent,payload);
         console.log(data)
+        if(data.code===1){
+          message.success('删除成功');
+        }
       },
       //```````````班级管理
       *Graded({ payload },{ call, put }){
         let data = yield call(Graded);
-        console.log("获取已经分配教室的班级",data)
         yield put({
             type:"grades",
             payload:data.data
@@ -93,15 +100,12 @@ export default {
     },
     *gradeDelete({ payload },{ call, put }){
         let data = yield call(gradeDelete,payload);
-        console.log("删除班级",data)
     },
     *All({ payload },{ call, put }){
         let data = yield call(gradeUpdata,payload);
-        console.log("更新班级",data)
     },
     *roomAll({ payload },{ call, put }){
         let data = yield call(roomAll);
-        console.log("获取全部教室",data)
         yield put({
             type:"roomAlls",
             payload:data.data
@@ -109,11 +113,9 @@ export default {
     },
     *addGrade({ payload },{ call, put }){
         let data = yield call(addGrade,payload);
-        console.log("添加班级",data)
     },
     *getStudent({ payload },{ call, put }){
         let data = yield call(getStudent);
-        console.log("获取学生",data)
         yield put({
             type:"getStudents",
             payload:data.data

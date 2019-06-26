@@ -22,6 +22,7 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
       return history.listen(({ pathname }) => {
+        console.log('pathname.....',pathname)
         // 1.判断去的页面是否是登陆页面
         if (pathname.indexOf('/login') === -1) {
           // 1.1 判断是否有登陆态

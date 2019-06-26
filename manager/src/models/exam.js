@@ -78,6 +78,7 @@ export default {
             console.log(payload)
             return {...state, paperlistArr:payload}
           },
+          //删除
        Remove_id(state,{payload}){
         return {...state,establishList:state.establishList.filter((item,index)=>index!==payload)};
        },
