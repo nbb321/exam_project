@@ -9,7 +9,6 @@ const {Content} =Layout
         let files=e.target.files
         var reader=new FileReader()
         reader.onload=function(){
-          props.vals(this.result)
             setval(this.result)
           
         }
